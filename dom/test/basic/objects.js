@@ -33,6 +33,13 @@
 
 		});
 
+		it("dom.html.BodyElement", function () {
+			var body = new dom.html.BodyElement([]);
+			expect(function () {
+				body.remove();
+			}).toThrow('You can not remove body element from DOM :)');
+		});
+
 	});
 
 }());

@@ -17,6 +17,46 @@ var dom = {};
 	dom.builder = {};
 
 	/**
+	 * Insert called
+	 * @type {boolean}
+	 */
+	var insertCalled = false;
+
+	//global functions
+
+	/**
+	 * Is development
+	 * @type {boolean}
+	 */
+	dom.IS_DEVELOPMENT = true;
+
+	/**
+	 * Body
+	 */
+	(function () {
+
+		/**
+		 * @static
+		 * Insert into body
+		 * @param {dom.Element...=} params
+		 */
+		dom.insert = function (params) {
+			var body,
+				args = Array.prototype.slice.apply(arguments);
+			//check call
+			if (insertCalled) {
+				throw "This method can be called only once!";
+			}
+			//set call flag
+			insertCalled = true;
+			//create body element and run it!
+			body = new dom.html.BodyElement(args);
+			body.getLive();
+		};
+
+	}());
+
+	/**
 	 * HTML functions
 	 */
 	(function () {
@@ -844,7 +884,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create attribute
-		 * @param {dom.html.ElementType|string} name
+		 * @param {dom.html.AttributeType|string} name
 		 * @param {string|dom.data.Contract} value
 		 * @returns {dom.html.Attribute}
 		 */

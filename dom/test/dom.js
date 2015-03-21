@@ -6,6 +6,17 @@
 
 		describe("html", function () {
 
+			it("dom.insert", function () {
+				dom.insert(
+					dom.div(dom.attr('id', 'body-test')),
+					dom.span()
+				);
+				expect(document.body.outerHTML).toContain('<div id="body-test"></div><span></span>');
+				expect(function () {
+					dom.insert(dom.span());
+				}).toThrow('This method can be called only once!');
+			});
+
 			it("dom.div", function () {
 				var div = dom.div();
 				expect(div.getHtml()).toBe('<div></div>');

@@ -15,6 +15,7 @@ module.exports = function(grunt) {
 			//Html
 			'src/html/html.element.js',
 			'src/html/html.element.text.js',
+			'src/html/html.element.body.js',
 			'src/html/html.attribute.js',
 			'src/html/html.attribute.data.js',
 			'src/html/html.classes.js',
@@ -25,7 +26,8 @@ module.exports = function(grunt) {
 			'src/sheets/sheets.css.group.js',
 			//Builders
 			'src/builder/builder.live.js',
-			'src/builder/builder.live.text.js'
+			'src/builder/builder.live.text.js',
+			'src/builder/builder.live.body.js'
 		],
 		specs = [
 			'test/**/*.js'
@@ -33,6 +35,9 @@ module.exports = function(grunt) {
 		watch = [
 			'src/**/*.js',
 			'test/**/*.js'
+		],
+		gruntFile = [
+			'Gruntfile.js'
 		];
 
 
@@ -106,7 +111,14 @@ module.exports = function(grunt) {
 		watch: {
 			scripts: {
 				files: watch,
-				tasks: ['jasmine'],
+				tasks: ['jasmine', 'concat'],
+				options: {
+					interrupt: true
+				}
+			},
+			grunt: {
+				files: gruntFile,
+				tasks: ['concat'],
 				options: {
 					interrupt: true
 				}

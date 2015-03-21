@@ -36,8 +36,8 @@
 	<div class="content">
 		<div class="container">
 
-			<!-- Basic usage -->
-			<h2>Basic usage</h2>
+			<!-- Create dom element -->
+			<h2>Create dom element</h2>
 			<div class="example">
 				<div class="description">
 					The basic element in making use in DOM. All the most popular elements have shortened own function.
@@ -56,7 +56,32 @@ document.body.appendChild(div.getLive());
 					<pre><code class="xml" id="example1"></code></pre>
 				</div>
 				<script>
-					examples.basicUsage("example1");
+					examples.createDomElement("example1");
+				</script>
+			</div>
+
+			<!-- Create attribute in element -->
+			<h2>Create attribute in element</h2>
+			<div class="example">
+				<div class="description">
+
+				</div>
+				<div class="js-code">
+					<div class="title">JavaScript code:</div>
+					<pre><code class="javascript">
+var div = dom.div(
+	dom.attr(dom.html.AttributeType.LANG, "en"),
+	dom.dataAttr("my-data", "test")
+);
+document.body.appendChild(div.getLive());
+					</code></pre>
+				</div>
+				<div class="html-code">
+					<div class="title">HTML output:</div>
+					<pre><code class="xml" id="example2"></code></pre>
+				</div>
+				<script>
+					examples.createDomElementWithAttr("example2");
 				</script>
 			</div>
 
