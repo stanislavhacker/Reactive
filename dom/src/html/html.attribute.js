@@ -59,7 +59,32 @@
 	 */
 	dom.html.AttributeType = {
 		ID: "id",
-		VALUE: "value"
+		VALUE: "value",
+		ACCESSKEY: "accesskey",
+		ACTION: "action",
+		ALINK: "alink",
+		ALT: "alt",
+		CHECKED: "checked",
+		CITE: "cite",
+		COLS: "cols",
+		COLSPAN: "colspan",
+		DISABLED: "disabled",
+		HREF: "href",
+		LABEL: "label",
+		LANG: "lang",
+		LINK: "link",
+		MEDIA: "media",
+		METHOD: "method",
+		NAME: "name",
+		READONLY: "readonly",
+		REL: "rel",
+		ROWS: "rows",
+		ROWSPAN: "rowspan",
+		SRC: "src",
+		TABINDEX: "tabindex",
+		TARGET: "target",
+		TITLE: "title",
+		TYPE: "type"
 	}
 
 }());

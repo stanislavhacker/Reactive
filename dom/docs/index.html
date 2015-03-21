@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+<head>
+    <title>Hammer framework</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+	<!-- Highlighter -->
+	<link rel="stylesheet" href="libs/idea.css">
+	<script src="libs/highlight.js"></script>
+	<script>
+		//noinspection JSUnresolvedVariable
+		hljs.initHighlightingOnLoad();
+	</script>
+	<link rel="stylesheet" href="libs/styles.css">
+
+	<!-- Hammer aka ShadowDom -->
+	<script type="text/javascript" src="../dist/hammer.js"></script>
+
+	<!-- Examples -->
+	<script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+
+	<div class="top">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1>Hammer aka ShadowDom</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="container">
+
+			<!-- Basic usage -->
+			<h2>Basic usage</h2>
+			<div class="example">
+				<div class="description">
+					The basic element in making use in DOM. All the most popular elements have shortened own function.
+					So for <span class="inline-code">&lt;span&gt;</span> it is <span class="inline-code">dom.span()</span> and
+					for <span class="inline-code">&lt;b&gt;</span> it is <span class="inline-code">dom.b();</span>.
+				</div>
+				<div class="js-code">
+					<div class="title">JavaScript code:</div>
+					<pre><code class="javascript">
+var div = dom.div();
+document.body.appendChild(div.getLive());
+					</code></pre>
+				</div>
+				<div class="html-code">
+					<div class="title">HTML output:</div>
+					<pre><code class="xml" id="example1"></code></pre>
+				</div>
+				<script>
+					examples.basicUsage("example1");
+				</script>
+			</div>
+
+
+		</div>
+	</div>
+
+
+<script>
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+h1 {
+    margin: 0;
+    line-height: 1em;
+    font-size: 51px;
+}
+
+h2 {
+    color: #2f353e;
+    margin: 2em 0 .5em;
+    line-height: 1.25;
+}
+
+pre {
+    padding: 0;
+    margin: 0;
+    background: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    display: block;
+    line-height: 20px;
+}
+
+code {
+    padding: 0 20px !important;
+    margin: 0;
+    background: none !important;
+}
+
+.top {
+    background: #3B444B;
+    padding: 75px 0;
+    margin: 0;
+    color: #fff;
+    position: relative;
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+}
+
+.top .container {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.top. container .row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.content {
+    position: relative;
+    padding: 50px 0;
+}
+
+.content .container {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.example {
+    width: 100%;
+    clear: both;
+}
+
+.example .js-code {
+    float: left;
+    width: 45%;
+}
+.example .html-code {
+    float: right;
+    width: 45%;
+}
+
+.example .title {
+    margin: 0;
+    font-size: 15px;
+    padding: 5px;
+    border-bottom: 1px dotted gray;
+    margin-bottom: 5px;
+}
+
+.example .description {
+    font-size: 11pt;
+    margin: 15px 0;
+}
+
+.inline-code {
+    display: inline-block;
+    background: #f7f7f9;
+    color: black;
+    font-weight: bold;
+    padding: 3px;
+    border: 1px solid #e1e1e8;
+}
