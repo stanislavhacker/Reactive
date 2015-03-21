@@ -3,13 +3,6 @@
 
 	describe("Dom renderer object", function () {
 
-		beforeEach(function () {
-			dom.IS_DEVELOPMENT = false;
-		});
-		afterEach(function () {
-			dom.IS_DEVELOPMENT = true;
-		});
-
 		/**
 		 * Spawn functions
 		 * @param {dom.render.Renderer} renderer
@@ -19,7 +12,7 @@
 			var i;
 			for (i = 0; i < count; i++) {
 				//noinspection JSAccessibilityCheck
-				renderer.render(function () {});
+				renderer.render(dom.div(), function () {});
 			}
 		}
 
@@ -32,7 +25,7 @@
 			var i;
 			for (i = 0; i < count; i++) {
 				//noinspection JSAccessibilityCheck
-				renderer.render(function () {
+				renderer.render(dom.div(), function () {
 					var i,
 						data = [];
 					for (i = 0; i < 100000; i++) {
@@ -114,7 +107,7 @@
 
 			interval = setInterval(function () {
 				//noinspection JSAccessibilityCheck
-				if (renderer.stacks.length === 0) {
+				if (renderer.queue.count() === 0) {
 
 					expect(renderer.MAX_IN_STEP).toBe(1);
 					expect(renderer.MAX_TIME).toBe(1);
@@ -132,6 +125,10 @@
 
 
 		}, 3000);
+
+	});
+
+	describe("Dom renderer queue", function () {
 
 	});
 

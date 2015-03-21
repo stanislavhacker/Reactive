@@ -9,7 +9,7 @@
 	 * Renderer
 	 * @type {dom.render.Renderer}
 	 */
-	var renderer = new dom.render.Renderer();
+	dom.html.RENDERER = new dom.render.Renderer();
 
 	/**
 	 * Element
@@ -114,6 +114,7 @@
 	 */
 	dom.html.Element.prototype.getHtml = function () {
 		var node = this.getLive();
+		dom.html.RENDERER.forceFor(this);
 		return node.outerHTML || node.nodeValue;
 	};
 
@@ -192,7 +193,7 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			renderer.render(function () {
+			dom.html.RENDERER.render(this, function () {
 				element.setAttribute(name, value);
 			});
 		}
@@ -207,7 +208,7 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			renderer.render(function () {
+			dom.html.RENDERER.render(this, function () {
 				element.style[name] = value;
 			});
 		}
@@ -221,7 +222,7 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			renderer.render(function () {
+			dom.html.RENDERER.render(this, function () {
 				element.className = value.join(" ");
 			});
 		}

@@ -10,8 +10,8 @@
 	 * @constructor
 	 */
 	dom.render.Renderer = function () {
-		/** @type {Array.<Function>}*/
-		this.stacks = [];
+		/** @type {dom.render.Queue}*/
+		this.queue = new dom.render.Queue();
 		/** @type {null}*/
 		this.timer = null;
 		/** @type {number}*/
@@ -23,19 +23,34 @@
 	/**
 	 * @protected
 	 * Renderer
+	 * @param {dom.html.Element} element
 	 * @param {Function} what
-	 * @constructor
 	 */
-	dom.render.Renderer.prototype.render = function (what) {
-		//propagate immediately in dev mode
-		if (dom.IS_DEVELOPMENT) {
-			what();
+	dom.render.Renderer.prototype.render = function (element, what) {
+		this.queue.add(element, what);
+		this.changed();
+	};
 
-		//evaluate run
-		} else {
-			this.stacks.push(what);
-			this.changed();
+	/**
+	 * @protected
+	 * Force render for
+	 * @param {dom.html.Element} element
+	 */
+	dom.render.Renderer.prototype.forceFor = function (element) {
+		//stop timer
+		if (this.timer) {
+			clearTimeout(this.timer);
+			this.timer = null;
 		}
+		//get all functions
+		var i,
+			functions = this.queue.getFor(element);
+		//force run all
+		for (i = 0; i < functions.length; i++) {
+			functions[i]();
+		}
+		//run timer if its necessary
+		this.changed();
 	};
 
 	/**
@@ -68,7 +83,7 @@
 			//clear timer
 			self.timer = null;
 			//run int again if not complete all
-			if (self.stacks.length !== 0) {
+			if (self.queue.count() !== 0) {
 				self.changed();
 			}
 		}, 30);
@@ -81,14 +96,12 @@
 	 */
 	dom.render.Renderer.prototype.cycle = function (time) {
 		var i,
-			fnc,
-			ration,
-			length;
+			fnc;
 
 		//run functions
 		for (i = 0; i < this.MAX_IN_STEP; i++) {
 			//get first function
-			fnc = this.stacks.shift();
+			fnc = this.queue.get();
 			//fnc
 			if (fnc) {
 				fnc();
@@ -96,22 +109,40 @@
 				//no function left, its done
 				return;
 			}
-			//length of functions
-			length = this.now() - time;
-			//check for remaining time
-			if (length > this.MAX_TIME) {
-				//set new max function count
-				this.MAX_IN_STEP = Math.max(i, 1);
-				break;
+			//check exceeded
+			if (this.recalculate(time, i)) {
+				//function exceeded given time
+				return;
 			}
 		}
+		//recalculate on end
+		this.recalculate(time, i);
+	};
+
+	/**
+	 * @private
+	 * Recalculate
+	 * @param {number} time
+	 * @param {number} i
+	 * @return {boolean} exceeded
+	 */
+	dom.render.Renderer.prototype.recalculate = function (time, i) {
+		var ration,
+			length;
 		//length of cycle
 		length = this.now() - time;
+		//check for remaining time
+		if (length > this.MAX_TIME) {
+			//set new max function count
+			this.MAX_IN_STEP = Math.max(i, 1);
+			return true;
+		}
 		//fast rendering, calculate MAX_IN_STEP
 		if (this.MAX_IN_STEP === i && length < this.MAX_TIME) {
 			ration = length === 0 ? 10 : this.MAX_TIME / length;
 			this.MAX_IN_STEP = Math.floor(this.MAX_IN_STEP * ration);
 		}
+		return false;
 	};
 
 	/**

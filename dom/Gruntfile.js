@@ -9,6 +9,7 @@ module.exports = function(grunt) {
 			'src/dom.element.js',
 			//Renderer
 			'src/render/render.renderer.js',
+			'src/render/render.queue.js',
 			//Utils
 			'src/utils/utils.inherit.js',
 			//Data

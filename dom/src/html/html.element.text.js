@@ -6,12 +6,6 @@
 	"use strict";
 
 	/**
-	 * Renderer
-	 * @type {dom.render.Renderer}
-	 */
-	var renderer = new dom.render.Renderer();
-
-	/**
 	 * Text Element
 	 * @param {string|dom.data.Contract} text
 	 * @extends {dom.html.Element}
@@ -119,7 +113,7 @@
 			element = this.element;
 		//set attribute on dom element
 		if (element) {
-			renderer.render(function () {
+			dom.html.RENDERER.render(this, function () {
 				element.nodeValue = self.text.getValue() || "";
 			});
 		}

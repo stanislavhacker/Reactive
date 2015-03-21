@@ -11,11 +11,20 @@
 					dom.div(dom.attr('id', 'body-test')),
 					dom.span()
 				);
-				expect(document.body.outerHTML).toContain('<div id="body-test"></div><span></span>');
-				expect(function () {
-					dom.insert(dom.span());
-				}).toThrow('This method can be called only once!');
-			});
+
+				var int = setInterval(function (done) {
+					if (document.body.outerHTML.indexOf('<div id="body-test"></div><span></span>') >= 0) {
+
+						expect(document.body.outerHTML).toContain('<div id="body-test"></div><span></span>');
+						expect(function () {
+							dom.insert(dom.span());
+						}).toThrow('This method can be called only once!');
+
+						clearInterval(int);
+						done();
+					}
+				}, 20);
+			}, 200);
 
 			it("dom.div", function () {
 				var div = dom.div();

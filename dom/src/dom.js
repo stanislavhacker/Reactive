@@ -22,12 +22,6 @@ var dom = {};
 	//global functions
 
 	/**
-	 * Is development
-	 * @type {boolean}
-	 */
-	dom.IS_DEVELOPMENT = true;
-
-	/**
 	 * Body
 	 */
 	(function () {
