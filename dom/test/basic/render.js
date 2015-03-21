@@ -3,6 +3,8 @@
 
 	describe("Dom basic render", function () {
 
+		var headless = navigator.userAgent.indexOf("PhantomJS") >= 0;
+
 		describe("element with attribute", function () {
 
 			it("static", function () {
@@ -114,9 +116,17 @@
 						)
 					);
 
-				expect(div.getHtml()).toBe('<div id="css" style="border-top-color: red; border-right-color: red; border-bottom-color: red; border-left-color: red; "></div>');
+				if (headless) {
+					expect(div.getHtml()).toBe('<div id="css" style="border-top-color: red; border-right-color: red; border-bottom-color: red; border-left-color: red; "></div>');
+				} else {
+					expect(div.getHtml()).toBe('<div id="css" style="border-color: red;"></div>');
+				}
 				borderColor.setValue("yellow");
-				expect(div.getHtml()).toBe('<div id="css" style="border-top-color: yellow; border-right-color: yellow; border-bottom-color: yellow; border-left-color: yellow; "></div>');
+				if (headless) {
+					expect(div.getHtml()).toBe('<div id="css" style="border-top-color: yellow; border-right-color: yellow; border-bottom-color: yellow; border-left-color: yellow; "></div>');
+				} else {
+					expect(div.getHtml()).toBe('<div id="css" style="border-color: yellow;"></div>');
+				}
 			});
 
 			it("double css fail", function () {

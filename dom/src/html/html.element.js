@@ -6,6 +6,12 @@
 	"use strict";
 
 	/**
+	 * Renderer
+	 * @type {dom.render.Renderer}
+	 */
+	var renderer = new dom.render.Renderer();
+
+	/**
 	 * Element
 	 * @param {dom.html.ElementType} tag
 	 * @param {Array.<dom.Element>} elements
@@ -135,7 +141,6 @@
 	}
 
 	/**
-	 * @dom
 	 * @public
 	 * Remove
 	 */
@@ -179,7 +184,6 @@
 	};
 
 	/**
-	 * @dom
 	 * Set attribute
 	 * @type {string} name
 	 * @type {string} value
@@ -188,12 +192,13 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			element.setAttribute(name, value);
+			renderer.render(function () {
+				element.setAttribute(name, value);
+			});
 		}
 	};
 
 	/**
-	 * @dom
 	 * Set css property
 	 * @type {string} name
 	 * @type {string} value
@@ -202,12 +207,13 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			element.style[name] = value;
+			renderer.render(function () {
+				element.style[name] = value;
+			});
 		}
 	};
 
 	/**
-	 * @dom
 	 * Set class name
 	 * @type {Array.<string>} value
 	 */
@@ -215,7 +221,9 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			element.className = value.join(" ");
+			renderer.render(function () {
+				element.className = value.join(" ");
+			});
 		}
 	};
 

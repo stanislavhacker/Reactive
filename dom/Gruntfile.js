@@ -7,6 +7,8 @@ module.exports = function(grunt) {
 			//Base object
 			'src/dom.js',
 			'src/dom.element.js',
+			//Renderer
+			'src/render/render.renderer.js',
 			//Utils
 			'src/utils/utils.inherit.js',
 			//Data
@@ -76,6 +78,20 @@ module.exports = function(grunt) {
 						}
 					}
 				}
+			},
+			options: {
+				keepRunner: true
+			}
+		},
+
+		//Connect task
+
+		connect: {
+			server: {
+				options: {
+					port: 8888,
+					keepalive: true
+				}
 			}
 		},
 
@@ -123,7 +139,17 @@ module.exports = function(grunt) {
 					interrupt: true
 				}
 			}
+		},
+
+		//Open task
+
+		open : {
+			test: {
+				path: 'http://localhost:8888/_SpecRunner.html',
+				delay: 1000
+			}
 		}
+
 	});
 
 	// Load the plugins tasks
@@ -132,8 +158,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
+	grunt.loadNpmTasks("grunt-contrib-connect");
+	grunt.loadNpmTasks('grunt-open');
 
 	// Default task(s).
 	grunt.registerTask('default', ['clean', 'jasmine', 'concat', 'uglify']);
+	grunt.registerTask('test debug', ['jasmine:pivotal', 'open:test', 'connect']);
 
 };

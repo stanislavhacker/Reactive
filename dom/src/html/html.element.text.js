@@ -6,6 +6,12 @@
 	"use strict";
 
 	/**
+	 * Renderer
+	 * @type {dom.render.Renderer}
+	 */
+	var renderer = new dom.render.Renderer();
+
+	/**
 	 * Text Element
 	 * @param {string|dom.data.Contract} text
 	 * @extends {dom.html.Element}
@@ -84,7 +90,6 @@
 	};
 
 	/**
-	 * @dom
 	 * @public
 	 * Remove
 	 */
@@ -106,15 +111,17 @@
 	};
 
 	/**
-	 * @dom
 	 * @protected
 	 * Set text
 	 */
 	dom.html.TextElement.prototype.setText = function () {
-		var element = this.element;
+		var self = this,
+			element = this.element;
 		//set attribute on dom element
 		if (element) {
-			element.nodeValue = this.text.getValue() || "";
+			renderer.render(function () {
+				element.nodeValue = self.text.getValue() || "";
+			});
 		}
 	};
 

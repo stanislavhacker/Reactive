@@ -47,7 +47,6 @@
 	};
 
 	/**
-	 * @dom
 	 * @public
 	 * Remove
 	 */

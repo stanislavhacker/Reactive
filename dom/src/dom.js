@@ -1,20 +1,17 @@
 var dom = {};
 /**
  * Base shadow dom definition
- *
- *
- *  @dom - working directly with dom elements
- *
  */
 (function () {
 	"use strict";
 
 	//namespaces
-	dom.utils = {};
-	dom.sheets = {};
-	dom.html = {};
-	dom.data = {};
 	dom.builder = {};
+	dom.data = {};
+	dom.html = {};
+	dom.render = {};
+	dom.sheets = {};
+	dom.utils = {};
 
 	/**
 	 * Insert called
