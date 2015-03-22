@@ -1,5 +1,6 @@
 /*globals dom*/
 (function () {
+	"use strict";
 
 	describe("Dom basic css operation", function () {
 
@@ -93,7 +94,8 @@
 				)
 			);
 
-			rules = div.getCssRules();
+			dom.insert(document.body, div);
+			rules = div.cssRules;
 			expect(rules.length).toBe(2);
 			expect(rules[0].name).toBe('#test:hover');
 			expect(rules[0].getRuleString()).toBe('#test:hover {background: blue}\n');
@@ -116,7 +118,8 @@
 					)
 				);
 
-			rules = div.getCssRules();
+			dom.insert(document.body, div);
+			rules = div.cssRules;
 			expect(rules.length).toBe(2);
 			expect(rules[0].name).toBe('.square:hover');
 			expect(rules[0].getRuleString()).toBe('.square:hover {background: blue}\n');
@@ -138,12 +141,73 @@
 					)
 				);
 
-			rules = div.getCssRules();
+			dom.insert(document.body, div);
+			rules = div.cssRules;
 			expect(rules.length).toBe(2);
 			expect(rules[0].name).toBe('div:hover');
 			expect(rules[0].getRuleString()).toBe('div:hover {background: blue}\n');
 			expect(rules[1].name).toBe('div');
 			expect(rules[1].getRuleString()).toBe('div {display: block;background: red;width: 200px;height: 180px}\n');
+		});
+
+		it("error throw", function () {
+			var div = dom.div();
+			expect(function () {
+				//noinspection JSAccessibilityCheck
+				div.createCssRules();
+			}).toThrow('Can not generate css for element without parent.');
+		});
+
+	});
+
+	describe("Dom complex css generating", function () {
+
+		it("Two divs inside", function () {
+			var divOne,
+				divTwo;
+			//one
+			divOne = dom.div(
+				dom.classes("test"),
+				dom.css(
+					dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
+					dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "purple"),
+					dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "20px"),
+					dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "18px"),
+					dom.cssGroup(":hover",
+						dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "yellow")
+					)
+				)
+			);
+			//two
+			divTwo = dom.div(
+				dom.classes("test"),
+				dom.css(
+					dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
+					dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "red"),
+					dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "200px"),
+					dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "180px"),
+					dom.cssGroup(":hover",
+						dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "blue")
+					)
+				),
+				divOne
+			);
+			//insert
+			dom.insert(document.body, divTwo);
+
+			expect(divOne.cssRules.length).toBe(2);
+			expect(divTwo.cssRules.length).toBe(2);
+
+			expect(divOne.cssRules[0].getRuleName()).toBe('.test .test:hover');
+			expect(divOne.cssRules[1].getRuleName()).toBe('.test .test');
+
+			expect(divTwo.cssRules[0].getRuleName()).toBe('.test:hover');
+			expect(divTwo.cssRules[1].getRuleName()).toBe('.test');
+
+			//try to create again
+			expect(function () {
+				new dom.builder.Css(divOne).getCss();
+			}).toThrow("There is duplicate rule named '.test .test:hover'. You mas specify one of element that is used on this path.");
 		});
 
 	});

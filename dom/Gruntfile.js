@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 			//Html
 			'src/html/html.element.js',
 			'src/html/html.element.text.js',
-			'src/html/html.element.body.js',
+			'src/html/html.element.root.js',
 			'src/html/html.attribute.js',
 			'src/html/html.attribute.data.js',
 			'src/html/html.classes.js',
@@ -32,7 +32,6 @@ module.exports = function(grunt) {
 			//Builders
 			'src/builder/builder.live.js',
 			'src/builder/builder.live.text.js',
-			'src/builder/builder.live.body.js',
 			'src/builder/builder.css.js'
 		],
 		specs = [
@@ -131,7 +130,7 @@ module.exports = function(grunt) {
 		watch: {
 			scripts: {
 				files: watch,
-				tasks: ['jasmine', 'concat'],
+				tasks: ['jasmine'],
 				options: {
 					interrupt: true
 				}

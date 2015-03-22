@@ -13,12 +13,6 @@ var dom = {};
 	dom.sheets = {};
 	dom.utils = {};
 
-	/**
-	 * Insert called
-	 * @type {boolean}
-	 */
-	var insertCalled = false;
-
 	//global functions
 
 	/**
@@ -28,21 +22,14 @@ var dom = {};
 
 		/**
 		 * @static
-		 * Insert into body
+		 * Insert into parent
+		 * @param {HTMLElement} parent
 		 * @param {dom.Element...=} params
 		 */
-		dom.insert = function (params) {
-			var body,
-				args = Array.prototype.slice.apply(arguments);
-			//check call
-			if (insertCalled) {
-				throw "This method can be called only once!";
-			}
-			//set call flag
-			insertCalled = true;
-			//create body element and run it!
-			body = new dom.html.BodyElement(args);
-			body.getLive();
+		dom.insert = function (parent, params) {
+			var args = Array.prototype.slice.apply(arguments);
+			//create root element and run it!
+			new dom.html.RootElement(parent, args.slice(1)); // jshint ignore:line
 		};
 
 	}());

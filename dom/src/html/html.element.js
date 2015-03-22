@@ -121,18 +121,20 @@
 	};
 
 	/**
-	 * @public
-	 * Get css rules
-	 * @returns {dom.sheets.CssRules}
+	 * @protected
+	 * Create css rules
 	 */
-	dom.html.Element.prototype.getCssRules = function () {
-		var rules = this.cssRules;
+	dom.html.Element.prototype.createCssRules = function () {
+		var rules = this.cssRules,
+			parent = this.parent;
+		//no parent
+		if (!parent) {
+			throw "Can not generate css for element without parent.";
+		}
 		//create new rules
 		if (rules === null) {
 			new dom.builder.Css(this).getCss();
-			rules = this.cssRules;
 		}
-		return rules;
 	};
 
 
@@ -341,6 +343,6 @@
 		U: "u",
 		UL: "ul",
 		VIDEO: "video"
-	}
+	};
 
 }());

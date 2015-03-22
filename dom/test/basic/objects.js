@@ -1,5 +1,6 @@
 /*globals dom*/
 (function () {
+	"use strict";
 
 	describe("Dom objects", function () {
 
@@ -33,11 +34,21 @@
 
 		});
 
-		it("dom.html.BodyElement", function () {
-			var body = new dom.html.BodyElement([]);
+		it("dom.html.RootElement", function () {
+			var body = new dom.html.RootElement(document.body, []);
 			expect(function () {
 				body.remove();
-			}).toThrow('You can not remove body element from DOM :)');
+			}).toThrow('You can not call this method on RootElement.');
+			expect(function () {
+				body.getLive();
+			}).toThrow('You can not call this method on RootElement.');
+		});
+
+		it("dom.utils.logger", function () {
+			dom.utils.logger(dom.utils.LoggerType.INFO, "Test info");
+			expect(function () {
+				dom.utils.logger("xx", "Test info");
+			}).toThrow();
 		});
 
 	});

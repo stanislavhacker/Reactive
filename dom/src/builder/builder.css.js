@@ -6,6 +6,14 @@
 	"use strict";
 
 	/**
+	 * @private
+	 * Style element, rules
+	 * @type {HTMLElement}
+	 */
+	var style = null,
+		rules = {};
+
+	/**
 	 * Css
 	 * @param {dom.html.Element} element
 	 * @constructor
@@ -21,14 +29,28 @@
 	 * Get css for element
 	 */
 	dom.builder.Css.prototype.getCss = function () {
-		var css = this.element.getCss();
+		var i,
+			rules = this.cssRules,
+			element = this.element,
+			children = element.getChildren(),
+			css = this.element.getCss();
 		//css exists
 		if (css) {
 			//css rules
-			this.getCssRule(this.getRuleName(), css.getCss());
+			this.getCssRule(dom.builder.Css.getRuleName(element), css.getCss());
+		}
+		//append to dom
+		for (i = 0; i < rules.length; i++) {
+			this.appendRule(rules[i]);
+		}
+		//for all children
+		if (!element.isEmpty()) {
+			for (i = 0; i < children.length; i++) {
+				new dom.builder.Css(children[i]).getCss();
+			}
 		}
 		//add rules
-		this.element.cssRules = this.cssRules;
+		element.cssRules = rules;
 	};
 
 	/**
@@ -39,7 +61,9 @@
 	 */
 	dom.builder.Css.prototype.getCssRule = function (name, cssProperties) {
 		var i,
+			cssRule,
 			cssGroup,
+			parentCss,
 			rule = [],
 			cssProperty,
 			rules = this.cssRules;
@@ -57,17 +81,57 @@
 				rule.push(cssProperty.getName() + ": " + cssProperty.getValue());
 			}
 		}
+		//parent name
+		parentCss = dom.builder.Css.getParentRuleName(this.element.parent);
+		//parent exists
+		if (parentCss) {
+			name = [ parentCss, name ].join(" ");
+		}
+		//rule
+		cssRule = new dom.sheets.CssRule(name, rule);
+		cssRule.element = this.element;
 		//push top rule
-		rules.push(new dom.sheets.CssRule(name, rule));
+		rules.push(cssRule);
 	};
 
 	/**
 	 * @private
+	 * Append style
+	 * @param {dom.sheets.CssRule} rule
+	 */
+	dom.builder.Css.prototype.appendRule = function (rule) {
+		var name = rule.getRuleName();
+		//is already in dom, do nothing
+		if (rule.isInDom()) {
+			return;
+		}
+		//check rule exists
+		if (rules[name]) {
+			throw "There is duplicate rule named '" + name + "'. You mas specify one of element that is used on this path.";
+		}
+		rules[name] = rule;
+		//create style
+		dom.builder.Css.createStyle();
+		//register node
+		rule.cssElement = document.createTextNode(rule.getRuleString());
+		//noinspection JSUnresolvedVariable
+		if (style.styleSheet) {
+			//noinspection JSUnresolvedVariable
+			style.styleSheet.cssText += rule.cssElement.nodeValue;
+		} else {
+			style.appendChild(rule.cssElement);
+		}
+	};
+
+	/**
+	 * @private
+	 * @static
 	 * Get id for element
+	 * @param  {dom.html.Element} element
 	 * @returns {string|null}
 	 */
-	dom.builder.Css.prototype.getId = function () {
-		var attributes = this.element.getAttributes(),
+	dom.builder.Css.getId = function (element) {
+		var attributes = element.getAttributes(),
 			id = attributes[dom.html.AttributeType.ID];
 
 		//for css we need static attribute
@@ -79,14 +143,16 @@
 
 	/**
 	 * @private
+	 * @static
 	 * Get all static css
+	 * @param  {dom.html.Element} element
 	 * @returns {Array.<string>}
 	 */
-	dom.builder.Css.prototype.getClasses = function () {
+	dom.builder.Css.getClasses = function (element) {
 		var i,
 			staticClasses,
 			allClasses = [],
-			classNames = this.element.getClassNames();
+			classNames = element.getClassNames();
 
 		for (i = 0; i < classNames.length; i++) {
 			staticClasses = classNames[i].getStaticClasses();
@@ -97,18 +163,19 @@
 
 	/**
 	 * @private
+	 * @static
 	 * Get rule name
+	 * @param  {dom.html.Element} element
 	 * @returns {string}
 	 */
-	dom.builder.Css.prototype.getRuleName = function () {
+	dom.builder.Css.getRuleName = function (element) {
 		var id,
 			classes,
-			name = [],
-			element = this.element;
+			name = [];
 
 		//get ind and classes
-		id = this.getId();
-		classes = this.getClasses();
+		id = dom.builder.Css.getId(element);
+		classes = dom.builder.Css.getClasses(element);
 		//add id
 		if (id !== null) {
 			name.push("#" + id);
@@ -120,10 +187,61 @@
 		}
 		//nothing
 		if (name.length === 0) {
-			name.push(element.getTag())
+			name.push(element.getTag());
 		}
 		//return
 		return name.join("");
+	};
+
+	/**
+	 * @private
+	 * @static
+	 * Get rule name
+	 * @param  {dom.html.Element} element
+	 * @returns {string}
+	 */
+	dom.builder.Css.getParentRuleName = function (element) {
+		var name = [],
+			parentIdentifier,
+			parent = element,
+			isRoot = parent instanceof dom.html.RootElement;
+
+		//is root
+		if (isRoot) {
+			return "";
+		}
+
+		//generate name
+		while(!isRoot) {
+			//get name
+			parentIdentifier = dom.builder.Css.getRuleName(parent);
+			//add into names array
+			if (parentIdentifier) {
+				name.push(parentIdentifier);
+			}
+			//get new parent
+			parent = parent.parent;
+			isRoot = parent instanceof dom.html.RootElement;
+		}
+		//return name
+		return name.join(" ");
+	};
+
+	/**
+	 * @static
+	 * @private
+	 * Create style
+	 */
+	dom.builder.Css.createStyle = function () {
+		var header;
+		//create new style
+		if (style === null) {
+			style = document.createElement('style');
+			style.setAttribute("type", "text/css");
+			style.setAttribute("id", "hammer-generated");
+			header = document.getElementsByTagName('head')[0];
+			header.appendChild(style);
+		}
 	};
 
 }());

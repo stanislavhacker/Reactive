@@ -1,5 +1,6 @@
 /*globals dom*/
 (function () {
+	"use strict";
 
 	describe("Dom renderer object", function () {
 

@@ -16,6 +16,18 @@
 		this.name = name;
 		/** @type {Array.<string>}*/
 		this.properties = properties;
+		/** @type {Text}*/
+		this.cssElement = null;
+		/** @type {dom.html.Element}*/
+		this.element = null;
+	};
+
+	/**
+	 * Get rule name
+	 * @returns {string}
+	 */
+	dom.sheets.CssRule.prototype.getRuleName = function () {
+		return this.name;
 	};
 
 	/**
@@ -24,6 +36,14 @@
 	 */
 	dom.sheets.CssRule.prototype.getRuleString = function () {
 		return this.name + " {" + this.properties.join(";") + "}\n";
+	};
+
+	/**
+	 * Check if rule is in dom
+	 * @returns {boolean}
+	 */
+	dom.sheets.CssRule.prototype.isInDom = function () {
+		return this.cssElement !== null;
 	};
 
 

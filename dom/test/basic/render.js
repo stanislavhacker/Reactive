@@ -1,5 +1,6 @@
 /*globals dom*/
 (function () {
+	"use strict";
 
 	describe("Dom basic render", function () {
 
@@ -140,7 +141,7 @@
 						dom.css(
 							dom.cssProperty(dom.sheets.CssPropertyType.BORDER_COLOR, "test")
 						)
-					)
+					);
 				}).toThrow('Can not set css twice on element.');
 			});
 

@@ -1,21 +1,20 @@
 /*globals dom*/
 (function () {
+	"use strict";
 
 	describe("Dom helper methods", function () {
-
 
 		describe("html", function () {
 
 			it("dom.insert", function () {
+				//noinspection JSCheckFunctionSignatures
 				dom.insert(
+					document.body,
 					dom.div(dom.attr('id', 'body-test')),
 					dom.span()
 				);
 
 				expect(document.body.outerHTML).toContain('<div></div><span></span>');
-				expect(function () {
-					dom.insert(dom.span());
-				}).toThrow('This method can be called only once!');
 
 				var int = setInterval(function (done) {
 					if (document.body.outerHTML.indexOf('<div id="body-test"></div><span></span>') >= 0) {
