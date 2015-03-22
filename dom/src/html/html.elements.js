@@ -22,7 +22,7 @@
 	dom.html.Elements.prototype.addElement = function (element) {
 		var index = this.elements.indexOf(element);
 		if (index === -1) {
-			this.elements.push(element)
+			this.elements.push(element);
 		}
 	};
 

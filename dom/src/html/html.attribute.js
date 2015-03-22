@@ -95,6 +95,6 @@
 		TARGET: "target",
 		TITLE: "title",
 		TYPE: "type"
-	}
+	};
 
 }());

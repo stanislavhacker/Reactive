@@ -100,7 +100,7 @@
 	 * @return {number}
 	 */
 	dom.render.Queue.prototype.count = function () {
-		return this.stacks.length
+		return this.stacks.length;
 	};
 
 

@@ -179,7 +179,7 @@
 			children[i].remove();
 		}
 		//remove attr
-		for (name in attributes) {
+		for (name in attributes) { // jshint ignore:line
 			//noinspection JSUnfilteredForInLoop
 			attributes[name].elements.removeElement(this);
 		}
@@ -257,6 +257,7 @@
 			current = this.parent;
 		//parent exists, change it
 		if (current !== null) {
+			//noinspection JSCheckFunctionSignatures
 			index = current.children.indexOf(parent);
 			current.children.splice(index, 1);
 		}

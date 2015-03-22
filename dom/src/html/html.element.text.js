@@ -15,7 +15,7 @@
 	dom.html.TextElement = function (text) {
 		/** @type {dom.data.Contract}*/
 		this.text = text instanceof dom.data.Contract ? text : new dom.data.UnboundContract(text);
-		/** @type {HTMLElement}*/
+		/** @type {Text}*/
 		this.element = null;
 		/** @type {dom.html.Element}*/
 		this.parent = null;

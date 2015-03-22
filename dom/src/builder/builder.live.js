@@ -50,7 +50,7 @@
 		//load attributes
 		attributes = element.getAttributes();
 		//iterate all attributes
-		for (name in attributes) {
+		for (name in attributes) { // jshint ignore:line
 			//noinspection JSUnfilteredForInLoop
 			attr = attributes[name];
 			//check attribute
@@ -124,7 +124,7 @@
 			isGroup = property instanceof dom.sheets.CssGroup;
 			//changeable
 			if (isProperty && property.isChangeable()) {
-				element.setCssProperty(property.getJsName(), property.getValue())
+				element.setCssProperty(property.getJsName(), property.getValue());
 			}
 			//group
 			if (isGroup) {
