@@ -130,6 +130,93 @@
 
 	describe("Dom renderer queue", function () {
 
+		it("basics", function () {
+			var queue = new dom.render.Queue();
+
+			expect(queue.elements.length).toBe(0);
+			expect(queue.stacks.length).toBe(0);
+		});
+
+		it("add into queue", function () {
+			var elementOne = dom.div(),
+				elementTwo = dom.div(),
+				queue = new dom.render.Queue();
+
+			queue.add(elementOne, function () {});
+			queue.add(elementOne, function () {});
+			expect(queue.elements.length).toBe(1);
+			expect(queue.stacks.length).toBe(1);
+			expect(queue.stacks[0].length).toBe(2);
+
+			queue.add(elementTwo, function () {});
+			queue.add(elementTwo, function () {});
+			expect(queue.elements.length).toBe(2);
+			expect(queue.stacks.length).toBe(2);
+			expect(queue.stacks[1].length).toBe(2);
+		});
+
+		it("get from queue", function () {
+			var elementOne = dom.div(),
+				elementTwo = dom.div(),
+				queue = new dom.render.Queue();
+
+			queue.add(elementOne, function () {});
+			queue.add(elementOne, function () {});
+			queue.add(elementTwo, function () {});
+			queue.add(elementTwo, function () {});
+
+			expect(queue.elements.length).toBe(2);
+			expect(queue.stacks.length).toBe(2);
+			expect(queue.stacks[0].length).toBe(2);
+			expect(queue.stacks[1].length).toBe(2);
+
+			queue.get();
+
+			expect(queue.elements.length).toBe(2);
+			expect(queue.stacks.length).toBe(2);
+			expect(queue.stacks[0].length).toBe(1);
+			expect(queue.stacks[1].length).toBe(2);
+
+			queue.get();
+
+			expect(queue.elements.length).toBe(1);
+			expect(queue.stacks.length).toBe(1);
+			expect(queue.stacks[0].length).toBe(2);
+
+			queue.get();
+
+			expect(queue.elements.length).toBe(1);
+			expect(queue.stacks.length).toBe(1);
+			expect(queue.stacks[0].length).toBe(1);
+
+			queue.get();
+
+			expect(queue.elements.length).toBe(0);
+			expect(queue.stacks.length).toBe(0);
+		});
+
+		it("getFor from queue", function () {
+			var elementOne = dom.div(),
+				elementTwo = dom.div(),
+				queue = new dom.render.Queue();
+
+			queue.add(elementOne, function () {});
+			queue.add(elementOne, function () {});
+			queue.add(elementTwo, function () {});
+			queue.add(elementTwo, function () {});
+
+			expect(queue.elements.length).toBe(2);
+			expect(queue.stacks.length).toBe(2);
+			expect(queue.stacks[0].length).toBe(2);
+			expect(queue.stacks[1].length).toBe(2);
+
+			expect(queue.getFor(elementOne).length).toBe(2);
+
+			expect(queue.elements.length).toBe(1);
+			expect(queue.stacks.length).toBe(1);
+			expect(queue.stacks[0].length).toBe(2);
+		});
+
 	});
 
 }());

@@ -13,15 +13,13 @@
 				);
 
 				expect(document.body.outerHTML).toContain('<div></div><span></span>');
+				expect(function () {
+					dom.insert(dom.span());
+				}).toThrow('This method can be called only once!');
 
 				var int = setInterval(function (done) {
 					if (document.body.outerHTML.indexOf('<div id="body-test"></div><span></span>') >= 0) {
-
 						expect(document.body.outerHTML).toContain('<div id="body-test"></div><span></span>');
-						expect(function () {
-							dom.insert(dom.span());
-						}).toThrow('This method can be called only once!');
-
 						clearInterval(int);
 						done();
 					}

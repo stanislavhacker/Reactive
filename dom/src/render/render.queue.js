@@ -17,7 +17,6 @@
 	};
 
 	/**
-	 * @protected
 	 * Add into queue
 	 * @param {dom.html.Element} element
 	 * @param {Function} what
@@ -97,7 +96,6 @@
 	};
 
 	/**
-	 * @protected
 	 * Count
 	 * @return {number}
 	 */
