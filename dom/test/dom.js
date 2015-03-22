@@ -12,6 +12,8 @@
 					dom.span()
 				);
 
+				expect(document.body.outerHTML).toContain('<div></div><span></span>');
+
 				var int = setInterval(function (done) {
 					if (document.body.outerHTML.indexOf('<div id="body-test"></div><span></span>') >= 0) {
 

@@ -124,7 +124,7 @@
 			isGroup = property instanceof dom.sheets.CssGroup;
 			//changeable
 			if (isProperty && property.isChangeable()) {
-				element.setCssProperty(property.getName(), property.getValue())
+				element.setCssProperty(property.getJsName(), property.getValue())
 			}
 			//group
 			if (isGroup) {
