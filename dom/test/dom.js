@@ -55,14 +55,31 @@
 				expect(attr.getValue()).toBe('test');
 			});
 
-			it("dom.classes", function () {
-				var classes = dom.classes("circle", "red", "clickable"),
-					cls = classes.getClasses();
-				expect(classes.elements.elements.length).toBe(0);
-				expect(cls.length).toBe(3);
-				expect(cls[0]).toBe('circle');
-				expect(cls[1]).toBe('red');
-				expect(cls[2]).toBe('clickable');
+			describe("dom.classes", function () {
+
+				it("basic usage", function () {
+					var classes = dom.classes("circle", "red", "clickable"),
+						cls = classes.getClasses();
+					expect(classes.elements.elements.length).toBe(0);
+					expect(cls.length).toBe(3);
+					expect(cls[0]).toBe('circle');
+					expect(cls[1]).toBe('red');
+					expect(cls[2]).toBe('clickable');
+				});
+
+				it("get static classes", function () {
+					var red = dom.contract("red"),
+						clickable = dom.contract("clickable"),
+						classes = dom.classes("circle", red, clickable),
+						cls;
+
+					cls = classes.getStaticClasses();
+
+					expect(classes.elements.elements.length).toBe(0);
+					expect(cls.length).toBe(1);
+					expect(cls[0]).toBe('circle');
+				});
+
 			});
 
 			it("dom.a", function () {

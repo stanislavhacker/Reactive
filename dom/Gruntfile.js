@@ -27,10 +27,13 @@ module.exports = function(grunt) {
 			'src/sheets/sheets.css.js',
 			'src/sheets/sheets.css.property.js',
 			'src/sheets/sheets.css.group.js',
+			'src/sheets/sheets.css.rule.js',
+			'src/sheets/sheets.css.rules.js',
 			//Builders
 			'src/builder/builder.live.js',
 			'src/builder/builder.live.text.js',
-			'src/builder/builder.live.body.js'
+			'src/builder/builder.live.body.js',
+			'src/builder/builder.css.js'
 		],
 		specs = [
 			'test/**/*.js'

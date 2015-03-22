@@ -34,6 +34,8 @@
 		this.css = this.processCss(elements);
 		/** @type {HTMLElement}*/
 		this.element = null;
+		/** @type {dom.sheets.CssRules}*/
+		this.cssRules = null;
 	};
 	dom.utils.inherit(dom.html.Element, dom.Element);
 
@@ -116,6 +118,21 @@
 		var node = this.getLive();
 		dom.html.RENDERER.forceFor(this);
 		return node.outerHTML || node.nodeValue;
+	};
+
+	/**
+	 * @public
+	 * Get css rules
+	 * @returns {dom.sheets.CssRules}
+	 */
+	dom.html.Element.prototype.getCssRules = function () {
+		var rules = this.cssRules;
+		//create new rules
+		if (rules === null) {
+			new dom.builder.Css(this).getCss();
+			rules = this.cssRules;
+		}
+		return rules;
 	};
 
 

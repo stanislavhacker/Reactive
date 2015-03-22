@@ -45,6 +45,16 @@
 	};
 
 	/**
+	 * @public
+	 * Is changeable
+	 * @returns {boolean}
+	 */
+	dom.html.Attribute.prototype.isChangeable = function () {
+		var unbound = this.value instanceof dom.data.UnboundContract;
+		return unbound === false;
+	};
+
+	/**
 	 * @protected
 	 * On attribute change
 	 */

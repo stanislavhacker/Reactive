@@ -36,6 +36,27 @@
 		return classes;
 	};
 
+	/**
+	 * @public
+	 * Get static classes
+	 * @returns {Array.<string>}
+	 */
+	dom.html.Classes.prototype.getStaticClasses = function () {
+		var i,
+			clazz,
+			cls = this.cls,
+			classes  = [];
+
+		for (i = 0; i < cls.length; i++) {
+			clazz = cls[i];
+			if (clazz instanceof dom.data.UnboundContract) {
+				classes.push(clazz.getValue());
+			}
+		}
+
+		return classes;
+	};
+
 
 	/**
 	 * @private
