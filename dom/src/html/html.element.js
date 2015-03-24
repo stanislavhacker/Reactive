@@ -13,14 +13,14 @@
 
 	/**
 	 * Element
-	 * @param {dom.html.ElementType} tag
+	 * @param {dom.html.ElementType|string} tag
 	 * @param {Array.<dom.Element>} elements
 	 * @extends {HTMLElement}
 	 * @extends {dom.Element}
 	 * @constructor
 	 */
 	dom.html.Element = function (tag, elements) {
-		/** @type {dom.html.ElementType}*/
+		/** @type {dom.html.ElementType|string}*/
 		this.tag = tag;
 		/** @type {dom.html.Element}*/
 		this.parent = null;

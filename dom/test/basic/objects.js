@@ -34,16 +34,6 @@
 
 		});
 
-		it("dom.html.RootElement", function () {
-			var body = new dom.html.RootElement(document.body, []);
-			expect(function () {
-				body.remove();
-			}).toThrow('You can not call this method on RootElement.');
-			expect(function () {
-				body.getLive();
-			}).toThrow('You can not call this method on RootElement.');
-		});
-
 		it("dom.utils.logger", function () {
 			dom.utils.logger(dom.utils.LoggerType.INFO, "Test info");
 			expect(function () {

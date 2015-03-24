@@ -7,21 +7,17 @@
 
 	/**
 	 * Root Element
-	 * @param {HTMLElement} parent
+	 * @param {HTMLElement|dom.html.Element} parent
 	 * @param {Array.<dom.Element>} elements
 	 * @extends {dom.html.Element}
 	 * @extends {HTMLElement}
 	 * @constructor
 	 */
 	dom.html.RootElement = function (parent, elements) {
-		var parentElement = new dom.html.Element(parent.tagName, this);
-		//add into structure
-		parentElement.element = parent;
-
 		/** @type {dom.html.ElementType}*/
 		this.tag = "div";
 		/** @type {dom.html.Element}*/
-		this.parent = parentElement;
+		this.parent = null;
 		/** @type {Array.<dom.html.Element>}*/
 		this.children = this.processChildren(elements);
 		/** @type {Object.<string, dom.html.Attribute>}*/
@@ -35,26 +31,33 @@
 		/** @type {dom.sheets.CssRules}*/
 		this.cssRules = null;
 
+		//create parent
+		this.parent = this.convertToElement(parent);
+
 		//append
 		this.append();
 	};
 	dom.utils.inherit(dom.html.RootElement, dom.html.Element);
 
-	/**
-	 * @public
-	 * Get live dom
-	 * @returns {HTMLElement}
-	 */
-	dom.html.RootElement.prototype.getLive = function () {
-		throw "You can not call this method on RootElement.";
-	};
 
 	/**
-	 * @public
-	 * Remove
+	 * @private
+	 * Convert to element
+	 * @param {HTMLElement|dom.html.Element} parent
+	 * @returns {dom.html.Element}
 	 */
-	dom.html.RootElement.prototype.remove = function () {
-		throw "You can not call this method on RootElement.";
+	dom.html.RootElement.prototype.convertToElement = function (parent) {
+		var domElement = parent,
+			isElement = parent instanceof dom.html.Element;
+		//create element
+		if (!isElement) {
+			domElement = new dom.html.Element(parent.tagName, [this]);
+			domElement.element = parent;
+		}
+		//get live
+		domElement.getLive();
+		//return element
+		return domElement;
 	};
 
 	/**

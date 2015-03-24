@@ -23,13 +23,14 @@ var dom = {};
 		/**
 		 * @static
 		 * Insert into parent
-		 * @param {HTMLElement} parent
+		 * @param {HTMLElement|dom.html.Element} parent
 		 * @param {dom.Element...=} params
+		 * @return {dom.html.RootElement}
 		 */
 		dom.insert = function (parent, params) {
 			var args = Array.prototype.slice.apply(arguments);
 			//create root element and run it!
-			new dom.html.RootElement(parent, args.slice(1)); // jshint ignore:line
+			return new dom.html.RootElement(parent, args.slice(1));
 		};
 
 	}());

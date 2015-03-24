@@ -6,24 +6,68 @@
 
 		describe("html", function () {
 
-			it("dom.insert", function () {
-				//noinspection JSCheckFunctionSignatures
-				dom.insert(
-					document.body,
-					dom.div(dom.attr('id', 'body-test')),
-					dom.span()
-				);
+			describe("dim.insert", function () {
 
-				expect(document.body.outerHTML).toContain('<div></div><span></span>');
+				it("dom.insert with HTMLElement", function () {
+					//noinspection JSCheckFunctionSignatures
+					var root = dom.insert(
+						document.body,
+						dom.div(dom.attr('id', 'body-test')),
+						dom.span()
+					);
 
-				var int = setInterval(function (done) {
-					if (document.body.outerHTML.indexOf('<div id="body-test"></div><span></span>') >= 0) {
-						expect(document.body.outerHTML).toContain('<div id="body-test"></div><span></span>');
-						clearInterval(int);
-						done();
-					}
-				}, 20);
-			}, 200);
+					expect(document.body.outerHTML).toContain('<div></div><span></span>');
+
+					var int = setInterval(function (done) {
+						if (document.body.outerHTML.indexOf('<div id="body-test"></div><span></span>') >= 0) {
+							clearInterval(int);
+
+							expect(root.element).toBe(document.body);
+
+							//check body
+							expect(document.body.outerHTML).toContain('<div id="body-test"></div><span></span>');
+
+							//remove element
+							root.remove();
+							expect(document.body.outerHTML).not.toContain('<div id="body-test"></div><span></span>');
+
+							//done
+							done();
+						}
+					}, 20);
+				}, 200);
+
+				it("dom.insert with dom.htmlElement", function () {
+					//noinspection JSCheckFunctionSignatures
+					var domElement = dom.div(),
+						root = dom.insert(
+							domElement,
+							dom.div(dom.attr('id', 'body-quest')),
+							dom.span()
+						);
+
+					expect(document.body.outerHTML).toContain('<div></div><span></span>');
+
+					var int = setInterval(function (done) {
+						if (document.body.outerHTML.indexOf('<div id="body-quest"></div><span></span>') >= 0) {
+							clearInterval(int);
+
+							expect(root.element).toBe(document.body);
+
+							//check body
+							expect(document.body.outerHTML).toContain('<div id="body-quest"></div><span></span>');
+
+							//remove element
+							root.remove();
+							expect(document.body.outerHTML).not.toContain('<div id="body-quest"></div><span></span>');
+
+							//done
+							done();
+						}
+					}, 20);
+				}, 200);
+
+			});
 
 			it("dom.div", function () {
 				var div = dom.div();
