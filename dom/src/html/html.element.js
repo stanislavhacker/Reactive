@@ -96,13 +96,14 @@
 	/**
 	 * @public
 	 * Get live dom
+	 * @param {HTMLElement=} parent
 	 * @returns {HTMLElement}
 	 */
-	dom.html.Element.prototype.getLive = function () {
+	dom.html.Element.prototype.getLive = function (parent) {
 		var element = this.element;
 		//create new element
 		if (element === null) {
-			new dom.builder.Live(this).getLive();
+			new dom.builder.Live(this, parent).getLive();
 			element = this.element;
 		}
 		//return element
@@ -125,12 +126,7 @@
 	 * Create css rules
 	 */
 	dom.html.Element.prototype.createCssRules = function () {
-		var rules = this.cssRules,
-			parent = this.parent;
-		//no parent
-		if (!parent) {
-			throw "Can not generate css for element without parent.";
-		}
+		var rules = this.cssRules;
 		//create new rules
 		if (rules === null) {
 			new dom.builder.Css(this).getCss();
@@ -169,6 +165,7 @@
 			name,
 			css = this.css,
 			parent = this.parent,
+//			rules = this.cssRules,
 			element = this.element,
 			children = this.children,
 			classNames = this.classNames,
@@ -192,6 +189,12 @@
 			css.elements.removeElement(this);
 			removeElementFromCss(this, css.getCss());
 		}
+		//remove rules
+//		if (rules) {
+//			for (i = 0; i < rules.length; i++) {
+//				//TODO: Remove rules or not?
+//			}
+//		}
 		//parent
 		if (parent) {
 			//remove from dom

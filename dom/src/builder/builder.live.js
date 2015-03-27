@@ -8,11 +8,14 @@
 	/**
 	 * Live
 	 * @param {dom.html.Element} element
+	 * @param {HTMLElement=} parent
 	 * @constructor
 	 */
-	dom.builder.Live = function (element) {
+	dom.builder.Live = function (element, parent) {
 		/** @type {dom.html.Element}*/
 		this.element = element;
+		/** @type {HTMLElement}*/
+		this.parent = parent;
 	};
 
 	/**
@@ -32,9 +35,10 @@
 	 * Generate start tag
 	 */
 	dom.builder.Live.prototype.generateElement = function () {
-		var element = this.element;
+		var element = this.element,
+			parent = this.parent;
 		//create element
-		element.element = document.createElement(element.getTag());
+		element.element = parent || document.createElement(element.getTag());
 	};
 
 	/**

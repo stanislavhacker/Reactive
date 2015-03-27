@@ -11,6 +11,7 @@
 	 */
 	dom.sheets.CssRules = function () {
 	};
+	//noinspection JSCheckFunctionSignatures
 	dom.utils.inherit(dom.sheets.CssRules, Array);
 
 

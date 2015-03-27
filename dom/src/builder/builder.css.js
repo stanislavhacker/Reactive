@@ -204,24 +204,24 @@
 		var name = [],
 			parentIdentifier,
 			parent = element,
-			isRoot = parent instanceof dom.html.RootElement;
+			isBody = element.parent === null;
 
 		//is root
-		if (isRoot) {
+		if (isBody) {
 			return "";
 		}
 
 		//generate name
-		while(!isRoot) {
+		while(!isBody) {
 			//get name
 			parentIdentifier = dom.builder.Css.getRuleName(parent);
 			//add into names array
 			if (parentIdentifier) {
-				name.push(parentIdentifier);
+				name.unshift(parentIdentifier);
 			}
 			//get new parent
 			parent = parent.parent;
-			isRoot = parent instanceof dom.html.RootElement;
+			isBody = parent === null;
 		}
 		//return name
 		return name.join(" ");

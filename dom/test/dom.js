@@ -8,21 +8,29 @@
 
 			describe("dim.insert", function () {
 
-				it("dom.insert with HTMLElement", function () {
+				it("dom.insert with HTMLElement", function (done) {
 					//noinspection JSCheckFunctionSignatures
-					var root = dom.insert(
-						document.body,
+					var div = document.createElement('p'),
+						root;
+
+					//append
+					document.body.appendChild(div);
+
+					//attach on
+					//noinspection JSCheckFunctionSignatures
+					root = dom.attach(
+						div,
 						dom.div(dom.attr('id', 'body-test')),
 						dom.span()
 					);
 
 					expect(document.body.outerHTML).toContain('<div></div><span></span>');
 
-					var int = setInterval(function (done) {
+					var int = setInterval(function () {
 						if (document.body.outerHTML.indexOf('<div id="body-test"></div><span></span>') >= 0) {
 							clearInterval(int);
 
-							expect(root.element).toBe(document.body);
+							expect(root.element).toBe(div);
 
 							//check body
 							expect(document.body.outerHTML).toContain('<div id="body-test"></div><span></span>');
@@ -30,36 +38,6 @@
 							//remove element
 							root.remove();
 							expect(document.body.outerHTML).not.toContain('<div id="body-test"></div><span></span>');
-
-							//done
-							done();
-						}
-					}, 20);
-				}, 200);
-
-				it("dom.insert with dom.htmlElement", function () {
-					//noinspection JSCheckFunctionSignatures
-					var domElement = dom.div(),
-						root = dom.insert(
-							domElement,
-							dom.div(dom.attr('id', 'body-quest')),
-							dom.span()
-						);
-
-					expect(document.body.outerHTML).toContain('<div></div><span></span>');
-
-					var int = setInterval(function (done) {
-						if (document.body.outerHTML.indexOf('<div id="body-quest"></div><span></span>') >= 0) {
-							clearInterval(int);
-
-							expect(root.element).toBe(document.body);
-
-							//check body
-							expect(document.body.outerHTML).toContain('<div id="body-quest"></div><span></span>');
-
-							//remove element
-							root.remove();
-							expect(document.body.outerHTML).not.toContain('<div id="body-quest"></div><span></span>');
 
 							//done
 							done();

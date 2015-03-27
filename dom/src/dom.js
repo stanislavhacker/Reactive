@@ -21,16 +21,35 @@ var dom = {};
 	(function () {
 
 		/**
-		 * @static
-		 * Insert into parent
-		 * @param {HTMLElement|dom.html.Element} parent
-		 * @param {dom.Element...=} params
-		 * @return {dom.html.RootElement}
+		 * @private
+		 * Convert to element
+		 * @param {HTMLElement} parent
+		 * @param {Array.<dom.Element>} children
+		 * @returns {dom.html.Element}
 		 */
-		dom.insert = function (parent, params) {
+		function convertToElement (parent, children) {
+			var domElement;
+			//create element
+			domElement = new dom.html.Element(parent.tagName, children);
+			//get live
+			domElement.getLive(parent);
+			//generate css rules
+			domElement.createCssRules();
+			//return element
+			return domElement;
+		}
+
+		/**
+		 * @static
+		 * Attach on element
+		 * @param {HTMLElement} parent
+		 * @param {dom.Element...} params
+		 * @return {dom.html.Element}
+		 */
+		dom.attach = function (parent, params) {
 			var args = Array.prototype.slice.apply(arguments);
 			//create root element and run it!
-			return new dom.html.RootElement(parent, args.slice(1));
+			return convertToElement(parent, args.slice(1));
 		};
 
 	}());

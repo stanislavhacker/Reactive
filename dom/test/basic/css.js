@@ -80,7 +80,8 @@
 	describe("Dom basic css generating", function () {
 
 		it("get css with id", function () {
-			var rules,
+			var el,
+				rules,
 				div = dom.div(
 				dom.attr("id", "test"),
 				dom.css(
@@ -94,13 +95,18 @@
 				)
 			);
 
-			dom.insert(document.body, div);
+			el = document.createElement('div');
+			document.body.appendChild(el);
+
+			dom.attach(el, div);
 			rules = div.cssRules;
 			expect(rules.length).toBe(2);
 			expect(rules[0].name).toBe('#test:hover');
 			expect(rules[0].getRuleString()).toBe('#test:hover {background: blue}\n');
 			expect(rules[1].name).toBe('#test');
 			expect(rules[1].getRuleString()).toBe('#test {display: block;background: red;width: 200px;height: 180px}\n');
+
+			div.remove();
 		});
 
 		it("get css with classes", function () {
@@ -118,13 +124,15 @@
 					)
 				);
 
-			dom.insert(document.body, div);
+			dom.attach(document.body, div);
 			rules = div.cssRules;
 			expect(rules.length).toBe(2);
 			expect(rules[0].name).toBe('.square:hover');
 			expect(rules[0].getRuleString()).toBe('.square:hover {background: blue}\n');
 			expect(rules[1].name).toBe('.square');
 			expect(rules[1].getRuleString()).toBe('.square {display: block;background: red;width: 200px;height: 180px}\n');
+
+			div.remove();
 		});
 
 		it("get css with tag", function () {
@@ -141,21 +149,15 @@
 					)
 				);
 
-			dom.insert(document.body, div);
+			dom.attach(document.body, div);
 			rules = div.cssRules;
 			expect(rules.length).toBe(2);
 			expect(rules[0].name).toBe('div:hover');
 			expect(rules[0].getRuleString()).toBe('div:hover {background: blue}\n');
 			expect(rules[1].name).toBe('div');
 			expect(rules[1].getRuleString()).toBe('div {display: block;background: red;width: 200px;height: 180px}\n');
-		});
 
-		it("error throw", function () {
-			var div = dom.div();
-			expect(function () {
-				//noinspection JSAccessibilityCheck
-				div.createCssRules();
-			}).toThrow('Can not generate css for element without parent.');
+			div.remove();
 		});
 
 	});
@@ -192,14 +194,15 @@
 				),
 				divOne
 			);
+
 			//insert
-			dom.insert(document.body, divTwo);
+			dom.attach(document.body, divTwo);
 
 			expect(divOne.cssRules.length).toBe(2);
 			expect(divTwo.cssRules.length).toBe(2);
 
-			expect(divOne.cssRules[0].getRuleName()).toBe('.test .test:hover');
-			expect(divOne.cssRules[1].getRuleName()).toBe('.test .test');
+			expect(divOne.cssRules[0].getRuleName()).toBe('BODY .test .test:hover');
+			expect(divOne.cssRules[1].getRuleName()).toBe('BODY .test .test');
 
 			expect(divTwo.cssRules[0].getRuleName()).toBe('.test:hover');
 			expect(divTwo.cssRules[1].getRuleName()).toBe('.test');
@@ -207,7 +210,10 @@
 			//try to create again
 			expect(function () {
 				new dom.builder.Css(divOne).getCss();
-			}).toThrow("There is duplicate rule named '.test .test:hover'. You mas specify one of element that is used on this path.");
+			}).toThrow("There is duplicate rule named 'BODY .test .test:hover'. You mas specify one of element that is used on this path.");
+
+			divOne.remove();
+			divTwo.remove();
 		});
 
 	});
