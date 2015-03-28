@@ -1,3 +1,3 @@
 # Reactive
-Library for working without original DOM using his abstraction. No jQuery, no react, render time optimalization.
+Shadow DOM library without jQuery, React and other stuff. Fully adaptable on browser performance and current load.
 
