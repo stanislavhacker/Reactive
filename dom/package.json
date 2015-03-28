@@ -1,7 +1,7 @@
 {
-  "name": "hammer",
-  "version": "1.0.0",
-  "description": "No jQuery shadow DOM library",
+  "name": "Reactive",
+  "version": "0.0.1",
+  "description": "Shadow DOM library without jQuery, React and other stuff. Fully adaptable on browser performance and curent load.",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {

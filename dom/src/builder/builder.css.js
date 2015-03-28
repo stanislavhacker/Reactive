@@ -238,7 +238,7 @@
 		if (style === null) {
 			style = document.createElement('style');
 			style.setAttribute("type", "text/css");
-			style.setAttribute("id", "hammer-generated");
+			style.setAttribute("id", "reactive-generated");
 			header = document.getElementsByTagName('head')[0];
 			header.appendChild(style);
 		}
