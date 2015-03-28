@@ -62,7 +62,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create div
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.div = function (params) {
@@ -73,7 +73,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create span
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.span = function (params) {
@@ -84,7 +84,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create a
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.a = function (params) {
@@ -95,7 +95,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create abbr
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.abbr = function (params) {
@@ -106,7 +106,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create address
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.address = function (params) {
@@ -117,7 +117,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create area
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.area = function (params) {
@@ -128,7 +128,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create article
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.article = function (params) {
@@ -139,7 +139,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create aside
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.aside = function (params) {
@@ -150,7 +150,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create audio
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.audio = function (params) {
@@ -161,7 +161,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create b
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.b = function (params) {
@@ -172,7 +172,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create base
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.base = function (params) {
@@ -183,7 +183,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create blockquote
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.blockquote = function (params) {
@@ -194,7 +194,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create br
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.br = function (params) {
@@ -205,7 +205,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create button
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.button = function (params) {
@@ -216,7 +216,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create canvas
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.canvas = function (params) {
@@ -227,7 +227,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create caption
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.caption = function (params) {
@@ -238,7 +238,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create cite
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.cite = function (params) {
@@ -249,7 +249,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create code
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.code = function (params) {
@@ -260,7 +260,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create em
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.em = function (params) {
@@ -271,7 +271,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create embed
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.embed = function (params) {
@@ -282,7 +282,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create fieldset
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.fieldset = function (params) {
@@ -293,7 +293,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create footer
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.footer = function (params) {
@@ -304,7 +304,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create form
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.form = function (params) {
@@ -315,7 +315,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create h1
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.h1 = function (params) {
@@ -326,7 +326,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create h2
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.h2 = function (params) {
@@ -337,7 +337,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create h3
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.h3 = function (params) {
@@ -348,7 +348,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create h4
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.h4 = function (params) {
@@ -359,7 +359,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create h5
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.h5 = function (params) {
@@ -370,7 +370,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create h6
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.h6 = function (params) {
@@ -381,7 +381,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create header
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.header = function (params) {
@@ -392,7 +392,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create i
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.i = function (params) {
@@ -403,7 +403,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create iframe
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.iframe = function (params) {
@@ -414,7 +414,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create img
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.img = function (params) {
@@ -425,7 +425,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create input
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.input = function (params) {
@@ -436,7 +436,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create label
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.label = function (params) {
@@ -447,7 +447,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create legend
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.legend = function (params) {
@@ -458,7 +458,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create li
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.li = function (params) {
@@ -469,7 +469,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create main
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.main = function (params) {
@@ -480,7 +480,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create mark
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.mark = function (params) {
@@ -491,7 +491,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create menu
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.menu = function (params) {
@@ -502,7 +502,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create menuitem
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.menuitem = function (params) {
@@ -513,7 +513,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create meta
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.meta = function (params) {
@@ -524,7 +524,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create meter
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.meter = function (params) {
@@ -535,7 +535,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create nav
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.nav = function (params) {
@@ -546,7 +546,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create noscript
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.noscript = function (params) {
@@ -557,7 +557,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create object
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.object = function (params) {
@@ -568,7 +568,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create ol
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.ol = function (params) {
@@ -579,7 +579,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create option
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.option = function (params) {
@@ -590,7 +590,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create p
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.p = function (params) {
@@ -601,7 +601,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create param
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.param = function (params) {
@@ -612,7 +612,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create pre
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.pre = function (params) {
@@ -623,7 +623,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create q
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.q = function (params) {
@@ -634,7 +634,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create section
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.section = function (params) {
@@ -645,7 +645,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create select
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.select = function (params) {
@@ -656,7 +656,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create small
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.small = function (params) {
@@ -667,7 +667,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create source
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.source = function (params) {
@@ -678,7 +678,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create strong
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.strong = function (params) {
@@ -689,7 +689,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create sub
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.sub = function (params) {
@@ -700,7 +700,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create summary
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.summary = function (params) {
@@ -711,7 +711,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create sup
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.sup = function (params) {
@@ -722,7 +722,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create table
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.table = function (params) {
@@ -733,7 +733,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create tbody
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.tbody = function (params) {
@@ -744,7 +744,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create td
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.td = function (params) {
@@ -755,7 +755,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create textarea
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.textarea = function (params) {
@@ -766,7 +766,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create tfoot
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.tfoot = function (params) {
@@ -777,7 +777,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create th
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.th = function (params) {
@@ -788,7 +788,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create thead
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.thead = function (params) {
@@ -799,7 +799,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create title
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.title = function (params) {
@@ -810,7 +810,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create tr
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.tr = function (params) {
@@ -821,7 +821,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create track
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.track = function (params) {
@@ -832,7 +832,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create u
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.u = function (params) {
@@ -843,7 +843,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create ul
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.ul = function (params) {
@@ -854,7 +854,7 @@ var dom = {};
 		/**
 		 * @static
 		 * Create video
-		 * @param {dom.Element...=} params
+		 * @param {...dom.Element=} params
 		 * @returns {dom.html.Element}
 		 */
 		dom.video = function (params) {
