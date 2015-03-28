@@ -12,6 +12,8 @@ module.exports = function(grunt) {
 			'src/render/render.queue.js',
 			//Utils
 			'src/utils/utils.inherit.js',
+			'src/utils/utils.logger.js',
+			'src/utils/utils.array.js',
 			//Data
 			'src/data/data.contract.js',
 			'src/data/data.contract.unbound.js',

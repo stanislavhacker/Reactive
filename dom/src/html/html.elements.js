@@ -20,7 +20,8 @@
 	 * @param {dom.html.Element|dom.sheets.Css} element
 	 */
 	dom.html.Elements.prototype.addElement = function (element) {
-		var index = this.elements.indexOf(element);
+		var index = dom.utils.arrayIndex(this.elements, element);
+		//add if not exists
 		if (index === -1) {
 			this.elements.push(element);
 		}
@@ -31,7 +32,8 @@
 	 * @param {dom.html.Element|dom.sheets.Css} element
 	 */
 	dom.html.Elements.prototype.removeElement = function (element) {
-		var index = this.elements.indexOf(element);
+		var index = dom.utils.arrayIndex(this.elements, element);
+		//remove if exists
 		if (index >= 0) {
 			this.elements.splice(index, 1);
 		}

@@ -260,8 +260,7 @@
 			current = this.parent;
 		//parent exists, change it
 		if (current !== null) {
-			//noinspection JSCheckFunctionSignatures
-			index = current.children.indexOf(parent);
+			index = dom.utils.arrayIndex(current.children, parent);
 			current.children.splice(index, 1);
 		}
 		//set new parent

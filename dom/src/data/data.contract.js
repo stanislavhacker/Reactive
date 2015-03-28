@@ -52,7 +52,8 @@
 	 * @param {function} event
 	 */
 	dom.data.Contract.prototype.addChangeEvent = function (caller, event) {
-		var index = this.callers.indexOf(caller);
+		var index = dom.utils.arrayIndex(this.callers, caller);
+		//inset if not exists
 		if (index === -1) {
 			this.callers.push(caller);
 			this.changeEvents.push(event);
@@ -64,7 +65,8 @@
 	 * @param {object} caller
 	 */
 	dom.data.Contract.prototype.removeChangeEvent = function (caller) {
-		var index = this.callers.indexOf(caller);
+		var index = dom.utils.arrayIndex(this.callers, caller);
+		//remove if not exists
 		if (index >= 0) {
 			this.callers.splice(index, 1);
 			this.changeEvents.splice(index, 1);

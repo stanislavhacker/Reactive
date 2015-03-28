@@ -6,11 +6,9 @@
 	"use strict";
 
 	/**
-	 * Utils
+	 * Utils inherit
 	 */
 	(function () {
-
-		var isConsole = Boolean(window.console);
 
 		/**
 		 * @static
@@ -27,29 +25,6 @@
 			//inheritance
 			Temp.prototype = base.prototype;
 			child.prototype = new Temp();
-		};
-
-		/**
-		 * @static
-		 * Logger
-		 * @param {dom.utils.LoggerType} type
-		 * @param {string} message
-		 */
-		dom.utils.logger = function (type, message) {
-			if (isConsole) {
-				console[type](message);
-			}
-		};
-
-		/**
-		 * Logger type
-		 * @enum {string}
-		 */
-		dom.utils.LoggerType = {
-			WARN: "warn",
-			ERROR: "error",
-			INFO: "info",
-			LOG: "log"
 		};
 
 	}());

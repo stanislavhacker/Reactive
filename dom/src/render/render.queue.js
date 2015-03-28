@@ -22,19 +22,16 @@
 	 * @param {Function} what
 	 */
 	dom.render.Queue.prototype.add = function (element, what) {
-		var array,
-			index = this.elements.indexOf(element);
-
-		//element is not in array
-		if (index === -1) {
-			index = this.elements.length;
-			this.elements.push(element);
-		}
+		var i,
+			array,
+			elements = this.elements;
+		//insert of not exists
+		i = dom.utils.arrayInsert(elements, element);
 		//array
-		array = this.stacks[index];
+		array = this.stacks[i];
 		if (!array) {
 			array = [];
-			this.stacks[index] = array;
+			this.stacks[i] = array;
 		}
 		array.push(what);
 	};
@@ -69,12 +66,14 @@
 	 */
 	dom.render.Queue.prototype.getFor = function (element) {
 		var i,
+			index,
 			array = [],
-			elements = this.elements,
 			stacks = this.stacks,
-			children = element.getChildren(),
-			index = elements.indexOf(element);
+			elements = this.elements,
+			children = element.getChildren();
 
+		//get array index
+		index = dom.utils.arrayIndex(elements, element);
 		//force for all children
 		if (!element.isEmpty() && children.length) {
 			for (i = 0; i < children.length; i++) {
