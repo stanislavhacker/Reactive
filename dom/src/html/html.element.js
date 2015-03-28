@@ -215,7 +215,7 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			dom.html.RENDERER.render(this, function () {
+			dom.html.RENDERER.render(this, name, function () {
 				element.setAttribute(name, value);
 			});
 		}
@@ -230,7 +230,7 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			dom.html.RENDERER.render(this, function () {
+			dom.html.RENDERER.render(this, name, function () {
 				element.style[name] = value;
 			});
 		}
@@ -244,7 +244,7 @@
 		var element = this.element;
 		//set attribute on dom element
 		if (element) {
-			dom.html.RENDERER.render(this, function () {
+			dom.html.RENDERER.render(this, "className", function () {
 				element.className = value.join(" ");
 			});
 		}

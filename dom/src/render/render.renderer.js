@@ -24,10 +24,11 @@
 	 * @protected
 	 * Renderer
 	 * @param {dom.html.Element} element
+	 * @param {string} name Function name
 	 * @param {Function} what
 	 */
-	dom.render.Renderer.prototype.render = function (element, what) {
-		this.queue.add(element, what);
+	dom.render.Renderer.prototype.render = function (element, name, what) {
+		this.queue.add(element, name, what);
 		this.changed();
 	};
 

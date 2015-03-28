@@ -113,7 +113,7 @@
 			element = this.element;
 		//set attribute on dom element
 		if (element) {
-			dom.html.RENDERER.render(this, function () {
+			dom.html.RENDERER.render(this, "nodeValue", function () {
 				element.nodeValue = self.text.getValue() || "";
 			});
 		}

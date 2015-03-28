@@ -12,6 +12,8 @@
 	dom.render.Queue = function () {
 		/** @type {Array.<Array.<Function>>}*/
 		this.stacks = [];
+		/** @type {Array.<Array.<string>>}*/
+		this.names = [];
 		/** @type {Array.<dom.html.Element>}*/
 		this.elements = [];
 	};
@@ -19,21 +21,32 @@
 	/**
 	 * Add into queue
 	 * @param {dom.html.Element} element
+	 * @param {string} name Function name
 	 * @param {Function} what
 	 */
-	dom.render.Queue.prototype.add = function (element, what) {
+	dom.render.Queue.prototype.add = function (element, name, what) {
 		var i,
-			array,
+			namesArray,
+			stackArray,
 			elements = this.elements;
 		//insert of not exists
 		i = dom.utils.arrayInsert(elements, element);
-		//array
-		array = this.stacks[i];
-		if (!array) {
-			array = [];
-			this.stacks[i] = array;
+		//stack and names
+		stackArray = this.stacks[i];
+		namesArray = this.names[i];
+		if (!stackArray) {
+			//stack array
+			stackArray = [];
+			this.stacks[i] = stackArray;
+			//names array
+			namesArray = [];
+			this.names[i] = namesArray;
 		}
-		array.push(what);
+		//insert of not exists
+		i = dom.utils.arrayInsert(namesArray, name);
+		//push
+		namesArray[i] = name;
+		stackArray[i] = what;
 	};
 
 	/**
@@ -43,16 +56,19 @@
 	dom.render.Queue.prototype.get = function () {
 		var fnc,
 			elements = this.elements,
+			names = this.names,
 			stacks = this.stacks;
 		//nothing exists in queue
 		if (stacks.length === 0) {
 			return null;
 		}
-		//get function
+		//get function, shift name
+		names[0].shift();
 		fnc = stacks[0].shift();
 		//remove from stack
 		if (stacks[0].length === 0) {
 			stacks.shift();
+			names.shift();
 			elements.shift();
 		}
 		//return function
@@ -68,6 +84,7 @@
 		var i,
 			index,
 			array = [],
+			names = this.names,
 			stacks = this.stacks,
 			elements = this.elements,
 			children = element.getChildren();
@@ -90,6 +107,7 @@
 		//remove
 		elements.splice(index, 1);
 		stacks.splice(index, 1);
+		names.splice(index, 1);
 		//return functions
 		return array;
 	};

@@ -12,8 +12,7 @@
 		function spawnFunctions(renderer, count) {
 			var i;
 			for (i = 0; i < count; i++) {
-				//noinspection JSAccessibilityCheck
-				renderer.render(dom.div(), function () {});
+				renderer.render(dom.div(), Math.random().toString(36), function () {});
 			}
 		}
 
@@ -25,8 +24,7 @@
 		function spawnLongFunctions(renderer, count) {
 			var i;
 			for (i = 0; i < count; i++) {
-				//noinspection JSAccessibilityCheck
-				renderer.render(dom.div(), function () {
+				renderer.render(dom.div(), Math.random().toString(36), function () {
 					var i,
 						data = [];
 					for (i = 0; i < 100000; i++) {
