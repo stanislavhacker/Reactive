@@ -43,7 +43,7 @@ var dom = {};
 		 * @static
 		 * Attach on element
 		 * @param {HTMLElement} parent
-		 * @param {...dom.Element} params
+		 * @param {...dom.Element=} params
 		 * @return {dom.html.Element}
 		 */
 		dom.attach = function (parent, params) {
