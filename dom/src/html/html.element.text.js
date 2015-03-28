@@ -19,11 +19,20 @@
 		this.element = null;
 		/** @type {dom.html.Element}*/
 		this.parent = null;
+		/** @type {dom.builder.LiveText}*/
+		this.reactor = null;
 
 		//register change
 		this.text.addChangeEvent(this, this.setText);
 	};
 	dom.utils.inherit(dom.html.TextElement, dom.html.Element);
+
+	/**
+	 * @public
+	 * @param elements
+	 */
+	dom.html.TextElement.prototype.attach = function (elements) {
+	};
 
 	/**
 	 * @public
@@ -45,6 +54,7 @@
 	};
 
 	/**
+	 * @protected
 	 * Set attribute
 	 * @type {string} name
 	 * @type {string} value
@@ -53,6 +63,7 @@
 	};
 
 	/**
+	 * @protected
 	 * Set css property
 	 * @type {string} name
 	 * @type {string} value
@@ -61,6 +72,7 @@
 	};
 
 	/**
+	 * @protected
 	 * Set class name
 	 * @type {Array.<string>} value
 	 */
@@ -76,7 +88,10 @@
 		var element = this.element;
 		//create new element
 		if (element === null) {
-			new dom.builder.LiveText(this).getLive();
+			//create reactor
+			this.reactor = new dom.builder.LiveText(this);
+			this.reactor.getLive();
+			//load element
 			element = this.element;
 		}
 		//return element

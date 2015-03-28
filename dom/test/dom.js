@@ -45,6 +45,46 @@
 					}, 20);
 				}, 200);
 
+				describe("attach element", function () {
+
+					it("simple", function () {
+						var inner,
+							parent;
+
+						//parent
+						parent = dom.div(dom.attr("title", "test"));
+						parent.getLive();
+
+						expect(parent.getHtml()).toBe('<div title="test"></div>');
+
+						//inner
+						inner = dom.div(dom.attr("id", "inner"));
+						//attach
+						dom.attach(parent, inner);
+
+						expect(parent.getHtml()).toBe('<div title="test"><div id="inner"></div></div>');
+					});
+
+					it("complex", function () {
+						var inner,
+							parent;
+
+						//parent
+						parent = dom.div(dom.attr("title", "test"), dom.div());
+						parent.getLive();
+
+						expect(parent.getHtml()).toBe('<div title="test"><div></div></div>');
+
+						//inner
+						inner = dom.div(dom.attr("id", "inner"));
+						//attach
+						dom.attach(parent, inner);
+
+						expect(parent.getHtml()).toBe('<div title="test"><div></div><div id="inner"></div></div>');
+					});
+
+				});
+
 			});
 
 			it("dom.div", function () {

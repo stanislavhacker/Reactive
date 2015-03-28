@@ -23,14 +23,22 @@ var dom = {};
 		/**
 		 * @private
 		 * Convert to element
-		 * @param {HTMLElement} parent
-		 * @param {Array.<dom.Element>} children
+		 * @param {HTMLElement|dom.html.Element} parent
+		 * @param {Array.<dom.html.Element>} children
 		 * @returns {dom.html.Element}
 		 */
 		function convertToElement (parent, children) {
 			var domElement;
-			//create element
-			domElement = new dom.html.Element(parent.tagName, children);
+			//if its element, attach element into given element
+			if (parent instanceof dom.html.Element) {
+				//only pass element
+				domElement = parent;
+				//attach
+				domElement.attach(children);
+			} else {
+				//create element
+				domElement = new dom.html.Element(parent.tagName, children);
+			}
 			//get live
 			domElement.getLive(parent);
 			//generate css rules
@@ -42,8 +50,8 @@ var dom = {};
 		/**
 		 * @static
 		 * Attach on element
-		 * @param {HTMLElement} parent
-		 * @param {...dom.Element=} params
+		 * @param {HTMLElement|dom.html.Element} parent
+		 * @param {...dom.html.Element=} params
 		 * @return {dom.html.Element}
 		 */
 		dom.attach = function (parent, params) {

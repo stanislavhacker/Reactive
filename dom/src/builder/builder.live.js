@@ -139,11 +139,12 @@
 	};
 
 	/**
-	 * @private
+	 * @protected
 	 * Generate html for children if there are
 	 */
 	dom.builder.Live.prototype.generateChildren = function () {
 		var element = this.element,
+			childrenElement,
 			children,
 			i;
 
@@ -152,7 +153,12 @@
 			children = element.getChildren();
 			//generate html for children
 			for (i = 0; i < children.length; i++) {
-				element.element.appendChild(children[i].getLive());
+				//children element
+				childrenElement = children[i].getLive();
+				//if not contain, append it
+				if (!element.element.contains(childrenElement)) {
+					element.element.appendChild(children[i].getLive());
+				}
 			}
 		}
 	};

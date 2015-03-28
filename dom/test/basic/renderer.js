@@ -72,7 +72,7 @@
 				//noinspection JSAccessibilityCheck
 				if (renderer.spawnTimer.calls.count() === 2) {
 
-					expect(renderer.MAX_IN_STEP).toBe(100);
+					expect(renderer.MAX_IN_STEP).toBeGreaterThan(99);
 					expect(renderer.MAX_TIME).toBe(50);
 
 					clearInterval(interval);

@@ -25,19 +25,53 @@
 		/** @type {dom.html.Element}*/
 		this.parent = null;
 		/** @type {Array.<dom.html.Element>}*/
-		this.children = this.processChildren(elements);
+		this.children = [];
 		/** @type {Object.<string, dom.html.Attribute>}*/
-		this.attributes = this.processAttributes(elements);
+		this.attributes = [];
 		/** @type {Array.<dom.html.Classes>}*/
-		this.classNames = this.processClasses(elements);
+		this.classNames = [];
 		/** @type {dom.sheets.Css}*/
-		this.css = this.processCss(elements);
+		this.css = null;
+
+		//init
+		this.init(elements);
+
 		/** @type {HTMLElement}*/
 		this.element = null;
 		/** @type {dom.sheets.CssRules}*/
 		this.cssRules = null;
+		/** @type {dom.builder.Live}*/
+		this.reactor = null;
 	};
 	dom.utils.inherit(dom.html.Element, dom.Element);
+
+	/**
+	 * @private
+	 * @param {Array.<dom.Element>} elements
+	 */
+	dom.html.Element.prototype.init = function (elements) {
+		this.children = this.processChildren(elements);
+		this.attributes = this.processAttributes(elements);
+		this.classNames = this.processClasses(elements);
+		this.css = this.processCss(elements);
+	};
+
+	/**
+	 * @public
+	 * Attach html elements
+	 * @param {Array.<dom.html.Element>} elements
+	 */
+	dom.html.Element.prototype.attach = function (elements) {
+		var i,
+			reactor = this.reactor,
+			children = this.processChildren(elements);
+		//generate
+		this.children = this.children.concat(children);
+		//create new element
+		if (reactor !== null) {
+			reactor.generateChildren();
+		}
+	};
 
 	/**
 	 * @public
@@ -103,7 +137,10 @@
 		var element = this.element;
 		//create new element
 		if (element === null) {
-			new dom.builder.Live(this, parent).getLive();
+			//create reactor
+			this.reactor = new dom.builder.Live(this, parent);
+			this.reactor.getLive();
+			//load element
 			element = this.element;
 		}
 		//return element
@@ -207,6 +244,7 @@
 	};
 
 	/**
+	 * @protected
 	 * Set attribute
 	 * @type {string} name
 	 * @type {string} value
@@ -222,6 +260,7 @@
 	};
 
 	/**
+	 * @protected
 	 * Set css property
 	 * @type {string} name
 	 * @type {string} value
@@ -237,6 +276,7 @@
 	};
 
 	/**
+	 * @protected
 	 * Set class name
 	 * @type {Array.<string>} value
 	 */
