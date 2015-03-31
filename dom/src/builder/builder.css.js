@@ -204,7 +204,7 @@
 		var name = [],
 			parentIdentifier,
 			parent = element,
-			isBody = element.parent === null;
+			isBody = parent === null || element.parent === null;
 
 		//is root
 		if (isBody) {

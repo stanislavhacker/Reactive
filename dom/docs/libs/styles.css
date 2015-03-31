@@ -82,6 +82,13 @@ code {
     float: right;
     width: 45%;
 }
+.example .css-code {
+    float: right;
+    width: 45%;
+}
+.example .css-code .title {
+    margin-top: 20px;
+}
 
 .example .title {
     margin: 0;
