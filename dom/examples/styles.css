@@ -32,6 +32,12 @@ code {
     background: none !important;
 }
 
+a {
+    color: black;
+    border-bottom: 1px dotted black;
+    text-decoration: none;
+}
+
 .top {
     background: #3B444B;
     padding: 75px 0;
