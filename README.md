@@ -14,7 +14,7 @@ document.body.appendChild(div.getLive());
 ##### Html output
 
 ```html
-<div><div>
+<div></div>
 ```
 
 
@@ -34,7 +34,7 @@ document.body.appendChild(div.getLive());
 ##### Html output
 
 ```html
-<div lang="en" data-my-data="test"><div>
+<div lang="en" data-my-data="test"></div>
 ```
 
 ## Create classes in element
@@ -52,7 +52,7 @@ document.body.appendChild(div.getLive());
 ##### Html output
 
 ```html
-<div class="square red test"><div>
+<div class="square red test"></div>
 ```
 
 ## Create styles in element
@@ -74,7 +74,7 @@ document.body.appendChild(div.getLive());
 ##### Html output
 
 ```html
-<div id="square"><div>
+<div id="square"></div>
 ```
 
 ##### Css output
