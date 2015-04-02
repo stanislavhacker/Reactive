@@ -1,4 +1,4 @@
-/*globals dom*/
+/*globals dom, source*/
 (function () {
 	"use strict";
 
@@ -72,6 +72,8 @@
 
 	//attach
 	dom.attach(document.body, h1);
+	//source
+	source('https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/css/example.js');
 	dom.attach(document.body, squareOne);
 	dom.attach(document.body, squareTwo);
 

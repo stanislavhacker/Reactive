@@ -23,6 +23,8 @@
 
 	//attach
 	dom.attach(document.body, h1);
+	//source
+	source('https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/simple/example.js');
 	dom.attach(document.body, div);
 
 	//call
