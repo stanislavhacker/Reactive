@@ -2903,7 +2903,10 @@ var dom = {};
 	 * @returns {string}
 	 */
 	dom.sheets.CssGroup.prototype.getName = function () {
-		return this.name;
+		var name = this.name,
+			start = name[0];
+		//return name with space or not
+		return start === ":" ? name : " " + name;
 	};
 
 	/**
