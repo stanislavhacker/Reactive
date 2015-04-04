@@ -125,6 +125,25 @@
 
 		}, 3000);
 
+		it("render only once", function () {
+			var contract = dom.contract('test'),
+				element = dom.div(dom.attr('id', contract));
+
+			//render
+			dom.attach(document.body, element);
+
+			spyOn(element, "setAttribute").and.callThrough();
+
+			expect(element.setAttribute.calls.count()).toBe(0);
+
+			contract.setValue("test1");
+			contract.setValue("test1");
+
+			expect(element.setAttribute.calls.count()).toBe(1);
+
+			element.remove();
+		});
+
 	});
 
 	describe("Dom renderer queue", function () {

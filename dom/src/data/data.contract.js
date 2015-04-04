@@ -38,6 +38,10 @@
 			callers = this.callers,
 			i;
 
+		//do nothing if value is same
+		if (value === this.value) {
+			return;
+		}
 		//set new value
 		this.value = value;
 		//inform all
