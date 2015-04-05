@@ -34,6 +34,9 @@
 			element = this.element,
 			children = element.getChildren(),
 			css = this.element.getCss();
+
+		//TODO: Check on static
+
 		//css exists
 		if (css) {
 			//css rules
@@ -107,7 +110,8 @@
 		}
 		//check rule exists
 		if (rules[name]) {
-			throw "There is duplicate rule named '" + name + "'. You mas specify one of element that is used on this path.";
+			dom.utils.logger(dom.utils.LoggerType.INFO, "There is duplicate rule named '" + name + "'. You must specify one of element that is used on this path.");
+			return;
 		}
 		rules[name] = rule;
 		//create style
@@ -238,10 +242,19 @@
 		if (style === null) {
 			style = document.createElement('style');
 			style.setAttribute("type", "text/css");
-			style.setAttribute("id", "reactive-generated");
+			style.setAttribute("id", dom.builder.CssStyleType.GENERATED);
 			header = document.getElementsByTagName('head')[0];
 			header.appendChild(style);
 		}
+	};
+
+	/**
+	 * CssStyle type
+	 * @enum {string}
+	 */
+	dom.builder.CssStyleType = {
+		GENERATED: "reactive-generated",
+		STATIC: "reactive-static"
 	};
 
 }());

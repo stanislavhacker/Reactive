@@ -225,12 +225,6 @@
 			css.elements.removeElement(this);
 			removeElementFromCss(this, css.getCss());
 		}
-		//remove rules
-//		if (rules) {
-//			for (i = 0; i < rules.length; i++) {
-//				//TODO: Remove rules or not?
-//			}
-//		}
 		//parent
 		if (parent) {
 			//remove from dom

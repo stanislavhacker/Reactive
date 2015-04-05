@@ -1200,7 +1200,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Renderer
 	 * @param {dom.html.Element} element
 	 * @param {string} name Function name
@@ -1212,7 +1212,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Force render for
 	 * @param {dom.html.Element} element
 	 */
@@ -1640,7 +1640,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * @param {object} caller
 	 * @param {function} event
 	 */
@@ -1654,7 +1654,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * @param {object} caller
 	 */
 	dom.data.Contract.prototype.removeChangeEvent = function (caller) {
@@ -1675,7 +1675,7 @@ window.dom = window.dom || {};
 	"use strict";
 
 	/**
-	 * @protected
+	 * @public
 	 * Data contract unbound
 	 * @param {string} initialValue
 	 * @extends {dom.data.Contract}
@@ -1772,8 +1772,7 @@ window.dom = window.dom || {};
 	 * @param {Array.<dom.html.Element>} elements
 	 */
 	dom.html.Element.prototype.attach = function (elements) {
-		var i,
-			reactor = this.reactor,
+		var reactor = this.reactor,
 			children = this.processChildren(elements);
 		//generate
 		this.children = this.children.concat(children);
@@ -1936,12 +1935,6 @@ window.dom = window.dom || {};
 			css.elements.removeElement(this);
 			removeElementFromCss(this, css.getCss());
 		}
-		//remove rules
-//		if (rules) {
-//			for (i = 0; i < rules.length; i++) {
-//				//TODO: Remove rules or not?
-//			}
-//		}
 		//parent
 		if (parent) {
 			//remove from dom
@@ -1954,7 +1947,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set attribute
 	 * @type {string} name
 	 * @type {string} value
@@ -1970,7 +1963,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set css property
 	 * @type {string} name
 	 * @type {string} value
@@ -1986,7 +1979,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set class name
 	 * @type {Array.<string>} value
 	 */
@@ -2001,7 +1994,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set parent
 	 * @param {dom.Element} parent
 	 */
@@ -2183,7 +2176,7 @@ window.dom = window.dom || {};
 	/**
 	 * @public
 	 * Get live dom
-	 * @returns {HTMLElement}
+	 * @returns {HTMLElement|Text}
 	 */
 	dom.html.TextElement.prototype.getLive = function () {
 		var element = this.element;
@@ -2221,7 +2214,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set text
 	 */
 	dom.html.TextElement.prototype.setText = function () {
@@ -3142,7 +3135,7 @@ window.dom = window.dom || {};
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Generate html for children if there are
 	 */
 	dom.builder.Live.prototype.generateChildren = function () {
@@ -3246,6 +3239,9 @@ window.dom = window.dom || {};
 			element = this.element,
 			children = element.getChildren(),
 			css = this.element.getCss();
+
+		//TODO: Check on static
+
 		//css exists
 		if (css) {
 			//css rules
@@ -3319,7 +3315,8 @@ window.dom = window.dom || {};
 		}
 		//check rule exists
 		if (rules[name]) {
-			throw "There is duplicate rule named '" + name + "'. You mas specify one of element that is used on this path.";
+			dom.utils.logger(dom.utils.LoggerType.INFO, "There is duplicate rule named '" + name + "'. You must specify one of element that is used on this path.");
+			return;
 		}
 		rules[name] = rule;
 		//create style
@@ -3450,10 +3447,19 @@ window.dom = window.dom || {};
 		if (style === null) {
 			style = document.createElement('style');
 			style.setAttribute("type", "text/css");
-			style.setAttribute("id", "reactive-generated");
+			style.setAttribute("id", dom.builder.CssStyleType.GENERATED);
 			header = document.getElementsByTagName('head')[0];
 			header.appendChild(style);
 		}
+	};
+
+	/**
+	 * CssStyle type
+	 * @enum {string}
+	 */
+	dom.builder.CssStyleType = {
+		GENERATED: "reactive-generated",
+		STATIC: "reactive-static"
 	};
 
 }());

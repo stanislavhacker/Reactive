@@ -166,7 +166,9 @@
 
 		it("Two divs inside", function () {
 			var divOne,
-				divTwo;
+				divTwo,
+				type = null,
+				message = null;
 			//one
 			divOne = dom.div(
 				dom.classes("test"),
@@ -208,9 +210,15 @@
 			expect(divTwo.cssRules[1].getRuleName()).toBe('.test');
 
 			//try to create again
-			expect(function () {
-				new dom.builder.Css(divOne).getCss();
-			}).toThrow("There is duplicate rule named 'BODY .test .test:hover'. You mas specify one of element that is used on this path.");
+			spyOn(dom.utils, "logger").and.callFake(function (t, m) {
+				type = t;
+				message = m;
+			});
+			new dom.builder.Css(divOne).getCss();
+			expect(type).toBe('info');
+			expect(message).toBe("There is duplicate rule named 'BODY .test .test'. You must specify one of element that is used on this path.");
+			dom.utils.logger.isSpy = false;
+
 
 			divOne.remove();
 			divTwo.remove();
