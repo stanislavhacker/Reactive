@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Grunt" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="node_modules" />
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/dom/node_modules/grunt" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/dom/node_modules/grunt" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

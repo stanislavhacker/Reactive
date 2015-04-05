@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="26e6fe3f-2ec1-455d-ad8e-d0a4ffea07db" name="Default" comment="Check on same value + test">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Grunt.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/Gruntfile.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Jamsine.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/Reactive.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/src/dom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/install.bat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="D:\Localhost\Reactive\dom\dom.iml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dom/dist/Reactive.js" afterPath="$PROJECT_DIR$/dom/dist/Reactive.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dom/src/dom.js" afterPath="$PROJECT_DIR$/dom/src/dom.js" />
+    </list>
+    <ignored path="hammer.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="hammer" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/dom/build/install.bat" />
+        <option value="$PROJECT_DIR$/dom/install.bat" />
+        <option value="$PROJECT_DIR$/dom/src/dom.element.js" />
+        <option value="$PROJECT_DIR$/dom/src/sheets/sheets.css.js" />
+        <option value="$PROJECT_DIR$/dom/src/html/html.attribute.data.js" />
+        <option value="$PROJECT_DIR$/dom/src/data/data.contract.unbound.js" />
+        <option value="$PROJECT_DIR$/dom/src/builder/builder.live.text.js" />
+        <option value="$PROJECT_DIR$/dom/src/sheets/sheets.css.property.js" />
+        <option value="$PROJECT_DIR$/dom/src/html/html.classes.js" />
+        <option value="$PROJECT_DIR$/dom/src/builder/dom.builder.css.js" />
+        <option value="$PROJECT_DIR$/dom/src/builder/dom.builder.cssRule.js" />
+        <option value="$PROJECT_DIR$/dom/dist/hammer.js" />
+        <option value="$PROJECT_DIR$/dom/src/html/html.element.body.js" />
+        <option value="$PROJECT_DIR$/dom/src/builder/builder.live.body.js" />
+        <option value="$PROJECT_DIR$/dom/src/html/html.attribute.js" />
+        <option value="$PROJECT_DIR$/dom/test/basic/objects.js" />
+        <option value="$PROJECT_DIR$/dom/src/html/html.element.root.js" />
+        <option value="$PROJECT_DIR$/dom/test/basic/css.js" />
+        <option value="$PROJECT_DIR$/dom/src/sheets/sheets.css.rules.js" />
+        <option value="$PROJECT_DIR$/dom/src/sheets/sheets.css.rule.js" />
+        <option value="$PROJECT_DIR$/dom/test/basic/render.js" />
+        <option value="$PROJECT_DIR$/dom/src/utils/utils.inherit.js" />
+        <option value="$PROJECT_DIR$/dom/src/utils/utils.logger.js" />
+        <option value="$PROJECT_DIR$/dom/Gruntfile.js" />
+        <option value="$PROJECT_DIR$/dom/src/utils/utils.array.js" />
+        <option value="$PROJECT_DIR$/dom/src/html/html.elements.js" />
+        <option value="$PROJECT_DIR$/dom/src/render/render.renderer.js" />
+        <option value="$PROJECT_DIR$/dom/src/render/render.queue.js" />
+        <option value="$PROJECT_DIR$/dom/package.json" />
+        <option value="$PROJECT_DIR$/dom/src/html/html.element.text.js" />
+        <option value="$PROJECT_DIR$/dom/src/builder/builder.live.js" />
+        <option value="$PROJECT_DIR$/dom/src/html/html.element.js" />
+        <option value="$PROJECT_DIR$/dom/test/dom.js" />
+        <option value="$PROJECT_DIR$/dom/src/builder/builder.css.js" />
+        <option value="$PROJECT_DIR$/dom/docs/index.js" />
+        <option value="$PROJECT_DIR$/dom/docs/libs/styles.css" />
+        <option value="$PROJECT_DIR$/dom/docs/index.html" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/dom/examples/styles.css" />
+        <option value="$PROJECT_DIR$/dom/examples/index.html" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/dom/src/sheets/sheets.css.group.js" />
+        <option value="$PROJECT_DIR$/dom/examples/all.js" />
+        <option value="$PROJECT_DIR$/dom/examples/css/index.html" />
+        <option value="$PROJECT_DIR$/dom/examples/css/example.js" />
+        <option value="$PROJECT_DIR$/dom/examples/simple/example.js" />
+        <option value="$PROJECT_DIR$/dom/examples/simple/index.html" />
+        <option value="$PROJECT_DIR$/dom/src/data/data.contract.js" />
+        <option value="$PROJECT_DIR$/dom/test/basic/renderer.js" />
+        <option value="$PROJECT_DIR$/dom/index.html" />
+        <option value="$PROJECT_DIR$/dom/src/dom.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true">
+    <gruntfile path="$PROJECT_DIR$/dom/Gruntfile.js">
+      <alias-task name="default" info="Alias for &quot;clean&quot;, &quot;jasmine&quot;, &quot;concat&quot;, &quot;uglify&quot; tasks." file-path="$PROJECT_DIR$/dom/Gruntfile.js">
+        <dependency value="clean" />
+        <dependency value="jasmine" />
+        <dependency value="concat" />
+        <dependency value="uglify" />
+      </alias-task>
+      <alias-task name="test debug" info="Alias for &quot;jasmine:pivotal&quot;, &quot;open:test&quot;, &quot;connect&quot; tasks." file-path="$PROJECT_DIR$/dom/Gruntfile.js">
+        <dependency value="jasmine:pivotal" />
+        <dependency value="open:test" />
+        <dependency value="connect" />
+      </alias-task>
+      <core-task name="clean" info="Clean files and folders." file-path="$PROJECT_DIR$/dom/node_modules/grunt-contrib-clean/tasks/clean.js" multi="true">
+        <target value="js" />
+        <target value="bin" />
+      </core-task>
+      <core-task name="concat" info="Concatenate files." file-path="$PROJECT_DIR$/dom/node_modules/grunt-contrib-concat/tasks/concat.js" multi="true">
+        <target value="dist" />
+      </core-task>
+      <core-task name="connect" info="Start a connect web server." file-path="$PROJECT_DIR$/dom/node_modules/grunt-contrib-connect/tasks/connect.js" multi="true">
+        <target value="server" />
+      </core-task>
+      <core-task name="jasmine" info="Run jasmine specs headlessly through PhantomJS." file-path="$PROJECT_DIR$/dom/node_modules/grunt-contrib-jasmine/tasks/jasmine.js" multi="true">
+        <target value="pivotal" />
+        <target value="coverage" />
+      </core-task>
+      <core-task name="open" info="Open urls and files from a grunt task" file-path="$PROJECT_DIR$/dom/node_modules/grunt-open/tasks/open.js" multi="true">
+        <target value="test" />
+      </core-task>
+      <core-task name="uglify" info="Minify files with UglifyJS." file-path="$PROJECT_DIR$/dom/node_modules/grunt-contrib-uglify/tasks/uglify.js" multi="true">
+        <target value="build" />
+      </core-task>
+      <core-task name="watch" info="Run predefined tasks whenever watched files change." file-path="$PROJECT_DIR$/dom/node_modules/grunt-contrib-watch/tasks/watch.js" multi="false">
+        <target value="scripts" />
+        <target value="grunt" />
+      </core-task>
+    </gruntfile>
+    <gruntfile path="$PROJECT_DIR$/css/Gruntfile.js">
+      <alias-task name="default" info="Alias for &quot;clean&quot;, &quot;jasmine&quot;, &quot;concat&quot;, &quot;uglify&quot; tasks." file-path="$PROJECT_DIR$/css/Gruntfile.js">
+        <dependency value="clean" />
+        <dependency value="jasmine" />
+        <dependency value="concat" />
+        <dependency value="uglify" />
+      </alias-task>
+      <alias-task name="test debug" info="Alias for &quot;jasmine:pivotal&quot;, &quot;open:test&quot;, &quot;connect&quot; tasks." file-path="$PROJECT_DIR$/css/Gruntfile.js">
+        <dependency value="jasmine:pivotal" />
+        <dependency value="open:test" />
+        <dependency value="connect" />
+      </alias-task>
+      <core-task name="clean" info="Clean files and folders." file-path="$PROJECT_DIR$/css/node_modules/grunt-contrib-clean/tasks/clean.js" multi="true">
+        <target value="js" />
+        <target value="bin" />
+      </core-task>
+      <core-task name="concat" info="Concatenate files." file-path="$PROJECT_DIR$/css/node_modules/grunt-contrib-concat/tasks/concat.js" multi="true">
+        <target value="dist" />
+      </core-task>
+      <core-task name="connect" info="Start a connect web server." file-path="$PROJECT_DIR$/css/node_modules/grunt-contrib-connect/tasks/connect.js" multi="true">
+        <target value="server" />
+      </core-task>
+      <core-task name="jasmine" info="Run jasmine specs headlessly through PhantomJS." file-path="$PROJECT_DIR$/css/node_modules/grunt-contrib-jasmine/tasks/jasmine.js" multi="true">
+        <target value="pivotal" />
+        <target value="coverage" />
+      </core-task>
+      <core-task name="open" info="Open urls and files from a grunt task" file-path="$PROJECT_DIR$/css/node_modules/grunt-open/tasks/open.js" multi="true">
+        <target value="test" />
+      </core-task>
+      <core-task name="uglify" info="Minify files with UglifyJS." file-path="$PROJECT_DIR$/css/node_modules/grunt-contrib-uglify/tasks/uglify.js" multi="true">
+        <target value="build" />
+      </core-task>
+      <core-task name="watch" info="Run predefined tasks whenever watched files change." file-path="$PROJECT_DIR$/css/node_modules/grunt-contrib-watch/tasks/watch.js" multi="false">
+        <target value="scripts" />
+        <target value="grunt" />
+      </core-task>
+    </gruntfile>
+  </component>
+  <component name="JsGruntFileManager">
+    <gruntfiles>
+      <GruntfileState>
+        <alias-tasks>
+          <alias-task value="default" />
+          <alias-task value="test debug" />
+        </alias-tasks>
+        <multi-tasks>
+          <GruntMultiTaskState>
+            <name>clean</name>
+            <targets>
+              <target value="js" />
+              <target value="bin" />
+            </targets>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>concat</name>
+            <targets>
+              <target value="dist" />
+            </targets>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>connect</name>
+            <targets>
+              <target value="server" />
+            </targets>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>jasmine</name>
+            <targets>
+              <target value="pivotal" />
+              <target value="coverage" />
+            </targets>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>uglify</name>
+            <targets>
+              <target value="build" />
+            </targets>
+          </GruntMultiTaskState>
+          <GruntMultiTaskState>
+            <name>watch</name>
+            <targets>
+              <target value="scripts" />
+              <target value="grunt" />
+            </targets>
+          </GruntMultiTaskState>
+        </multi-tasks>
+        <gruntfile-path>$PROJECT_DIR$/dom/Gruntfile.js</gruntfile-path>
+      </GruntfileState>
+    </gruntfiles>
+    <initial>false</initial>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1358" />
+    <option name="y" value="-8" />
+    <option name="width" value="1634" />
+    <option name="height" value="1066" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Code quality toolsJavaScript</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JsTestDriverJavaScript</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>JSHint</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="false" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <OptionsSetting value="true" id="Undo Check Out" />
+    <OptionsSetting value="true" id="Get Latest Version" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers ProjectPane="false" />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Default" />
+      </pane>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Reactive" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Reactive" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Reactive" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <option name="show-excluded-files" value="false" />
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="options.lastSelected" value="web-ide.project.structure" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="recentsLimit" value="5" />
+    <property name="js.buildTools.gulp.node_interpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="js.eslint.nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Localhost\ShadowDom\dom\examples" />
+      <recent name="D:\Localhost\ShadowDom\dom\src\sheets" />
+      <recent name="D:\Localhost\ShadowDom\dom\docs\libs" />
+      <recent name="D:\Localhost\hammer\dom\docs" />
+      <recent name="I:\hammer\dom" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JsTestDriver-test-runner" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="$PROJECT_DIR$/../supervisor/libs/nodejs/node" node-parameters="grunt" working-dir="$PROJECT_DIR$/dom">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.grunt" factoryName="Grunt.js">
+      <pass-parent-env-vars value="true" />
+      <force value="false" />
+      <verbose value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeWebKit" factoryName="Node-webkit">
+      <option name="name" value="" />
+      <method />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="26e6fe3f-2ec1-455d-ad8e-d0a4ffea07db" name="Default" comment="" />
+      <created>1426597239461</created>
+      <option name="number" value="Default" />
+      <updated>1426597239461</updated>
+      <workItem from="1426597240714" duration="24607000" />
+    </task>
+    <task id="LOCAL-00001" summary="First commit of ShadowDom library&#10; - tests&#10; - grunt build">
+      <created>1426833332496</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1426833332496</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Documentation and first usage&#10;Shortands for most popular elements&#10;Atrributes enum&#10;Tag enum&#10;Tests">
+      <created>1426936594326</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1426936594326</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Second documentation&#10;Builder for body&#10;Body element&#10;Tests">
+      <created>1426952206451</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1426952206451</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added renderer for evaluating of functions run&#10;Tests on renderer&#10;Added test debug into Gruntfile">
+      <created>1426962784279</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1426962784279</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Global renderer&#10;Render queue for elements&#10;">
+      <created>1426967131609</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1426967131609</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Css property convertor&#10;Js name and dom.sheets.CssProperty.createJsName&#10;Tests">
+      <created>1426982994375</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1426982994375</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Css property enum">
+      <created>1427017200506</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1427017200506</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Rendering queue testy&#10;">
+      <created>1427018782341</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1427018782341</updated>
+    </task>
+    <task id="LOCAL-00009" summary="First css builder&#10;Method getStaticClasses&#10;Method getCssRules on element&#10;Tests&#10;">
+      <created>1427024273579</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1427024273579</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Css generator - is only private&#10;Body element has not builder anymore&#10;Root element instead of body&#10;CSS rule update&#10;Logger&#10;">
+      <created>1427057845297</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1427057845297</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Inspection clean up, green files&#10;">
+      <created>1427058074238</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1427058074238</updated>
+    </task>
+    <task id="LOCAL-00012" summary="RooTelement - generrate parent =&gt; must change it&#10;Insert return element&#10;&#10;">
+      <created>1427180193085</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1427180193085</updated>
+    </task>
+    <task id="LOCAL-00013" summary="is body is defined by null parent&#10;Live builder have parent&#10;Deleted root element&#10;Private convertToElement&#10;Test update&#10;">
+      <created>1427482552068</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1427482552068</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Index of fast implement&#10;Utils split&#10;&#10;">
+      <created>1427530934194</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1427530934194</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Js docs">
+      <created>1427531220178</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1427531220178</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Js docs">
+      <created>1427531276705</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1427531276705</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Js docs">
+      <created>1427531303236</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1427531303236</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Optimalization of function call, no twice calling what update same property">
+      <created>1427533556217</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1427533556217</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Rename">
+      <created>1427534110305</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1427534110305</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Description">
+      <created>1427534679565</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1427534679565</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Attach element support&#10;Reactor on each element&#10;">
+      <created>1427539232004</created>
+      <option name="number" value="00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1427539232004</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Next docs examples&#10;">
+      <created>1427837956401</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1427837956401</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Correction of name">
+      <created>1427869364887</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1427869364887</updated>
+    </task>
+    <task id="LOCAL-00024" summary="New examples structure">
+      <created>1427904612327</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1427904612327</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Css example">
+      <created>1427921058639</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1427921058639</updated>
+    </task>
+    <task id="LOCAL-00026" summary="New examples">
+      <created>1427958782122</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1427958782122</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Css property group repair">
+      <created>1427958816430</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1427958816430</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Check on same value + test">
+      <created>1428138058777</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1428138058777</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="24607000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1358" y="-8" width="1634" height="1066" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1829574" sideWeight="0.49614963" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.18261826" sideWeight="0.5038504" order="17" side_tool="false" content_ui="tabs" x="98" y="24" width="1194" height="693" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32819384" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258786" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.2973568" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="99" y="40" width="1237" height="687" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Tasks" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32819384" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6563877" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
+    <MESSAGE value="Documentation and first usage&#10;Shortands for most popular elements&#10;Atrributes enum&#10;Tag enum&#10;Tests" />
+    <MESSAGE value="Second documentation&#10;Builder for body&#10;Body element&#10;Tests" />
+    <MESSAGE value="Added renderer for evaluating of functions run&#10;Tests on renderer&#10;Added test debug into Gruntfile" />
+    <MESSAGE value="Global renderer&#10;Render queue for elements&#10;" />
+    <MESSAGE value="Css property convertor&#10;Js name and dom.sheets.CssProperty.createJsName&#10;Tests" />
+    <MESSAGE value="Css property enum" />
+    <MESSAGE value="Rendering queue testy&#10;" />
+    <MESSAGE value="First css builder&#10;Method getStaticClasses&#10;Method getCssRules on element&#10;Tests&#10;" />
+    <MESSAGE value="Css generator - is only private&#10;Body element has not builder anymore&#10;Root element instead of body&#10;CSS rule update&#10;Logger&#10;" />
+    <MESSAGE value="Inspection clean up, green files&#10;" />
+    <MESSAGE value="RooTelement - generrate parent =&gt; must change it&#10;Insert return element&#10;&#10;" />
+    <MESSAGE value="is body is defined by null parent&#10;Live builder have parent&#10;Deleted root element&#10;Private convertToElement&#10;Test update&#10;" />
+    <MESSAGE value="Index of fast implement&#10;Utils split&#10;&#10;" />
+    <MESSAGE value="Js docs" />
+    <MESSAGE value="Optimalization of function call, no twice calling what update same property" />
+    <MESSAGE value="Rename" />
+    <MESSAGE value="Description" />
+    <MESSAGE value="Attach element support&#10;Reactor on each element&#10;" />
+    <MESSAGE value="Next docs examples&#10;" />
+    <MESSAGE value="Correction of name" />
+    <MESSAGE value="New examples structure" />
+    <MESSAGE value="Css example" />
+    <MESSAGE value="New examples" />
+    <MESSAGE value="Css property group repair" />
+    <MESSAGE value="Check on same value + test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Check on same value + test" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="41" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/dom/src/dom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/dom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.element.text.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.element.text.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/install.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.019296255">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68729097">
+          <caret line="186" column="5" selection-start-line="186" selection-start-column="5" selection-end-line="186" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/node_modules/grunt-contrib-jasmine/vendor/jasmine-2.0.0/jasmine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36581197">
+          <caret line="1359" column="45" selection-start-line="1359" selection-start-column="42" selection-end-line="1359" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/node_modules/grunt-contrib-jasmine/vendor/jasmine-2.0.1/boot.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36239317">
+          <caret line="68" column="19" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.attribute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8068182">
+          <caret line="96" column="20" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.classes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38636363">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/test/basic/objects.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6522727">
+          <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.attribute.data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09659091">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/builder/builder.live.text.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44381386">
+          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/utils/utils.inherit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/utils/utils.logger.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/utils/utils.array.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="28" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/sheets/sheets.css.property.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6579546">
+          <caret line="101" column="61" selection-start-line="101" selection-start-column="61" selection-end-line="101" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.elements.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/render/render.queue.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22727273">
+          <caret line="54" column="7" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/render/render.renderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2125">
+          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538">
+          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/dom.element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33295456">
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.element.text.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="86" column="57" selection-start-line="86" selection-start-column="57" selection-end-line="86" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMCore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33295456">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/builder/builder.live.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="157" column="32" selection-start-line="157" selection-start-column="32" selection-end-line="157" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/test/dom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/sheets/sheets.css.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38636363">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/sheets/sheets.css.rules.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2125">
+          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/examples/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19318181">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/sheets/sheets.css.rule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5409091">
+          <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/builder/builder.css.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="50" selection-start-line="77" selection-start-column="50" selection-end-line="77" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/sheets/sheets.css.group.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/examples/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.769231">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/examples/simple/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09953161">
+          <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/examples/simple/example.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5022727">
+          <caret line="26" column="87" selection-start-line="26" selection-start-column="87" selection-end-line="26" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/examples/all.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3090909">
+          <caret line="16" column="70" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/examples/css/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09953161">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/examples/css/example.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7875">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="75" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38590202">
+          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/data/data.contract.unbound.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09659091">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/test/basic/css.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11590909">
+          <caret line="6" column="61" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/test/basic/render.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/test/basic/renderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36704546">
+          <caret line="144" column="11" selection-start-line="144" selection-start-column="11" selection-end-line="144" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/data/data.contract.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3625">
+          <caret line="35" column="40" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/html/html.element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24570447">
+          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="233" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dom/src/dom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.057954546">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12208258">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Node.js v0.10.12 Core Modules</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
