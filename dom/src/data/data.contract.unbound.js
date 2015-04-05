@@ -6,7 +6,7 @@
 	"use strict";
 
 	/**
-	 * @protected
+	 * @public
 	 * Data contract unbound
 	 * @param {string} initialValue
 	 * @extends {dom.data.Contract}

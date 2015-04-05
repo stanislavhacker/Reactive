@@ -62,8 +62,7 @@
 	 * @param {Array.<dom.html.Element>} elements
 	 */
 	dom.html.Element.prototype.attach = function (elements) {
-		var i,
-			reactor = this.reactor,
+		var reactor = this.reactor,
 			children = this.processChildren(elements);
 		//generate
 		this.children = this.children.concat(children);
@@ -244,7 +243,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set attribute
 	 * @type {string} name
 	 * @type {string} value
@@ -260,7 +259,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set css property
 	 * @type {string} name
 	 * @type {string} value
@@ -276,7 +275,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set class name
 	 * @type {Array.<string>} value
 	 */
@@ -291,7 +290,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set parent
 	 * @param {dom.Element} parent
 	 */

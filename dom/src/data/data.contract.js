@@ -51,7 +51,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * @param {object} caller
 	 * @param {function} event
 	 */
@@ -65,7 +65,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * @param {object} caller
 	 */
 	dom.data.Contract.prototype.removeChangeEvent = function (caller) {

@@ -82,7 +82,7 @@
 	/**
 	 * @public
 	 * Get live dom
-	 * @returns {HTMLElement}
+	 * @returns {HTMLElement|Text}
 	 */
 	dom.html.TextElement.prototype.getLive = function () {
 		var element = this.element;
@@ -120,7 +120,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Set text
 	 */
 	dom.html.TextElement.prototype.setText = function () {

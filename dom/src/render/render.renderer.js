@@ -21,7 +21,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Renderer
 	 * @param {dom.html.Element} element
 	 * @param {string} name Function name
@@ -33,7 +33,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Force render for
 	 * @param {dom.html.Element} element
 	 */

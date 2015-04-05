@@ -139,7 +139,7 @@
 	};
 
 	/**
-	 * @protected
+	 * @public
 	 * Generate html for children if there are
 	 */
 	dom.builder.Live.prototype.generateChildren = function () {
