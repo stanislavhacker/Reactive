@@ -1,5 +1,7 @@
-var dom = {};
+/*globals dom*/
+window.dom = window.dom || {};
 /**
+ * @author Stanislav Hacker
  * Base shadow dom definition
  */
 (function () {
@@ -961,6 +963,14 @@ var dom = {};
 		dom.cssGroup = function (name, params) {
 			var args = Array.prototype.slice.apply(arguments);
 			return new dom.sheets.CssGroup(name, args.slice(1));
+		};
+
+		/**
+		 * Css generator
+		 * @returns {CssGenerator}
+		 */
+		dom.cssGenerator = function () {
+			throw "You must include Reactive.css module for working with generated css.";
 		};
 
 	}());

@@ -529,6 +529,12 @@
 				expect(prop.getCss().length).toBe(2);
 			});
 
+			it("dom.cssGenerator", function () {
+				expect(function () {
+					dom.cssGenerator();
+				}).toThrow('You must include Reactive.css module for working with generated css.');
+			});
+
 		});
 
 		describe("data", function () {
