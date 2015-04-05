@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Reactive.iml" filepath="$PROJECT_DIR$/.idea/Reactive.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/ShadowDom.iml" filepath="$PROJECT_DIR$/.idea/ShadowDom.iml" />
     </modules>
   </component>
 </project>
