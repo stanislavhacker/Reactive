@@ -5,5 +5,7 @@
     <file url="file://$PROJECT_DIR$/css/test" libraries="{Jamsine}" />
     <file url="file://$PROJECT_DIR$/dom/Gruntfile.js" libraries="{Grunt, Node.js v0.10.35 Core Modules}" />
     <file url="file://$PROJECT_DIR$/dom/test" libraries="{Jamsine}" />
+    <file url="file://$PROJECT_DIR$/sandbox/Gruntfile.js" libraries="{Grunt}" />
+    <file url="file://$PROJECT_DIR$/sandbox/test" libraries="{Jamsine}" />
   </component>
 </project>
