@@ -81,12 +81,13 @@
 	dom.html.TextElement.prototype.setClassName = function (value) {
 	};
 
+	//noinspection JSUnusedLocalSymbols
 	/**
 	 * @public
 	 * Get live dom
-	 * @returns {HTMLElement|Text}
+	 * @returns {HTMLElement}
 	 */
-	dom.html.TextElement.prototype.getLive = function () {
+	dom.html.TextElement.prototype.getLive = function (parent) {
 		var element = this.element;
 		//create new element
 		if (element === null) {
@@ -97,7 +98,7 @@
 			element = this.element;
 		}
 		//return element
-		return element;
+		return /** @type {HTMLElement}*/element;
 	};
 
 	/**
