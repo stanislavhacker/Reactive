@@ -949,6 +949,11 @@ var dom = (function() {
 		 * @returns {CssGenerator}
 		 */
 		cssGenerator: function () {
+			//css generator module exists
+			if (typeof domCssGenerator !== "undefined") {
+				return domCssGenerator.getInstance();
+			}
+			//throw error
 			throw "You must include Reactive.css module for working with generated css.";
 		},
 

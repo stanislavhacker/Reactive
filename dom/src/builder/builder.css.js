@@ -12,7 +12,8 @@
 	 * Style element, rules
 	 * @type {HTMLElement}
 	 */
-	var style = null,
+	var generatedStyle = null,
+		staticStyle = null,
 		rules = {};
 
 	/**
@@ -37,7 +38,12 @@
 			children = element.getChildren(),
 			css = this.element.getCss();
 
-		//TODO: Check on static
+		//try find static style
+		dom.builder.Css.findStyle();
+		//if static style exists, do nothing
+		if (staticStyle === true) {
+			return;
+		}
 
 		//css exists
 		if (css) {
@@ -101,7 +107,7 @@
 
 	/**
 	 * @private
-	 * Append style
+	 * Append generatedStyle
 	 * @param {dom.sheets.CssRule} rule
 	 */
 	dom.builder.Css.prototype.appendRule = function (rule) {
@@ -116,16 +122,16 @@
 			return;
 		}
 		rules[name] = rule;
-		//create style
+		//create generatedStyle
 		dom.builder.Css.createStyle();
 		//register node
 		rule.cssElement = document.createTextNode(rule.getRuleString());
 		//noinspection JSUnresolvedVariable
-		if (style.styleSheet) {
+		if (generatedStyle.styleSheet) {
 			//noinspection JSUnresolvedVariable
-			style.styleSheet.cssText += rule.cssElement.nodeValue;
+			generatedStyle.styleSheet.cssText += rule.cssElement.nodeValue;
 		} else {
-			style.appendChild(rule.cssElement);
+			generatedStyle.appendChild(rule.cssElement);
 		}
 	};
 
@@ -236,17 +242,29 @@
 	/**
 	 * @static
 	 * @private
-	 * Create style
+	 * Create generatedStyle
 	 */
 	dom.builder.Css.createStyle = function () {
 		var header;
-		//create new style
-		if (style === null) {
-			style = document.createElement('style');
-			style.setAttribute("type", "text/css");
-			style.setAttribute("id", dom.builder.CssStyleType.GENERATED);
+		//create new generatedStyle
+		if (generatedStyle === null) {
+			generatedStyle = document.createElement('generatedStyle');
+			generatedStyle.setAttribute("type", "text/css");
+			generatedStyle.setAttribute("id", dom.builder.CssStyleType.GENERATED);
 			header = document.getElementsByTagName('head')[0];
-			header.appendChild(style);
+			header.appendChild(generatedStyle);
+		}
+	};
+
+	/**
+	 * @static
+	 * @private
+	 * Find staticStyle
+	 */
+	dom.builder.Css.findStyle = function () {
+		//find static style definition
+		if (staticStyle === null) {
+			staticStyle = Boolean(document.getElementById(dom.builder.CssStyleType.STATIC));
 		}
 	};
 

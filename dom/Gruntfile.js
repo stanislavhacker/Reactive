@@ -45,6 +45,10 @@ module.exports = function(grunt) {
 		],
 		gruntFile = [
 			'Gruntfile.js'
+		],
+		bundle = [
+			'dist/Reactive.js',
+			'../css/dist/Reactive.css.js'
 		];
 
 
@@ -112,7 +116,13 @@ module.exports = function(grunt) {
 				src: files,
 				// the location of the resulting JS file
 				dest: 'dist/<%= pkg.name %>.js'
-			}
+			},
+			bundle: {
+				// the files to concatenate
+				src: bundle,
+				// the location of the resulting JS file
+				dest: '../<%= pkg.name %>.bundle.js'
+			},
 		},
 
 		//Uglify task
@@ -124,6 +134,10 @@ module.exports = function(grunt) {
 			build: {
 				src: 'dist/<%= pkg.name %>.js',
 				dest: 'dist/<%= pkg.name %>.min.js'
+			},
+			bundle: {
+				src: '../<%= pkg.name %>.bundle.js',
+				dest: '../<%= pkg.name %>.min.js'
 			}
 		},
 
@@ -167,7 +181,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-open');
 
 	// Default task(s).
-	grunt.registerTask('default', ['clean', 'jasmine', 'concat', 'uglify']);
+	grunt.registerTask('default', ['clean', 'jasmine', 'concat:dist', 'uglify:build']);
+	grunt.registerTask('bundle', ['concat:bundle', 'uglify:bundle']);
 	grunt.registerTask('test debug', ['jasmine:pivotal', 'open:test', 'connect']);
 
 };
