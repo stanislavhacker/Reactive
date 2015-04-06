@@ -3,39 +3,8 @@ module.exports = function(grunt) {
 	// Project configuration.
 
 	//files spec
-	var sandbox = "../sandbox/lib/",
-		files = [
-			//Base object
-			'src/dom.js',
-			'src/dom.element.js',
-			//Renderer
-			'src/render/render.renderer.js',
-			'src/render/render.queue.js',
-			//Utils
-			'src/utils/utils.inherit.js',
-			'src/utils/utils.logger.js',
-			'src/utils/utils.array.js',
-			//Data
-			'src/data/data.contract.js',
-			'src/data/data.contract.unbound.js',
-			//Html
-			'src/html/html.element.js',
-			'src/html/html.element.text.js',
-			'src/html/html.element.root.js',
-			'src/html/html.attribute.js',
-			'src/html/html.attribute.data.js',
-			'src/html/html.classes.js',
-			'src/html/html.elements.js',
-			//Css
-			'src/sheets/sheets.css.js',
-			'src/sheets/sheets.css.property.js',
-			'src/sheets/sheets.css.group.js',
-			'src/sheets/sheets.css.rule.js',
-			'src/sheets/sheets.css.rules.js',
-			//Builders
-			'src/builder/builder.live.js',
-			'src/builder/builder.live.text.js',
-			'src/builder/builder.css.js'
+	var files = [
+			'src/cssGenerator.js'
 		],
 		specs = [
 			'test/**/*.js'
@@ -46,10 +15,6 @@ module.exports = function(grunt) {
 		],
 		gruntFile = [
 			'Gruntfile.js'
-		],
-		bundle = [
-			'dist/Reactive.js',
-			'../css/dist/Reactive.css.js'
 		];
 
 
@@ -117,12 +82,6 @@ module.exports = function(grunt) {
 				src: files,
 				// the location of the resulting JS file
 				dest: 'dist/<%= pkg.name %>.js'
-			},
-			bundle: {
-				// the files to concatenate
-				src: bundle,
-				// the location of the resulting JS file
-				dest: sandbox + '<%= pkg.name %>.min.js'
 			}
 		},
 
@@ -135,10 +94,6 @@ module.exports = function(grunt) {
 			build: {
 				src: 'dist/<%= pkg.name %>.js',
 				dest: 'dist/<%= pkg.name %>.min.js'
-			},
-			bundle: {
-				src: sandbox + '<%= pkg.name %>.min.js',
-				dest: sandbox + '<%= pkg.name %>.min.js'
 			}
 		},
 
@@ -183,7 +138,6 @@ module.exports = function(grunt) {
 
 	// Default task(s).
 	grunt.registerTask('default', ['clean', 'jasmine', 'concat:dist', 'uglify:build']);
-	grunt.registerTask('bundle', ['concat:bundle', 'uglify:bundle']);
 	grunt.registerTask('test debug', ['jasmine:pivotal', 'open:test', 'connect']);
 
 };
