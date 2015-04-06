@@ -96,9 +96,9 @@
 					dom.attr('id', 'css'),
 					dom.css(
 						dom.cssGroup(":hover",
-							dom.cssProperty(dom.sheets.CssPropertyType.BORDER_COLOR, "blue")
+							dom.cssProperty(CssPropertyType.BORDER_COLOR, "blue")
 						),
-						dom.cssProperty(dom.sheets.CssPropertyType.BORDER_COLOR, "red")
+						dom.cssProperty(CssPropertyType.BORDER_COLOR, "red")
 					)
 				);
 
@@ -111,9 +111,9 @@
 						dom.attr('id', 'css'),
 						dom.css(
 							dom.cssGroup(":hover",
-								dom.cssProperty(dom.sheets.CssPropertyType.BORDER_COLOR, "blue")
+								dom.cssProperty(CssPropertyType.BORDER_COLOR, "blue")
 							),
-							dom.cssProperty(dom.sheets.CssPropertyType.BORDER_COLOR, borderColor)
+							dom.cssProperty(CssPropertyType.BORDER_COLOR, borderColor)
 						)
 					);
 
@@ -136,10 +136,10 @@
 				expect(function () {
 					div = dom.div(
 						dom.css(
-							dom.cssProperty(dom.sheets.CssPropertyType.BORDER_COLOR, "test")
+							dom.cssProperty(CssPropertyType.BORDER_COLOR, "test")
 						),
 						dom.css(
-							dom.cssProperty(dom.sheets.CssPropertyType.BORDER_COLOR, "test")
+							dom.cssProperty(CssPropertyType.BORDER_COLOR, "test")
 						)
 					);
 				}).toThrow('Can not set css twice on element.');
@@ -153,7 +153,7 @@
 				var div = dom.div(
 					dom.attr('id', 'css'),
 					dom.cssGroup(":hover",
-						dom.cssProperty(dom.sheets.CssPropertyType.BORDER_COLOR, "blue")
+						dom.cssProperty(CssPropertyType.BORDER_COLOR, "blue")
 					)
 				);
 

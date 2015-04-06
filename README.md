@@ -29,7 +29,7 @@ The creation of the attribute are used two functions. It is a function `dom.attr
 
 ```javascript
 var div = dom.div(
-	dom.attr(dom.html.AttributeType.LANG, "en"),
+	dom.attr(AttributeType.LANG, "en"),
 	dom.dataAttr("my-data", "test")
 );
 document.body.appendChild(div.getLive());
@@ -68,8 +68,8 @@ Creating styles operates on a similar principle. Just call `dom.css()` and then 
 var div = dom.div(
 	dom.attr('id', 'square'),
 	dom.css(
-		dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "red"),
-		dom.cssProperty(dom.sheets.CssPropertyType.BORDER, "1px solid red")
+		dom.cssProperty(CssPropertyType.BACKGROUND, "red"),
+		dom.cssProperty(CssPropertyType.BORDER, "1px solid red")
 	)
 );
 document.body.appendChild(div.getLive());

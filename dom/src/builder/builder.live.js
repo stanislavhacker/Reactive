@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Builder for shadow dom
+ * Builder for Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.builder = dom.builder || {};
 
 	/**
 	 * Live
@@ -163,4 +165,4 @@
 		}
 	};
 
-}());
+}(dom, document, window));

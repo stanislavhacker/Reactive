@@ -1,53 +1,42 @@
-/*globals dom*/
-window.dom = window.dom || {};
 /**
+ * Reactive base module
  * @author Stanislav Hacker
- * Base shadow dom definition
+ * @type {object}
  */
-(function () {
+var dom = (function() {
 	"use strict";
 
-	//namespaces
-	dom.builder = {};
-	dom.data = {};
-	dom.html = {};
-	dom.render = {};
-	dom.sheets = {};
-	dom.utils = {};
-
-	//global functions
-
 	/**
-	 * Body
+	 * @private
+	 * Convert to element
+	 * @param {HTMLElement|dom.html.Element} parent
+	 * @param {Array.<dom.html.Element>} children
+	 * @returns {dom.html.Element}
 	 */
-	(function () {
-
-		/**
-		 * @private
-		 * Convert to element
-		 * @param {HTMLElement|dom.html.Element} parent
-		 * @param {Array.<dom.html.Element>} children
-		 * @returns {dom.html.Element}
-		 */
-		function convertToElement (parent, children) {
-			var domElement;
-			//if its element, attach element into given element
-			if (parent instanceof dom.html.Element) {
-				//only pass element
-				domElement = parent;
-				//attach
-				domElement.attach(children);
-			} else {
-				//create element
-				domElement = new dom.html.Element(parent.tagName, children);
-			}
-			//get live
-			domElement.getLive(parent);
-			//generate css rules
-			domElement.createCssRules();
-			//return element
-			return domElement;
+	function convertToElement (parent, children) {
+		var domElement;
+		//if its element, attach element into given element
+		if (parent instanceof dom.html.Element) {
+			//only pass element
+			domElement = parent;
+			//attach
+			domElement.attach(children);
+		} else {
+			//create element
+			domElement = new dom.html.Element(parent.tagName, children);
 		}
+		//get live
+		domElement.getLive(parent);
+		//generate css rules
+		domElement.createCssRules();
+		//return element
+		return domElement;
+	}
+
+	//return interface methods
+	return {
+
+		//ATTACH functions
 
 		/**
 		 * @static
@@ -56,821 +45,816 @@ window.dom = window.dom || {};
 		 * @param {...dom.html.Element=} params
 		 * @return {dom.html.Element}
 		 */
-		dom.attach = function (parent, params) {
+		attach: function (parent, params) {
 			var args = Array.prototype.slice.apply(arguments);
 			//create root element and run it!
 			return convertToElement(parent, args.slice(1));
-		};
+		},
 
-	}());
-
-	/**
-	 * HTML functions
-	 */
-	(function () {
+		//HTML functions
 
 		/**
 		 * @static
 		 * Create div
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.div = function (params) {
+		div: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.DIV, args);
-		};
+			return new dom.html.Element(ElementType.DIV, args);
+		},
 
 		/**
 		 * @static
 		 * Create span
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.span = function (params) {
+		span: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.SPAN, args);
-		};
+			return new dom.html.Element(ElementType.SPAN, args);
+		},
 
 		/**
 		 * @static
 		 * Create a
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.a = function (params) {
+		a: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.A, args);
-		};
+			return new dom.html.Element(ElementType.A, args);
+		},
 
 		/**
 		 * @static
 		 * Create abbr
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.abbr = function (params) {
+		abbr: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.ABBR, args);
-		};
+			return new dom.html.Element(ElementType.ABBR, args);
+		},
 
 		/**
 		 * @static
 		 * Create address
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.address = function (params) {
+		address: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.ADDRESS, args);
-		};
+			return new dom.html.Element(ElementType.ADDRESS, args);
+		},
 
 		/**
 		 * @static
 		 * Create area
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.area = function (params) {
+		area: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.AREA, args);
-		};
+			return new dom.html.Element(ElementType.AREA, args);
+		},
 
 		/**
 		 * @static
 		 * Create article
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.article = function (params) {
+		article: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.ARTICLE, args);
-		};
+			return new dom.html.Element(ElementType.ARTICLE, args);
+		},
 
 		/**
 		 * @static
 		 * Create aside
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.aside = function (params) {
+		aside: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.ASIDE, args);
-		};
+			return new dom.html.Element(ElementType.ASIDE, args);
+		},
 
 		/**
 		 * @static
 		 * Create audio
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.audio = function (params) {
+		audio: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.AUDIO, args);
-		};
+			return new dom.html.Element(ElementType.AUDIO, args);
+		},
 
 		/**
 		 * @static
 		 * Create b
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.b = function (params) {
+		b: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.B, args);
-		};
+			return new dom.html.Element(ElementType.B, args);
+		},
 
 		/**
 		 * @static
 		 * Create base
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.base = function (params) {
+		base: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.BASE, args);
-		};
+			return new dom.html.Element(ElementType.BASE, args);
+		},
 
 		/**
 		 * @static
 		 * Create blockquote
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.blockquote = function (params) {
+		blockquote: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.BLOCKQUOTE, args);
-		};
+			return new dom.html.Element(ElementType.BLOCKQUOTE, args);
+		},
 
 		/**
 		 * @static
 		 * Create br
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.br = function (params) {
+		br: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.BR, args);
-		};
+			return new dom.html.Element(ElementType.BR, args);
+		},
 
 		/**
 		 * @static
 		 * Create button
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.button = function (params) {
+		button: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.BUTTON, args);
-		};
+			return new dom.html.Element(ElementType.BUTTON, args);
+		},
 
 		/**
 		 * @static
 		 * Create canvas
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.canvas = function (params) {
+		canvas: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.CANVAS, args);
-		};
+			return new dom.html.Element(ElementType.CANVAS, args);
+		},
 
 		/**
 		 * @static
 		 * Create caption
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.caption = function (params) {
+		caption: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.CAPTION, args);
-		};
+			return new dom.html.Element(ElementType.CAPTION, args);
+		},
 
 		/**
 		 * @static
 		 * Create cite
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.cite = function (params) {
+		cite: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.CITE, args);
-		};
+			return new dom.html.Element(ElementType.CITE, args);
+		},
 
 		/**
 		 * @static
 		 * Create code
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.code = function (params) {
+		code: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.CODE, args);
-		};
+			return new dom.html.Element(ElementType.CODE, args);
+		},
 
 		/**
 		 * @static
 		 * Create em
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.em = function (params) {
+		em: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.EM, args);
-		};
+			return new dom.html.Element(ElementType.EM, args);
+		},
 
 		/**
 		 * @static
 		 * Create embed
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.embed = function (params) {
+		embed: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.EMBED, args);
-		};
+			return new dom.html.Element(ElementType.EMBED, args);
+		},
 
 		/**
 		 * @static
 		 * Create fieldset
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.fieldset = function (params) {
+		fieldset: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.FIELDSET, args);
-		};
+			return new dom.html.Element(ElementType.FIELDSET, args);
+		},
 
 		/**
 		 * @static
 		 * Create footer
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.footer = function (params) {
+		footer: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.FOOTER, args);
-		};
+			return new dom.html.Element(ElementType.FOOTER, args);
+		},
 
 		/**
 		 * @static
 		 * Create form
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.form = function (params) {
+		form: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.FORM, args);
-		};
+			return new dom.html.Element(ElementType.FORM, args);
+		},
 
 		/**
 		 * @static
 		 * Create h1
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.h1 = function (params) {
+		h1: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.H1, args);
-		};
+			return new dom.html.Element(ElementType.H1, args);
+		},
 
 		/**
 		 * @static
 		 * Create h2
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.h2 = function (params) {
+		h2: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.H2, args);
-		};
+			return new dom.html.Element(ElementType.H2, args);
+		},
 
 		/**
 		 * @static
 		 * Create h3
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.h3 = function (params) {
+		h3: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.H3, args);
-		};
+			return new dom.html.Element(ElementType.H3, args);
+		},
 
 		/**
 		 * @static
 		 * Create h4
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.h4 = function (params) {
+		h4: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.H4, args);
-		};
+			return new dom.html.Element(ElementType.H4, args);
+		},
 
 		/**
 		 * @static
 		 * Create h5
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.h5 = function (params) {
+		h5: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.H5, args);
-		};
+			return new dom.html.Element(ElementType.H5, args);
+		},
 
 		/**
 		 * @static
 		 * Create h6
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.h6 = function (params) {
+		h6: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.H6, args);
-		};
+			return new dom.html.Element(ElementType.H6, args);
+		},
 
 		/**
 		 * @static
 		 * Create header
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.header = function (params) {
+		header: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.HEADER, args);
-		};
+			return new dom.html.Element(ElementType.HEADER, args);
+		},
 
 		/**
 		 * @static
 		 * Create i
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.i = function (params) {
+		i: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.I, args);
-		};
+			return new dom.html.Element(ElementType.I, args);
+		},
 
 		/**
 		 * @static
 		 * Create iframe
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.iframe = function (params) {
+		iframe: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.IFRAME, args);
-		};
+			return new dom.html.Element(ElementType.IFRAME, args);
+		},
 
 		/**
 		 * @static
 		 * Create img
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.img = function (params) {
+		img: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.IMG, args);
-		};
+			return new dom.html.Element(ElementType.IMG, args);
+		},
 
 		/**
 		 * @static
 		 * Create input
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.input = function (params) {
+		input: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.INPUT, args);
-		};
+			return new dom.html.Element(ElementType.INPUT, args);
+		},
 
 		/**
 		 * @static
 		 * Create label
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.label = function (params) {
+		label: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.LABEL, args);
-		};
+			return new dom.html.Element(ElementType.LABEL, args);
+		},
 
 		/**
 		 * @static
 		 * Create legend
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.legend = function (params) {
+		legend: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.LEGEND, args);
-		};
+			return new dom.html.Element(ElementType.LEGEND, args);
+		},
 
 		/**
 		 * @static
 		 * Create li
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.li = function (params) {
+		li: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.LI, args);
-		};
+			return new dom.html.Element(ElementType.LI, args);
+		},
 
 		/**
 		 * @static
 		 * Create main
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.main = function (params) {
+		main: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.MAIN, args);
-		};
+			return new dom.html.Element(ElementType.MAIN, args);
+		},
 
 		/**
 		 * @static
 		 * Create mark
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.mark = function (params) {
+		mark: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.MARK, args);
-		};
+			return new dom.html.Element(ElementType.MARK, args);
+		},
 
 		/**
 		 * @static
 		 * Create menu
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.menu = function (params) {
+		menu: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.MENU, args);
-		};
+			return new dom.html.Element(ElementType.MENU, args);
+		},
 
 		/**
 		 * @static
 		 * Create menuitem
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.menuitem = function (params) {
+		menuitem: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.MENUITEM, args);
-		};
+			return new dom.html.Element(ElementType.MENUITEM, args);
+		},
 
 		/**
 		 * @static
 		 * Create meta
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.meta = function (params) {
+		meta: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.META, args);
-		};
+			return new dom.html.Element(ElementType.META, args);
+		},
 
 		/**
 		 * @static
 		 * Create meter
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.meter = function (params) {
+		meter: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.METER, args);
-		};
+			return new dom.html.Element(ElementType.METER, args);
+		},
 
 		/**
 		 * @static
 		 * Create nav
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.nav = function (params) {
+		nav: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.NAV, args);
-		};
+			return new dom.html.Element(ElementType.NAV, args);
+		},
 
 		/**
 		 * @static
 		 * Create noscript
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.noscript = function (params) {
+		noscript: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.NOSCRIPT, args);
-		};
+			return new dom.html.Element(ElementType.NOSCRIPT, args);
+		},
 
 		/**
 		 * @static
 		 * Create object
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.object = function (params) {
+		object: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.OBJECT, args);
-		};
+			return new dom.html.Element(ElementType.OBJECT, args);
+		},
 
 		/**
 		 * @static
 		 * Create ol
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.ol = function (params) {
+		ol: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.OL, args);
-		};
+			return new dom.html.Element(ElementType.OL, args);
+		},
 
 		/**
 		 * @static
 		 * Create option
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.option = function (params) {
+		option: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.OPTION, args);
-		};
+			return new dom.html.Element(ElementType.OPTION, args);
+		},
 
 		/**
 		 * @static
 		 * Create p
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.p = function (params) {
+		p: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.P, args);
-		};
+			return new dom.html.Element(ElementType.P, args);
+		},
 
 		/**
 		 * @static
 		 * Create param
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.param = function (params) {
+		param: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.PARAM, args);
-		};
+			return new dom.html.Element(ElementType.PARAM, args);
+		},
 
 		/**
 		 * @static
 		 * Create pre
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.pre = function (params) {
+		pre: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.PRE, args);
-		};
+			return new dom.html.Element(ElementType.PRE, args);
+		},
 
 		/**
 		 * @static
 		 * Create q
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.q = function (params) {
+		q: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.Q, args);
-		};
+			return new dom.html.Element(ElementType.Q, args);
+		},
 
 		/**
 		 * @static
 		 * Create section
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.section = function (params) {
+		section: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.SECTION, args);
-		};
+			return new dom.html.Element(ElementType.SECTION, args);
+		},
 
 		/**
 		 * @static
 		 * Create select
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.select = function (params) {
+		select: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.SELECT, args);
-		};
+			return new dom.html.Element(ElementType.SELECT, args);
+		},
 
 		/**
 		 * @static
 		 * Create small
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.small = function (params) {
+		small: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.SMALL, args);
-		};
+			return new dom.html.Element(ElementType.SMALL, args);
+		},
 
 		/**
 		 * @static
 		 * Create source
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.source = function (params) {
+		source: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.SOURCE, args);
-		};
+			return new dom.html.Element(ElementType.SOURCE, args);
+		},
 
 		/**
 		 * @static
 		 * Create strong
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.strong = function (params) {
+		strong: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.STRONG, args);
-		};
+			return new dom.html.Element(ElementType.STRONG, args);
+		},
 
 		/**
 		 * @static
 		 * Create sub
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.sub = function (params) {
+		sub: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.SUB, args);
-		};
+			return new dom.html.Element(ElementType.SUB, args);
+		},
 
 		/**
 		 * @static
 		 * Create summary
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.summary = function (params) {
+		summary: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.SUMMARY, args);
-		};
+			return new dom.html.Element(ElementType.SUMMARY, args);
+		},
 
 		/**
 		 * @static
 		 * Create sup
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.sup = function (params) {
+		sup: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.SUP, args);
-		};
+			return new dom.html.Element(ElementType.SUP, args);
+		},
 
 		/**
 		 * @static
 		 * Create table
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.table = function (params) {
+		table: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TABLE, args);
-		};
+			return new dom.html.Element(ElementType.TABLE, args);
+		},
 
 		/**
 		 * @static
 		 * Create tbody
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.tbody = function (params) {
+		tbody: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TBODY, args);
-		};
+			return new dom.html.Element(ElementType.TBODY, args);
+		},
 
 		/**
 		 * @static
 		 * Create td
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.td = function (params) {
+		td: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TD, args);
-		};
+			return new dom.html.Element(ElementType.TD, args);
+		},
 
 		/**
 		 * @static
 		 * Create textarea
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.textarea = function (params) {
+		textarea: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TEXTAREA, args);
-		};
+			return new dom.html.Element(ElementType.TEXTAREA, args);
+		},
 
 		/**
 		 * @static
 		 * Create tfoot
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.tfoot = function (params) {
+		tfoot: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TFOOT, args);
-		};
+			return new dom.html.Element(ElementType.TFOOT, args);
+		},
 
 		/**
 		 * @static
 		 * Create th
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.th = function (params) {
+		th: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TH, args);
-		};
+			return new dom.html.Element(ElementType.TH, args);
+		},
 
 		/**
 		 * @static
 		 * Create thead
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.thead = function (params) {
+		thead: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.THEAD, args);
-		};
+			return new dom.html.Element(ElementType.THEAD, args);
+		},
 
 		/**
 		 * @static
 		 * Create title
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.title = function (params) {
+		title: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TITLE, args);
-		};
+			return new dom.html.Element(ElementType.TITLE, args);
+		},
 
 		/**
 		 * @static
 		 * Create tr
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.tr = function (params) {
+		tr: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TR, args);
-		};
+			return new dom.html.Element(ElementType.TR, args);
+		},
 
 		/**
 		 * @static
 		 * Create track
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.track = function (params) {
+		track: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.TRACK, args);
-		};
+			return new dom.html.Element(ElementType.TRACK, args);
+		},
 
 		/**
 		 * @static
 		 * Create u
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.u = function (params) {
+		u: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.U, args);
-		};
+			return new dom.html.Element(ElementType.U, args);
+		},
 
 		/**
 		 * @static
 		 * Create ul
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.ul = function (params) {
+		ul: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.UL, args);
-		};
+			return new dom.html.Element(ElementType.UL, args);
+		},
 
 		/**
 		 * @static
 		 * Create video
-		 * @param {...dom.Element=} params
+		 * @param {...namespace.Element=} params
 		 * @returns {dom.html.Element}
 		 */
-		dom.video = function (params) {
+		video: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
-			return new dom.html.Element(dom.html.ElementType.VIDEO, args);
-		};
+			return new dom.html.Element(ElementType.VIDEO, args);
+		},
 
 
 
@@ -882,9 +866,9 @@ window.dom = window.dom || {};
 		 * @param {string|dom.data.Contract} text
 		 * @returns {dom.html.TextElement}
 		 */
-		dom.text = function (text) {
+		text: function (text) {
 			return new dom.html.TextElement(text);
-		};
+		},
 
 
 
@@ -892,24 +876,24 @@ window.dom = window.dom || {};
 		/**
 		 * @static
 		 * Create attribute
-		 * @param {dom.html.AttributeType|string} name
+		 * @param {AttributeType|string} name
 		 * @param {string|dom.data.Contract} value
 		 * @returns {dom.html.Attribute}
 		 */
-		dom.attr = function (name, value) {
+		attr: function (name, value) {
 			return new dom.html.Attribute(name, value);
-		};
+		},
 
 		/**
 		 * @static
 		 * Create data attribute
-		 * @param {dom.html.ElementType|string} name
+		 * @param {ElementType|string} name
 		 * @param {string|dom.data.Contract} value
 		 * @returns {dom.html.Attribute}
 		 */
-		dom.dataAttr = function (name, value) {
+		dataAttr: function (name, value) {
 			return new dom.html.DataAttribute(name, value);
-		};
+		},
 
 
 
@@ -919,17 +903,12 @@ window.dom = window.dom || {};
 		 * @param {string|dom.data.Contract...} params
 		 * @returns {dom.html.Classes}
 		 */
-		dom.classes = function (params) {
+		classes: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
 			return new dom.html.Classes(args);
-		};
+		},
 
-	}());
-
-	/**
-	 * CSS functions
-	 */
-	(function () {
+		//CSS functions
 
 		/**
 		 * @static
@@ -937,21 +916,21 @@ window.dom = window.dom || {};
 		 * @param {dom.sheets.CssProperty|dom.sheets.CssGroup...} params
 		 * @returns {dom.sheets.Css}
 		 */
-		dom.css = function (params) {
+		css: function (params) {
 			var args = Array.prototype.slice.apply(arguments);
 			return new dom.sheets.Css(args);
-		};
+		},
 
 		/**
 		 * @static
 		 * Css property
-		 * @param {dom.sheets.CssPropertyType|string} name
+		 * @param {CssPropertyType|string} name
 		 * @param {string|dom.data.Contract} value
 		 * @returns {dom.sheets.CssProperty}
 		 */
-		dom.cssProperty = function (name, value) {
+		cssProperty: function (name, value) {
 			return new dom.sheets.CssProperty(name, value);
-		};
+		},
 
 		/**
 		 * @static
@@ -960,25 +939,20 @@ window.dom = window.dom || {};
 		 * @param {dom.sheets.CssProperty|dom.sheets.CssGroup...} params
 		 * @returns {dom.sheets.CssGroup}
 		 */
-		dom.cssGroup = function (name, params) {
+		cssGroup: function (name, params) {
 			var args = Array.prototype.slice.apply(arguments);
 			return new dom.sheets.CssGroup(name, args.slice(1));
-		};
+		},
 
 		/**
 		 * Css generator
 		 * @returns {CssGenerator}
 		 */
-		dom.cssGenerator = function () {
+		cssGenerator: function () {
 			throw "You must include Reactive.css module for working with generated css.";
-		};
+		},
 
-	}());
-
-	/**
-	 * DATA functions
-	 */
-	(function () {
+		//DATA functions
 
 		/**
 		 * @static
@@ -986,10 +960,11 @@ window.dom = window.dom || {};
 		 * @param {string} value
 		 * @returns {dom.data.Contract}
 		 */
-		dom.contract = function (value) {
+		contract: function (value) {
 			return new dom.data.Contract(value);
-		};
+		}
 
-	}());
+		
+	};
 
 }());

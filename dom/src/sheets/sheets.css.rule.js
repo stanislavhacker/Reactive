@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Css rule for shadow dom
+ * Css rule for reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.sheets = dom.sheets || {};
 
 	/**
 	 * Css rule
@@ -47,4 +49,4 @@
 	};
 
 
-}());
+}(dom, document, window));

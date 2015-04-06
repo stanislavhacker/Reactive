@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Data contract in shadow dom
+ * Elements in Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.html = dom.html || {};
 
 	/**
 	 * Elements
@@ -85,4 +87,4 @@
 		}
 	};
 
-}());
+}(dom, document, window));

@@ -1,10 +1,9 @@
-/*global dom*/
 /**
- * Base element in shadow dom
+ * Base element object in reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
-
 
 	/**
 	 * Base element in shadow dom
@@ -181,4 +180,4 @@
 		this.elements.addElement(element);
 	};
 
-}());
+}(dom, document, window));

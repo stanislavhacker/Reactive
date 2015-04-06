@@ -1,19 +1,21 @@
-/*global dom*/
 /**
- * Data attribute in shadow dom
+ * Data attribute in Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.html = dom.html || {};
 
 	/**
 	 * Data Attribute
-	 * @param {dom.html.ElementType|string} name
+	 * @param {ElementType|string} name
 	 * @param {string|dom.data.Contract} value
 	 * @extends {dom.html.Attribute}
 	 * @constructor
 	 */
 	dom.html.DataAttribute = function (name, value) {
-		/** @type {dom.html.ElementType|string}*/
+		/** @type {ElementType|string}*/
 		this.name = name;
 		/** @type {dom.data.Contract}*/
 		this.value = value instanceof dom.data.Contract ? value : new dom.data.UnboundContract(value);
@@ -28,10 +30,10 @@
 	/**
 	 * @public
 	 * Return name
-	 * @returns {dom.html.ElementType|string}
+	 * @returns {ElementType|string}
 	 */
 	dom.html.DataAttribute.prototype.getName = function () {
 		return "data-" + this.name;
 	};
 
-}());
+}(dom, document, window));

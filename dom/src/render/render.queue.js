@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Builder for shadow dom
+ * Builder for Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.render = dom.render || {};
 
 	/**
 	 * Render queue
@@ -122,4 +124,4 @@
 
 
 
-}());
+}(dom, document, window));

@@ -35,7 +35,7 @@
 		});
 
 		it("dom.utils.logger", function () {
-			dom.utils.logger(dom.utils.LoggerType.INFO, "Test info");
+			dom.utils.logger(LoggerType.INFO, "Test info");
 			expect(function () {
 				dom.utils.logger("xx", "Test info");
 			}).toThrow();

@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Css rules for shadow dom
+ * Css rules for Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.sheets = dom.sheets || {};
 
 	/**
 	 * Css rules object
@@ -15,4 +17,4 @@
 	dom.utils.inherit(dom.sheets.CssRules, Array);
 
 
-}());
+}(dom, document, window));

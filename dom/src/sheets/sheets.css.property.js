@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Css property in shadow dom
+ * Css property in reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom, document, window) {
 	"use strict";
+
+	dom.sheets = dom.sheets || {};
 
 	/**
 	 * @private
@@ -288,4 +290,7 @@
 		ZOOM: "zoom"
 };
 
-}());
+	//export
+	window['CssPropertyType'] = dom.sheets.CssPropertyType;
+
+}(dom, document, window));

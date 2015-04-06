@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Builder for shadow dom
+ * Builder for Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom, document, window) {
 	"use strict";
+
+	dom.builder = dom.builder || {};
 
 	/**
 	 * @private
@@ -110,7 +112,7 @@
 		}
 		//check rule exists
 		if (rules[name]) {
-			dom.utils.logger(dom.utils.LoggerType.INFO, "There is duplicate rule named '" + name + "'. You must specify one of element that is used on this path.");
+			dom.utils.logger(LoggerType.INFO, "There is duplicate rule named '" + name + "'. You must specify one of element that is used on this path.");
 			return;
 		}
 		rules[name] = rule;
@@ -136,7 +138,7 @@
 	 */
 	dom.builder.Css.getId = function (element) {
 		var attributes = element.getAttributes(),
-			id = attributes[dom.html.AttributeType.ID];
+			id = attributes[AttributeType.ID];
 
 		//for css we need static attribute
 		if (id && !id.isChangeable()) {
@@ -257,4 +259,7 @@
 		STATIC: "reactive-static"
 	};
 
-}());
+	//export
+	window['CssStyleType'] = dom.builder.CssStyleType;
+
+}(dom, document, window));

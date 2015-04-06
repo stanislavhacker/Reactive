@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Css group in shadow dom
+ * Css group in reactive
+ * @author Stanislav Hacker
  */
-(function () {
+var sheets = (function (dom) {
 	"use strict";
+
+	dom.sheets = dom.sheets || {};
 
 	/**
 	 * Css property
@@ -43,4 +45,4 @@
 		return this.css;
 	};
 
-}());
+}(dom, document, window));

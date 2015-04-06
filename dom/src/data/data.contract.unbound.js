@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Data contract in shadow dom
+ * Data contract in Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.data = dom.data || {};
 
 	/**
 	 * @public
@@ -38,4 +40,4 @@
 	dom.data.UnboundContract.prototype.removeChangeEvent = function (caller) {
 	};
 
-}());
+}(dom, document, window));

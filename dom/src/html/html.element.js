@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Element in shadow dom
+ * Html element in Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom, document, window) {
 	"use strict";
+
+	dom.html = dom.html || {};
 
 	/**
 	 * Renderer
@@ -381,4 +383,7 @@
 		VIDEO: "video"
 	};
 
-}());
+	//export
+	window['ElementType'] = dom.html.ElementType;
+
+}(dom, document, window));

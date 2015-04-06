@@ -85,12 +85,12 @@
 				div = dom.div(
 				dom.attr("id", "test"),
 				dom.css(
-					dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
-					dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "red"),
-					dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "200px"),
-					dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "180px"),
+					dom.cssProperty(CssPropertyType.DISPLAY, "block"),
+					dom.cssProperty(CssPropertyType.BACKGROUND, "red"),
+					dom.cssProperty(CssPropertyType.WIDTH, "200px"),
+					dom.cssProperty(CssPropertyType.HEIGHT, "180px"),
 					dom.cssGroup(":hover",
-						dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "blue")
+						dom.cssProperty(CssPropertyType.BACKGROUND, "blue")
 					)
 				)
 			);
@@ -114,12 +114,12 @@
 				div = dom.div(
 					dom.classes("square"),
 					dom.css(
-						dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
-						dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "red"),
-						dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "200px"),
-						dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "180px"),
+						dom.cssProperty(CssPropertyType.DISPLAY, "block"),
+						dom.cssProperty(CssPropertyType.BACKGROUND, "red"),
+						dom.cssProperty(CssPropertyType.WIDTH, "200px"),
+						dom.cssProperty(CssPropertyType.HEIGHT, "180px"),
 						dom.cssGroup(":hover",
-							dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "blue")
+							dom.cssProperty(CssPropertyType.BACKGROUND, "blue")
 						)
 					)
 				);
@@ -139,12 +139,12 @@
 			var rules,
 				div = dom.div(
 					dom.css(
-						dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
-						dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "red"),
-						dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "200px"),
-						dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "180px"),
+						dom.cssProperty(CssPropertyType.DISPLAY, "block"),
+						dom.cssProperty(CssPropertyType.BACKGROUND, "red"),
+						dom.cssProperty(CssPropertyType.WIDTH, "200px"),
+						dom.cssProperty(CssPropertyType.HEIGHT, "180px"),
 						dom.cssGroup(":hover",
-							dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "blue")
+							dom.cssProperty(CssPropertyType.BACKGROUND, "blue")
 						)
 					)
 				);
@@ -173,12 +173,12 @@
 			divOne = dom.div(
 				dom.classes("test"),
 				dom.css(
-					dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
-					dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "purple"),
-					dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "20px"),
-					dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "18px"),
+					dom.cssProperty(CssPropertyType.DISPLAY, "block"),
+					dom.cssProperty(CssPropertyType.BACKGROUND, "purple"),
+					dom.cssProperty(CssPropertyType.WIDTH, "20px"),
+					dom.cssProperty(CssPropertyType.HEIGHT, "18px"),
 					dom.cssGroup(":hover",
-						dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "yellow")
+						dom.cssProperty(CssPropertyType.BACKGROUND, "yellow")
 					)
 				)
 			);
@@ -186,12 +186,12 @@
 			divTwo = dom.div(
 				dom.classes("test"),
 				dom.css(
-					dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
-					dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "red"),
-					dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "200px"),
-					dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "180px"),
+					dom.cssProperty(CssPropertyType.DISPLAY, "block"),
+					dom.cssProperty(CssPropertyType.BACKGROUND, "red"),
+					dom.cssProperty(CssPropertyType.WIDTH, "200px"),
+					dom.cssProperty(CssPropertyType.HEIGHT, "180px"),
 					dom.cssGroup(":hover",
-						dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND, "blue")
+						dom.cssProperty(CssPropertyType.BACKGROUND, "blue")
 					)
 				),
 				divOne

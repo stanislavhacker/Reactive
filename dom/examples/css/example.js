@@ -15,20 +15,20 @@
 		dom.classes("square1"),
 		dom.css(
 			dom.cssGroup(":hover",
-				dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND_COLOR, "red")
+				dom.cssProperty(CssPropertyType.BACKGROUND_COLOR, "red")
 			),
-			dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
-			dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "200px"),
-			dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "200px"),
-			dom.cssProperty(dom.sheets.CssPropertyType.COLOR, "white"),
-			dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND_COLOR, "gray"),
-			dom.cssProperty(dom.sheets.CssPropertyType.BORDER, "1px solid black")
+			dom.cssProperty(CssPropertyType.DISPLAY, "block"),
+			dom.cssProperty(CssPropertyType.WIDTH, "200px"),
+			dom.cssProperty(CssPropertyType.HEIGHT, "200px"),
+			dom.cssProperty(CssPropertyType.COLOR, "white"),
+			dom.cssProperty(CssPropertyType.BACKGROUND_COLOR, "gray"),
+			dom.cssProperty(CssPropertyType.BORDER, "1px solid black")
 		),
 		dom.div(
 			dom.classes("text"),
 			dom.css(
-				dom.cssProperty(dom.sheets.CssPropertyType.TEXT_ALIGN, "center"),
-				dom.cssProperty(dom.sheets.CssPropertyType.MARGIN_TOP, "50px")
+				dom.cssProperty(CssPropertyType.TEXT_ALIGN, "center"),
+				dom.cssProperty(CssPropertyType.MARGIN_TOP, "50px")
 			),
 			dom.text("Hover on me!")
 		)
@@ -36,7 +36,7 @@
 
 	//create hover
 	hover = dom.cssGroup(":hover",
-		dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND_COLOR, "black")
+		dom.cssProperty(CssPropertyType.BACKGROUND_COLOR, "black")
 	);
 
 	//create square 2
@@ -44,27 +44,27 @@
 		dom.classes("square", "outer"),
 		dom.css(
 			hover,
-			dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "inline-block"),
-			dom.cssProperty(dom.sheets.CssPropertyType.PADDING, "20px"),
-			dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND_COLOR, "blue"),
-			dom.cssProperty(dom.sheets.CssPropertyType.MARGIN_TOP, "20px")
+			dom.cssProperty(CssPropertyType.DISPLAY, "inline-block"),
+			dom.cssProperty(CssPropertyType.PADDING, "20px"),
+			dom.cssProperty(CssPropertyType.BACKGROUND_COLOR, "blue"),
+			dom.cssProperty(CssPropertyType.MARGIN_TOP, "20px")
 		),
 		dom.div(
 			dom.classes("square", "inner"),
 			dom.css(
 				hover,
-				dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "inline-block"),
-				dom.cssProperty(dom.sheets.CssPropertyType.PADDING, "20px"),
-				dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND_COLOR, "red")
+				dom.cssProperty(CssPropertyType.DISPLAY, "inline-block"),
+				dom.cssProperty(CssPropertyType.PADDING, "20px"),
+				dom.cssProperty(CssPropertyType.BACKGROUND_COLOR, "red")
 			),
 			dom.div(
 				dom.classes("square", "last"),
 				dom.css(
 					hover,
-					dom.cssProperty(dom.sheets.CssPropertyType.DISPLAY, "block"),
-					dom.cssProperty(dom.sheets.CssPropertyType.WIDTH, "200px"),
-					dom.cssProperty(dom.sheets.CssPropertyType.HEIGHT, "200px"),
-					dom.cssProperty(dom.sheets.CssPropertyType.BACKGROUND_COLOR, "green")
+					dom.cssProperty(CssPropertyType.DISPLAY, "block"),
+					dom.cssProperty(CssPropertyType.WIDTH, "200px"),
+					dom.cssProperty(CssPropertyType.HEIGHT, "200px"),
+					dom.cssProperty(CssPropertyType.BACKGROUND_COLOR, "green")
 				)
 			)
 		)

@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Data contract in shadow dom
+ * Data contract in Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.data = dom.data || {};
 
 	/**
 	 * Data contract
@@ -77,4 +79,4 @@
 		}
 	};
 
-}());
+}(dom, document, window));

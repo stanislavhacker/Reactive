@@ -1,9 +1,11 @@
-/*global dom*/
 /**
- * Element in shadow dom
+ * Element in Reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom) {
 	"use strict";
+
+	dom.html = dom.html || {};
 
 	/**
 	 * Classes
@@ -93,4 +95,4 @@
 		this.elements.setClassName(this);
 	};
 
-}());
+}(dom, document, window));

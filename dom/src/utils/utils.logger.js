@@ -1,40 +1,38 @@
-/*global dom*/
 /**
- * Base shadow dom definition
+ * Logger utils for reactive
+ * @author Stanislav Hacker
  */
-(function () {
+(function (dom, document, window) {
 	"use strict";
 
+	dom.utils = dom.utils || {};
+
+	var isConsole = Boolean(window.console);
+
 	/**
-	 * Utils logger
+	 * @static
+	 * Logger
+	 * @param {dom.utils.LoggerType} type
+	 * @param {string} message
 	 */
-	(function () {
+	dom.utils.logger = function (type, message) {
+		if (isConsole) {
+			console[type](message);
+		}
+	};
 
-		var isConsole = Boolean(window.console);
+	/**
+	 * Logger type
+	 * @enum {string}
+	 */
+	dom.utils.LoggerType = {
+		WARN: "warn",
+		ERROR: "error",
+		INFO: "info",
+		LOG: "log"
+	};
 
-		/**
-		 * @static
-		 * Logger
-		 * @param {dom.utils.LoggerType} type
-		 * @param {string} message
-		 */
-		dom.utils.logger = function (type, message) {
-			if (isConsole) {
-				console[type](message);
-			}
-		};
+	//export
+	window['LoggerType'] = dom.utils.LoggerType;
 
-		/**
-		 * Logger type
-		 * @enum {string}
-		 */
-		dom.utils.LoggerType = {
-			WARN: "warn",
-			ERROR: "error",
-			INFO: "info",
-			LOG: "log"
-		};
-
-	}());
-
-}());
+}(dom, document, window));
