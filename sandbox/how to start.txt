@@ -1,0 +1,2 @@
+Go to link https://github.com/stanislavhacker/Reactive/wiki/How-to-develop-with-Reactive and procced the list
+of steps to install Reactive and his sandbox.
