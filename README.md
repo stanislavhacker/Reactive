@@ -4,6 +4,9 @@ Shadow DOM library without jQuery, React and other stuff. Fully adaptable on bro
 ## Examples
  - [Simple example - run test](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/simple/index.html)
  - [Css example - generating css](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/css/index.html)
+ 
+# How to start developing?
+Go to this [link](https://github.com/stanislavhacker/Reactive/wiki/How-to-start-developing%3F) in wiki.
 
 ## Create dom element
 The basic element in making use in DOM. All the most popular elements have shortened own function. So for `<span>` it is `dom.span()` and for `<b>` it is `dom.b();`.
