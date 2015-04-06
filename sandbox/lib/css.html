@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<script src="Reactive.min.js"></script>
+	<script src="../Production.js"></script>
+	<script src="../src/css.js"></script>
+</head>
+<body>
+	<script>
+		// Send messages to the parent PhantomJS process via alert! Good times!!
+		function sendMessage() {
+			var args = [].slice.call(arguments);
+			alert(JSON.stringify(args));
+		}
+		//done message
+		sendMessage('css.done', dom.cssGenerator().getProductionCss());
+	</script>
+</body>
+</html>
