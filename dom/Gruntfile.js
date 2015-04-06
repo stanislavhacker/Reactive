@@ -122,7 +122,7 @@ module.exports = function(grunt) {
 				src: bundle,
 				// the location of the resulting JS file
 				dest: '../<%= pkg.name %>.bundle.js'
-			},
+			}
 		},
 
 		//Uglify task
