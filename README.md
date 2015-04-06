@@ -21,6 +21,8 @@ document.body.appendChild(div.getLive());
 <div></div>
 ```
 
+[More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---basic-dom-element-usage)
+
 
 ## Create attribute in element
 The creation of the attribute are used two functions. It is a function `dom.attr()` and `dom.dataAttr()`. As you can see, data attributes have a separate function because automatically added name `data-` before attribute name. Nothing complicated.
@@ -41,6 +43,8 @@ document.body.appendChild(div.getLive());
 <div lang="en" data-my-data="test"></div>
 ```
 
+[More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---basic-dom-element-usage)
+
 ## Create classes in element
 Class names are like attributes. Just call `dom.classes()` with parameters and you have what you need. Of course you can also use the method for binding attributes, but this method is a little smarter.
 
@@ -58,6 +62,8 @@ document.body.appendChild(div.getLive());
 ```html
 <div class="square red test"></div>
 ```
+
+[More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---basic-dom-element-usage)
 
 ## Create styles in element
 Creating styles operates on a similar principle. Just call `dom.css()` and then use the parameters`dom.cssProperty()`. But if you look at the HTML, you will find that there are no css! How then used? It's very simple. Static css are very slow on the elements. Therefore, there are a generated CSS styles that can be connected as a statics css file on page!
@@ -86,3 +92,5 @@ document.body.appendChild(div.getLive());
 ```css
 #square {background: red;border:1px solid red}
 ```
+
+[More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---basic-dom-element-usage)
