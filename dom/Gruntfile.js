@@ -168,6 +168,22 @@ module.exports = function(grunt) {
 				path: 'http://localhost:8888/_SpecRunner.html',
 				delay: 1000
 			}
+		},
+
+		//Compress task
+
+		compress: {
+			main: {
+				options: {
+					archive: '../Reactive-sandbox.zip'
+				},
+				files: [
+					{expand: true, cwd: '../sandbox/', src: ['*.*']},
+					{expand: true, cwd: '../sandbox/', src: ['lib/**/*']},
+					{expand: true, cwd: '../sandbox/', src: ['src/**/*']},
+					{expand: true, cwd: '../sandbox/', src: ['test/**/*']}
+				]
+			}
 		}
 
 	});
@@ -179,11 +195,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	grunt.loadNpmTasks("grunt-contrib-connect");
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-open');
 
 	// Default task(s).
 	grunt.registerTask('default', ['clean', 'jasmine', 'concat:dist', 'uglify:build']);
-	grunt.registerTask('bundle', ['concat:bundle', 'uglify:bundle']);
+	grunt.registerTask('bundle', ['concat:bundle', 'uglify:bundle', 'compress']);
 	grunt.registerTask('test debug', ['jasmine:pivotal', 'open:test', 'connect']);
 
 };
