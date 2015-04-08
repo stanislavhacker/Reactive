@@ -4,6 +4,7 @@ module.exports = function(grunt) {
 
 	//files spec
 	var files = [
+			'../dom/dist/Reactive.min.js',
 			'src/cssGenerator.js'
 		],
 		specs = [

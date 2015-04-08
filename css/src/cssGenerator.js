@@ -27,7 +27,22 @@ var domCssGenerator = (function(){
 	 * @returns {string}
 	 */
 	CssGenerator.prototype.getProductionCss = function () {
-		return "#test";
+		var i,
+			style,
+			element,
+			elements = this.elements;
+		//iterate all
+		for (i = 0; i < elements.length; i++) {
+			//get element
+			element = elements[i];
+			//get live
+			element.getLive();
+			//generate css rules
+			element.createCssRules();
+		}
+		//get generated styles
+		style = document.getElementById(dom.builder.CssStyleType.GENERATED);
+		return style.textContent;
 	};
 
 	//instance
