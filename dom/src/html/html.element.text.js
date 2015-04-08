@@ -52,7 +52,7 @@
 	 */
 	dom.html.TextElement.prototype.getValue = function () {
 		var text = this.text.getValue();
-		return text ? text.toString() : null;
+		return text !== null && text !== undefined ? text.toString() : null;
 	};
 
 	/**
@@ -132,7 +132,7 @@
 		//set attribute on dom element
 		if (element) {
 			dom.html.RENDERER.render(this, "nodeValue", function () {
-				element.nodeValue = self.text.getValue() || "";
+				element.nodeValue = self.getValue() || "";
 			});
 		}
 	};

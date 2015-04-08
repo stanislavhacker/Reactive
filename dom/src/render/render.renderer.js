@@ -89,7 +89,7 @@
 			if (self.queue.count() !== 0) {
 				self.changed();
 			}
-		}, 30);
+		}, 100);
 	};
 
 	/**
