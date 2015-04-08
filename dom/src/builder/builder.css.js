@@ -248,7 +248,7 @@
 		var header;
 		//create new generatedStyle
 		if (generatedStyle === null) {
-			generatedStyle = document.createElement('generatedStyle');
+			generatedStyle = document.createElement('style');
 			generatedStyle.setAttribute("type", "text/css");
 			generatedStyle.setAttribute("id", dom.builder.CssStyleType.GENERATED);
 			header = document.getElementsByTagName('head')[0];
