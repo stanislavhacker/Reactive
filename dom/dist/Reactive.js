@@ -24,6 +24,8 @@ var dom = (function() {
 		} else {
 			//create element
 			domElement = new dom.html.Element(parent.tagName, children);
+			//set rendered
+			domElement.rendered = true;
 		}
 		//get live
 		domElement.getLive(parent);
@@ -1164,6 +1166,9 @@ var dom = (function() {
 
 	dom.render = dom.render || {};
 
+	var spawnMin = 30,
+		spawnMax = 150;
+
 	/**
 	 * Renderer
 	 * @constructor
@@ -1177,6 +1182,8 @@ var dom = (function() {
 		this.MAX_IN_STEP = 10; //count
 		/** @type {number}*/
 		this.MAX_TIME = 50; //ms
+		/** @type {number}*/
+		this.TIMER_SPAWN = spawnMin; //ms
 	};
 
 	/**
@@ -1187,6 +1194,7 @@ var dom = (function() {
 	 * @param {Function} what
 	 */
 	dom.render.Renderer.prototype.render = function (element, name, what) {
+		//add into queue
 		this.queue.add(element, name, what);
 		this.changed();
 	};
@@ -1246,7 +1254,7 @@ var dom = (function() {
 			if (self.queue.count() !== 0) {
 				self.changed();
 			}
-		}, 100);
+		}, this.TIMER_SPAWN);
 	};
 
 	/**
@@ -1295,12 +1303,14 @@ var dom = (function() {
 		if (length > this.MAX_TIME) {
 			//set new max function count
 			this.MAX_IN_STEP = Math.max(i, 1);
+			this.TIMER_SPAWN = Math.min(spawnMax, this.TIMER_SPAWN * 2);
 			return true;
 		}
 		//fast rendering, calculate MAX_IN_STEP
 		if (this.MAX_IN_STEP === i && length < this.MAX_TIME) {
 			ration = length === 0 ? 10 : this.MAX_TIME / length;
 			this.MAX_IN_STEP = Math.floor(this.MAX_IN_STEP * ration);
+			this.TIMER_SPAWN = spawnMin;
 		}
 		return false;
 	};
@@ -1325,6 +1335,64 @@ var dom = (function() {
 	dom.render = dom.render || {};
 
 	/**
+	 * Insert
+	 * @param {dom.render.Queue} self
+	 * @param {dom.html.Element} element
+	 * @returns {dom.render.Update}
+	 */
+	function insert(self, element) {
+		var where,
+			queue = self.queue,
+			updatesMap = self.updatesMap,
+			updates = element.getUpdates(),
+			updateId = updates.getId(),
+			update = updatesMap[updateId];
+		//create updates
+		if (!update) {
+			//add to map and push
+			updatesMap[updateId] = updates;
+			//prioritize
+			if (element.isPrioritized()) {
+				where = Math.floor(queue.length / 2) + 1;
+				queue.splice(where, 0, updateId);
+			} else {
+				queue.push(updateId);
+			}
+			//set variable
+			update = updates;
+			//update
+			self.length++;
+		}
+		//return update
+		return update;
+	}
+
+	/**
+	 * Retrieve function
+	 * @param {dom.render.Queue} self
+	 * @returns {Function}
+	 */
+	function retrieve(self) {
+		var update,
+			queue = self.queue,
+			key = queue[0],
+			updateMap = self.updatesMap,
+			updates = updateMap[key];
+		//pop update
+		update = updates.popUpdate();
+		//delete
+		if (updates.length === 0) {
+			//delete
+			delete updateMap[key];
+			//update
+			self.length--;
+			//remove from queue
+			queue.shift();
+		}
+		return update;
+	}
+
+	/**
 	 * Render queue
 	 * @constructor
 	 */
@@ -1344,21 +1412,9 @@ var dom = (function() {
 	 * @param {Function} what
 	 */
 	dom.render.Queue.prototype.add = function (element, name, what) {
-		var queue = this.queue,
-			updatesMap = this.updatesMap,
-			updates = element.getUpdates(),
-			updateId = updates.getId(),
-			update = updatesMap[updateId];
-		//create updates
-		if (!update) {
-			//add to map and push
-			updatesMap[updateId] = updates;
-			queue.push(updateId);
-			//set variable
-			update = updates;
-			//update
-			this.length++;
-		}
+		var update;
+		//update retrieve
+		update = insert(this, element);
 		//push update
 		update.pushUpdate(name, what);
 	};
@@ -1372,23 +1428,9 @@ var dom = (function() {
 		if (this.length === 0) {
 			return null;
 		}
+		var update;
 		//get first update
-		var update,
-			queue = this.queue,
-			key = queue[0],
-			updateMap = this.updatesMap,
-			updates = updateMap[key];
-		//pop update
-		update = updates.popUpdate();
-		//delete
-		if (updates.length === 0) {
-			//delete
-			delete updateMap[key];
-			//update
-			this.length--;
-			//remove from queue
-			queue.shift();
-		}
+		update = retrieve(this);
 		//return function
 		return update;
 	};
@@ -1822,6 +1864,9 @@ var dom = (function() {
 		this.cssRules = null;
 		/** @type {dom.builder.Live}*/
 		this.reactor = null;
+
+		/** @type {boolean}*/
+		this.rendered = false;
 	};
 	dom.utils.inherit(dom.html.Element, dom.Element);
 
@@ -1915,6 +1960,14 @@ var dom = (function() {
 	};
 
 	/**
+	 * Is prioritized
+	 * @returns {boolean}
+	 */
+	dom.html.Element.prototype.isPrioritized = function () {
+		return this.rendered;
+	};
+
+	/**
 	 * @public
 	 * Get live dom
 	 * @param {HTMLElement=} parent
@@ -1989,14 +2042,13 @@ var dom = (function() {
 			name,
 			css = this.css,
 			parent = this.parent,
-//			rules = this.cssRules,
 			element = this.element,
 			children = this.children,
 			classNames = this.classNames,
 			attributes = this.attributes;
 
 		//remove all children
-		for (i = 0; i < children.length; i++) {
+		for (i = children.length - 1; i >= 0; i--) {
 			children[i].remove();
 		}
 		//remove attr
@@ -2022,6 +2074,8 @@ var dom = (function() {
 			//remove from children
 			this.setParent(null);
 		}
+		//no rendered
+		this.rendered = false;
 	};
 
 	/**
@@ -2074,7 +2128,7 @@ var dom = (function() {
 	/**
 	 * @public
 	 * Set parent
-	 * @param {dom.Element} parent
+	 * @param {dom.Element|dom.html.Element} parent
 	 */
 	dom.html.Element.prototype.setParent = function (parent) {
 		var index,
@@ -2086,6 +2140,7 @@ var dom = (function() {
 		}
 		//set new parent
 		this.parent = parent;
+		this.rendered = parent ? parent.rendered : false;
 	};
 
 
@@ -2200,6 +2255,9 @@ var dom = (function() {
 		this.reactor = null;
 		/** @type {dom.render.Update}*/
 		this.updates = new dom.render.Update();
+
+		/** @type {boolean}*/
+		this.rendered = false;
 
 		//register change
 		this.text.addChangeEvent(this, this.setText);
@@ -3253,7 +3311,9 @@ var sheets = (function (dom) {
 	dom.builder.Live.prototype.generateChildren = function () {
 		var element = this.element,
 			childrenElement,
+			domElement,
 			children,
+			child,
 			i;
 
 		if (!element.isEmpty()) {
@@ -3261,11 +3321,18 @@ var sheets = (function (dom) {
 			children = element.getChildren();
 			//generate html for children
 			for (i = 0; i < children.length; i++) {
+				//child
+				child = children[i];
 				//children element
-				childrenElement = children[i].getLive();
+				childrenElement = child.getLive();
+				//dom element
+				domElement = element.element;
 				//if not contain, append it
-				if (!element.element.contains(childrenElement)) {
-					element.element.appendChild(children[i].getLive());
+				if (!domElement.contains(childrenElement)) {
+					//TODO: Async?
+					domElement.appendChild(childrenElement);
+					//set parent render state
+					child.rendered = element.rendered;
 				}
 			}
 		}

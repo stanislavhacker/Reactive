@@ -7,6 +7,9 @@
 
 	dom.render = dom.render || {};
 
+	var spawnMin = 30,
+		spawnMax = 150;
+
 	/**
 	 * Renderer
 	 * @constructor
@@ -20,6 +23,8 @@
 		this.MAX_IN_STEP = 10; //count
 		/** @type {number}*/
 		this.MAX_TIME = 50; //ms
+		/** @type {number}*/
+		this.TIMER_SPAWN = spawnMin; //ms
 	};
 
 	/**
@@ -90,7 +95,7 @@
 			if (self.queue.count() !== 0) {
 				self.changed();
 			}
-		}, 100);
+		}, this.TIMER_SPAWN);
 	};
 
 	/**
@@ -139,12 +144,14 @@
 		if (length > this.MAX_TIME) {
 			//set new max function count
 			this.MAX_IN_STEP = Math.max(i, 1);
+			this.TIMER_SPAWN = Math.min(spawnMax, this.TIMER_SPAWN * 2);
 			return true;
 		}
 		//fast rendering, calculate MAX_IN_STEP
 		if (this.MAX_IN_STEP === i && length < this.MAX_TIME) {
 			ration = length === 0 ? 10 : this.MAX_TIME / length;
 			this.MAX_IN_STEP = Math.floor(this.MAX_IN_STEP * ration);
+			this.TIMER_SPAWN = spawnMin;
 		}
 		return false;
 	};

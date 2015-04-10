@@ -8,6 +8,64 @@
 	dom.render = dom.render || {};
 
 	/**
+	 * Insert
+	 * @param {dom.render.Queue} self
+	 * @param {dom.html.Element} element
+	 * @returns {dom.render.Update}
+	 */
+	function insert(self, element) {
+		var where,
+			queue = self.queue,
+			updatesMap = self.updatesMap,
+			updates = element.getUpdates(),
+			updateId = updates.getId(),
+			update = updatesMap[updateId];
+		//create updates
+		if (!update) {
+			//add to map and push
+			updatesMap[updateId] = updates;
+			//prioritize
+			if (element.isPrioritized()) {
+				where = Math.floor(queue.length / 2) + 1;
+				queue.splice(where, 0, updateId);
+			} else {
+				queue.push(updateId);
+			}
+			//set variable
+			update = updates;
+			//update
+			self.length++;
+		}
+		//return update
+		return update;
+	}
+
+	/**
+	 * Retrieve function
+	 * @param {dom.render.Queue} self
+	 * @returns {Function}
+	 */
+	function retrieve(self) {
+		var update,
+			queue = self.queue,
+			key = queue[0],
+			updateMap = self.updatesMap,
+			updates = updateMap[key];
+		//pop update
+		update = updates.popUpdate();
+		//delete
+		if (updates.length === 0) {
+			//delete
+			delete updateMap[key];
+			//update
+			self.length--;
+			//remove from queue
+			queue.shift();
+		}
+		return update;
+	}
+
+	/**
 	 * Render queue
 	 * @constructor
 	 */
@@ -27,21 +85,9 @@
 	 * @param {Function} what
 	 */
 	dom.render.Queue.prototype.add = function (element, name, what) {
-		var queue = this.queue,
-			updatesMap = this.updatesMap,
-			updates = element.getUpdates(),
-			updateId = updates.getId(),
-			update = updatesMap[updateId];
-		//create updates
-		if (!update) {
-			//add to map and push
-			updatesMap[updateId] = updates;
-			queue.push(updateId);
-			//set variable
-			update = updates;
-			//update
-			this.length++;
-		}
+		var update;
+		//update retrieve
+		update = insert(this, element);
 		//push update
 		update.pushUpdate(name, what);
 	};
@@ -55,23 +101,9 @@
 		if (this.length === 0) {
 			return null;
 		}
+		var update;
 		//get first update
-		var update,
-			queue = this.queue,
-			key = queue[0],
-			updateMap = this.updatesMap,
-			updates = updateMap[key];
-		//pop update
-		update = updates.popUpdate();
-		//delete
-		if (updates.length === 0) {
-			//delete
-			delete updateMap[key];
-			//update
-			this.length--;
-			//remove from queue
-			queue.shift();
-		}
+		update = retrieve(this);
 		//return function
 		return update;
 	};

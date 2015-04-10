@@ -142,6 +142,14 @@
 	};
 
 	/**
+	 * Is prioritized
+	 * @returns {boolean}
+	 */
+	dom.html.Element.prototype.isPrioritized = function () {
+		return this.rendered;
+	};
+
+	/**
 	 * @public
 	 * Get live dom
 	 * @param {HTMLElement=} parent

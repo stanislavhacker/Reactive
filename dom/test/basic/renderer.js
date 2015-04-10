@@ -60,6 +60,7 @@
 
 			expect(renderer.MAX_IN_STEP).toBe(10);
 			expect(renderer.MAX_TIME).toBe(50);
+			expect(renderer.TIMER_SPAWN).toBe(30);
 
 			spawnFunctions(renderer, 15);
 
@@ -74,6 +75,7 @@
 
 					expect(renderer.MAX_IN_STEP).toBeGreaterThan(99);
 					expect(renderer.MAX_TIME).toBe(50);
+					expect(renderer.TIMER_SPAWN).toBe(30);
 
 					clearInterval(interval);
 
@@ -96,6 +98,7 @@
 
 			expect(renderer.MAX_IN_STEP).toBe(10);
 			expect(renderer.MAX_TIME).toBe(1);
+			expect(renderer.TIMER_SPAWN).toBe(30);
 
 			spawnLongFunctions(renderer, 5);
 
@@ -110,6 +113,7 @@
 
 					expect(renderer.MAX_IN_STEP).toBe(1);
 					expect(renderer.MAX_TIME).toBe(1);
+					expect(renderer.TIMER_SPAWN).toBe(150);
 
 					//noinspection JSAccessibilityCheck
 					expect(renderer.changed.calls.count()).toBe(9);
