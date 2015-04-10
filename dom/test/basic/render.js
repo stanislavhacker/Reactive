@@ -11,6 +11,7 @@
 			it("static", function () {
 				//noinspection JSCheckFunctionSignatures
 				var div = dom.div(dom.attr('id', "circle"));
+				expect(div.rendered).toBe(false);
 				expect(div.getHtml()).toBe('<div id="circle"></div>');
 			});
 
@@ -20,8 +21,10 @@
 					div = dom.div(dom.attr('id', variable));
 
 				expect(div.getHtml()).toBe('<div id="initValue"></div>');
+				expect(div.rendered).toBe(false);
 				variable.setValue("test");
 				expect(div.getHtml()).toBe('<div id="test"></div>');
+				expect(div.rendered).toBe(false);
 			});
 
 		});

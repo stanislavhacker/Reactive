@@ -11,6 +11,7 @@
 				it("dom.insert with HTMLElement", function (done) {
 					//noinspection JSCheckFunctionSignatures
 					var div = document.createElement('p'),
+						children,
 						root;
 
 					//append
@@ -24,6 +25,10 @@
 						dom.span()
 					);
 
+					expect(root.children[0].rendered).toBe(true);
+					expect(root.children[1].rendered).toBe(true);
+					expect(root.rendered).toBe(true);
+
 					expect(document.body.outerHTML).toContain('<div></div><span></span>');
 
 					var int = setInterval(function () {
@@ -35,8 +40,16 @@
 							//check body
 							expect(document.body.outerHTML).toContain('<div id="body-test"></div><span></span>');
 
+							//load children
+							children = root.children.slice(0);
+
 							//remove element
 							root.remove();
+
+							expect(children[0].rendered).toBe(false);
+							expect(children[1].rendered).toBe(false);
+							expect(root.rendered).toBe(false);
+
 							expect(document.body.outerHTML).not.toContain('<div id="body-test"></div><span></span>');
 
 							//done

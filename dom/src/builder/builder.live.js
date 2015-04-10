@@ -147,7 +147,9 @@
 	dom.builder.Live.prototype.generateChildren = function () {
 		var element = this.element,
 			childrenElement,
+			domElement,
 			children,
+			child,
 			i;
 
 		if (!element.isEmpty()) {
@@ -155,11 +157,18 @@
 			children = element.getChildren();
 			//generate html for children
 			for (i = 0; i < children.length; i++) {
+				//child
+				child = children[i];
 				//children element
-				childrenElement = children[i].getLive();
+				childrenElement = child.getLive();
+				//dom element
+				domElement = element.element;
 				//if not contain, append it
-				if (!element.element.contains(childrenElement)) {
-					element.element.appendChild(children[i].getLive());
+				if (!domElement.contains(childrenElement)) {
+					//TODO: Async?
+					domElement.appendChild(childrenElement);
+					//set parent render state
+					child.rendered = element.rendered;
 				}
 			}
 		}

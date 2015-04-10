@@ -30,6 +30,7 @@
 	 * @param {Function} what
 	 */
 	dom.render.Renderer.prototype.render = function (element, name, what) {
+		//add into queue
 		this.queue.add(element, name, what);
 		this.changed();
 	};

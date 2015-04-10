@@ -24,6 +24,8 @@ var dom = (function() {
 		} else {
 			//create element
 			domElement = new dom.html.Element(parent.tagName, children);
+			//set rendered
+			domElement.rendered = true;
 		}
 		//get live
 		domElement.getLive(parent);

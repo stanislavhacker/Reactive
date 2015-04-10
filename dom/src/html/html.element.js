@@ -46,6 +46,9 @@
 		this.cssRules = null;
 		/** @type {dom.builder.Live}*/
 		this.reactor = null;
+
+		/** @type {boolean}*/
+		this.rendered = false;
 	};
 	dom.utils.inherit(dom.html.Element, dom.Element);
 
@@ -213,14 +216,13 @@
 			name,
 			css = this.css,
 			parent = this.parent,
-//			rules = this.cssRules,
 			element = this.element,
 			children = this.children,
 			classNames = this.classNames,
 			attributes = this.attributes;
 
 		//remove all children
-		for (i = 0; i < children.length; i++) {
+		for (i = children.length - 1; i >= 0; i--) {
 			children[i].remove();
 		}
 		//remove attr
@@ -246,6 +248,8 @@
 			//remove from children
 			this.setParent(null);
 		}
+		//no rendered
+		this.rendered = false;
 	};
 
 	/**
@@ -298,7 +302,7 @@
 	/**
 	 * @public
 	 * Set parent
-	 * @param {dom.Element} parent
+	 * @param {dom.Element|dom.html.Element} parent
 	 */
 	dom.html.Element.prototype.setParent = function (parent) {
 		var index,
@@ -310,6 +314,7 @@
 		}
 		//set new parent
 		this.parent = parent;
+		this.rendered = parent ? parent.rendered : false;
 	};
 
 

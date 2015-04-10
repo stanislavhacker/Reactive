@@ -26,6 +26,9 @@
 		/** @type {dom.render.Update}*/
 		this.updates = new dom.render.Update();
 
+		/** @type {boolean}*/
+		this.rendered = false;
+
 		//register change
 		this.text.addChangeEvent(this, this.setText);
 	};

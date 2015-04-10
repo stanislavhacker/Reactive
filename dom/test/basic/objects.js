@@ -41,6 +41,24 @@
 			}).toThrow();
 		});
 
+		it("dom.utils.arrayInsert", function () {
+			var array = [];
+
+			dom.utils.arrayInsert(array, "1");
+			expect(array[0]).toBe("1");
+			expect(array.length).toBe(1);
+
+			dom.utils.arrayInsert(array, "2");
+			expect(array[0]).toBe("1");
+			expect(array[1]).toBe("2");
+			expect(array.length).toBe(2);
+
+			dom.utils.arrayInsert(array, "1");
+			expect(array[0]).toBe("1");
+			expect(array[1]).toBe("2");
+			expect(array.length).toBe(2);
+		});
+
 	});
 
 }());
