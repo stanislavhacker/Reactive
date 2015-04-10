@@ -12,12 +12,12 @@
 	 * @constructor
 	 */
 	dom.render.Queue = function () {
-		/** @type {Array.<Array.<Function>>}*/
-		this.stacks = [];
-		/** @type {Array.<Array.<string>>}*/
-		this.names = [];
-		/** @type {Array.<dom.html.Element>}*/
-		this.elements = [];
+		/** @type {Object.<string, dom.render.Update>}*/
+		this.updatesMap = {};
+		/** @type {Array.<string>}*/
+		this.queue = [];
+		/** @type {number}*/
+		this.length = 0;
 	};
 
 	/**
@@ -27,28 +27,23 @@
 	 * @param {Function} what
 	 */
 	dom.render.Queue.prototype.add = function (element, name, what) {
-		var i,
-			namesArray,
-			stackArray,
-			elements = this.elements;
-		//insert of not exists
-		i = dom.utils.arrayInsert(elements, element);
-		//stack and names
-		stackArray = this.stacks[i];
-		namesArray = this.names[i];
-		if (!stackArray) {
-			//stack array
-			stackArray = [];
-			this.stacks[i] = stackArray;
-			//names array
-			namesArray = [];
-			this.names[i] = namesArray;
+		var queue = this.queue,
+			updatesMap = this.updatesMap,
+			updates = element.getUpdates(),
+			updateId = updates.getId(),
+			update = updatesMap[updateId];
+		//create updates
+		if (!update) {
+			//add to map and push
+			updatesMap[updateId] = updates;
+			queue.push(updateId);
+			//set variable
+			update = updates;
+			//update
+			this.length++;
 		}
-		//insert of not exists
-		i = dom.utils.arrayInsert(namesArray, name);
-		//push
-		namesArray[i] = name;
-		stackArray[i] = what;
+		//push update
+		update.pushUpdate(name, what);
 	};
 
 	/**
@@ -56,25 +51,29 @@
 	 * @returns {Function}
 	 */
 	dom.render.Queue.prototype.get = function () {
-		var fnc,
-			elements = this.elements,
-			names = this.names,
-			stacks = this.stacks;
-		//nothing exists in queue
-		if (stacks.length === 0) {
+		//no queue
+		if (this.length === 0) {
 			return null;
 		}
-		//get function, shift name
-		names[0].shift();
-		fnc = stacks[0].shift();
-		//remove from stack
-		if (stacks[0].length === 0) {
-			stacks.shift();
-			names.shift();
-			elements.shift();
+		//get first update
+		var update,
+			queue = this.queue,
+			key = queue[0],
+			updateMap = this.updatesMap,
+			updates = updateMap[key];
+		//pop update
+		update = updates.popUpdate();
+		//delete
+		if (updates.length === 0) {
+			//delete
+			delete updateMap[key];
+			//update
+			this.length--;
+			//remove from queue
+			queue.shift();
 		}
 		//return function
-		return fnc;
+		return update;
 	};
 
 	/**
@@ -84,32 +83,34 @@
 	 */
 	dom.render.Queue.prototype.getFor = function (element) {
 		var i,
-			index,
+			all,
 			array = [],
-			names = this.names,
-			stacks = this.stacks,
-			elements = this.elements,
-			children = element.getChildren();
+			queue = this.queue,
+			updateMap = this.updatesMap,
+			updates = element.getUpdates(),
+			children = element.getChildren(),
+			key = updates.getId(),
+			update = updateMap[key];
 
-		//get array index
-		index = dom.utils.arrayIndex(elements, element);
 		//force for all children
 		if (!element.isEmpty() && children.length) {
 			for (i = 0; i < children.length; i++) {
 				array = array.concat(this.getFor(children[i]));
 			}
 		}
-
 		//no element found
-		if (index === -1) {
+		if (!update) {
 			return array;
 		}
+		//all
+		all = update.getAll();
 		//get functions
-		array = array.concat(stacks[index]);
+		array = array.concat(all);
 		//remove
-		elements.splice(index, 1);
-		stacks.splice(index, 1);
-		names.splice(index, 1);
+		delete updateMap[key];
+		queue.splice(queue.indexOf(key), 1);
+		//length
+		this.length--;
 		//return functions
 		return array;
 	};
@@ -119,7 +120,7 @@
 	 * @return {number}
 	 */
 	dom.render.Queue.prototype.count = function () {
-		return this.stacks.length;
+		return this.length;
 	};
 
 

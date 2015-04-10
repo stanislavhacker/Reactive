@@ -23,6 +23,8 @@
 		this.parent = null;
 		/** @type {dom.builder.LiveText}*/
 		this.reactor = null;
+		/** @type {dom.render.Update}*/
+		this.updates = new dom.render.Update();
 
 		//register change
 		this.text.addChangeEvent(this, this.setText);

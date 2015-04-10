@@ -1246,7 +1246,7 @@ var dom = (function() {
 			if (self.queue.count() !== 0) {
 				self.changed();
 			}
-		}, 30);
+		}, 100);
 	};
 
 	/**
@@ -1329,12 +1329,12 @@ var dom = (function() {
 	 * @constructor
 	 */
 	dom.render.Queue = function () {
-		/** @type {Array.<Array.<Function>>}*/
-		this.stacks = [];
-		/** @type {Array.<Array.<string>>}*/
-		this.names = [];
-		/** @type {Array.<dom.html.Element>}*/
-		this.elements = [];
+		/** @type {Object.<string, dom.render.Update>}*/
+		this.updatesMap = {};
+		/** @type {Array.<string>}*/
+		this.queue = [];
+		/** @type {number}*/
+		this.length = 0;
 	};
 
 	/**
@@ -1344,28 +1344,23 @@ var dom = (function() {
 	 * @param {Function} what
 	 */
 	dom.render.Queue.prototype.add = function (element, name, what) {
-		var i,
-			namesArray,
-			stackArray,
-			elements = this.elements;
-		//insert of not exists
-		i = dom.utils.arrayInsert(elements, element);
-		//stack and names
-		stackArray = this.stacks[i];
-		namesArray = this.names[i];
-		if (!stackArray) {
-			//stack array
-			stackArray = [];
-			this.stacks[i] = stackArray;
-			//names array
-			namesArray = [];
-			this.names[i] = namesArray;
+		var queue = this.queue,
+			updatesMap = this.updatesMap,
+			updates = element.getUpdates(),
+			updateId = updates.getId(),
+			update = updatesMap[updateId];
+		//create updates
+		if (!update) {
+			//add to map and push
+			updatesMap[updateId] = updates;
+			queue.push(updateId);
+			//set variable
+			update = updates;
+			//update
+			this.length++;
 		}
-		//insert of not exists
-		i = dom.utils.arrayInsert(namesArray, name);
-		//push
-		namesArray[i] = name;
-		stackArray[i] = what;
+		//push update
+		update.pushUpdate(name, what);
 	};
 
 	/**
@@ -1373,25 +1368,29 @@ var dom = (function() {
 	 * @returns {Function}
 	 */
 	dom.render.Queue.prototype.get = function () {
-		var fnc,
-			elements = this.elements,
-			names = this.names,
-			stacks = this.stacks;
-		//nothing exists in queue
-		if (stacks.length === 0) {
+		//no queue
+		if (this.length === 0) {
 			return null;
 		}
-		//get function, shift name
-		names[0].shift();
-		fnc = stacks[0].shift();
-		//remove from stack
-		if (stacks[0].length === 0) {
-			stacks.shift();
-			names.shift();
-			elements.shift();
+		//get first update
+		var update,
+			queue = this.queue,
+			key = queue[0],
+			updateMap = this.updatesMap,
+			updates = updateMap[key];
+		//pop update
+		update = updates.popUpdate();
+		//delete
+		if (updates.length === 0) {
+			//delete
+			delete updateMap[key];
+			//update
+			this.length--;
+			//remove from queue
+			queue.shift();
 		}
 		//return function
-		return fnc;
+		return update;
 	};
 
 	/**
@@ -1401,32 +1400,34 @@ var dom = (function() {
 	 */
 	dom.render.Queue.prototype.getFor = function (element) {
 		var i,
-			index,
+			all,
 			array = [],
-			names = this.names,
-			stacks = this.stacks,
-			elements = this.elements,
-			children = element.getChildren();
+			queue = this.queue,
+			updateMap = this.updatesMap,
+			updates = element.getUpdates(),
+			children = element.getChildren(),
+			key = updates.getId(),
+			update = updateMap[key];
 
-		//get array index
-		index = dom.utils.arrayIndex(elements, element);
 		//force for all children
 		if (!element.isEmpty() && children.length) {
 			for (i = 0; i < children.length; i++) {
 				array = array.concat(this.getFor(children[i]));
 			}
 		}
-
 		//no element found
-		if (index === -1) {
+		if (!update) {
 			return array;
 		}
+		//all
+		all = update.getAll();
 		//get functions
-		array = array.concat(stacks[index]);
+		array = array.concat(all);
 		//remove
-		elements.splice(index, 1);
-		stacks.splice(index, 1);
-		names.splice(index, 1);
+		delete updateMap[key];
+		queue.splice(queue.indexOf(key), 1);
+		//length
+		this.length--;
 		//return functions
 		return array;
 	};
@@ -1436,7 +1437,98 @@ var dom = (function() {
 	 * @return {number}
 	 */
 	dom.render.Queue.prototype.count = function () {
-		return this.stacks.length;
+		return this.length;
+	};
+
+
+
+}(dom, document, window));
+;/**
+ * Builder for Reactive
+ * @author Stanislav Hacker
+ */
+(function (dom) {
+	"use strict";
+
+	var identifier = 0;
+
+	dom.render = dom.render || {};
+
+	/**
+	 * Render update
+	 * @constructor
+	 */
+	dom.render.Update = function () {
+		/** @type {number}*/
+		this.id = identifier;
+		/** @type {Object.<string, Function>}*/
+		this.updates = {};
+		/** @type {Array.<string>}*/
+		this.queue = [];
+		/** @type {number}*/
+		this.length = 0;
+		//inc
+		identifier++;
+	};
+
+	/**
+	 * Get id
+	 * @returns {number}
+	 */
+	dom.render.Update.prototype.getId = function () {
+		return this.id;
+	};
+
+	/**
+	 * Push update
+	 * @param {string} name Function name
+	 * @param {Function} what
+	 */
+	dom.render.Update.prototype.pushUpdate = function (name, what) {
+		var isNew = !this.updates[name];
+		//push to queue
+		if (isNew) {
+			this.queue.push(name);
+			this.length++;
+		}
+		//update function
+		this.updates[name] = what;
+	};
+
+	/**
+	 * Pop update
+	 * @returns {Function}
+	 */
+	dom.render.Update.prototype.popUpdate = function () {
+		var first = this.queue.shift(),
+			fnc = this.updates[first];
+		//delete fnc
+		delete this.updates[first];
+		//update length
+		this.length--;
+		//return
+		return fnc;
+	};
+
+	/**
+	 * Get all
+	 * @returns {Array.<Function>}
+	 */
+	dom.render.Update.prototype.getAll = function () {
+		var name,
+			all = [],
+			updates = this.updates;
+		//for all updates
+		for (name in updates) {
+			//noinspection JSUnfilteredForInLoop
+			all.push(updates[name]);
+		}
+		//reset
+		this.updates = {};
+		this.queue = [];
+		this.length = 0;
+		//return
+		return all;
 	};
 
 
@@ -1718,6 +1810,8 @@ var dom = (function() {
 		this.classNames = [];
 		/** @type {dom.sheets.Css}*/
 		this.css = null;
+		/** @type {dom.render.Update}*/
+		this.updates = new dom.render.Update();
 
 		//init
 		this.init(elements);
@@ -1740,6 +1834,14 @@ var dom = (function() {
 		this.attributes = this.processAttributes(elements);
 		this.classNames = this.processClasses(elements);
 		this.css = this.processCss(elements);
+	};
+
+	/**
+	 * Get updates
+	 * @returns {dom.render.Update}
+	 */
+	dom.html.Element.prototype.getUpdates = function () {
+		return this.updates;
 	};
 
 	/**
@@ -2096,6 +2198,8 @@ var dom = (function() {
 		this.parent = null;
 		/** @type {dom.builder.LiveText}*/
 		this.reactor = null;
+		/** @type {dom.render.Update}*/
+		this.updates = new dom.render.Update();
 
 		//register change
 		this.text.addChangeEvent(this, this.setText);
@@ -2125,7 +2229,7 @@ var dom = (function() {
 	 */
 	dom.html.TextElement.prototype.getValue = function () {
 		var text = this.text.getValue();
-		return text ? text.toString() : null;
+		return text !== null && text !== undefined ? text.toString() : null;
 	};
 
 	/**
@@ -2205,7 +2309,7 @@ var dom = (function() {
 		//set attribute on dom element
 		if (element) {
 			dom.html.RENDERER.render(this, "nodeValue", function () {
-				element.nodeValue = self.text.getValue() || "";
+				element.nodeValue = self.getValue() || "";
 			});
 		}
 	};

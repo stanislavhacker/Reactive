@@ -11,6 +11,7 @@ module.exports = function(grunt) {
 			//Renderer
 			'src/render/render.renderer.js',
 			'src/render/render.queue.js',
+			'src/render/render.update.js',
 			//Utils
 			'src/utils/utils.inherit.js',
 			'src/utils/utils.logger.js',

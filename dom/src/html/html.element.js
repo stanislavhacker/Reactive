@@ -34,6 +34,8 @@
 		this.classNames = [];
 		/** @type {dom.sheets.Css}*/
 		this.css = null;
+		/** @type {dom.render.Update}*/
+		this.updates = new dom.render.Update();
 
 		//init
 		this.init(elements);
@@ -56,6 +58,14 @@
 		this.attributes = this.processAttributes(elements);
 		this.classNames = this.processClasses(elements);
 		this.css = this.processCss(elements);
+	};
+
+	/**
+	 * Get updates
+	 * @returns {dom.render.Update}
+	 */
+	dom.html.Element.prototype.getUpdates = function () {
+		return this.updates;
 	};
 
 	/**

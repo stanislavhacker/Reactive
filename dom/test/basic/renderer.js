@@ -151,8 +151,7 @@
 		it("basics", function () {
 			var queue = new dom.render.Queue();
 
-			expect(queue.elements.length).toBe(0);
-			expect(queue.stacks.length).toBe(0);
+			expect(queue.length).toBe(0);
 		});
 
 		it("add into queue", function () {
@@ -160,17 +159,15 @@
 				elementTwo = dom.div(),
 				queue = new dom.render.Queue();
 
-			queue.add(elementOne, function () {});
-			queue.add(elementOne, function () {});
-			expect(queue.elements.length).toBe(1);
-			expect(queue.stacks.length).toBe(1);
-			expect(queue.stacks[0].length).toBe(2);
+			queue.add(elementOne, "test1", function () {});
+			queue.add(elementOne, "test2", function () {});
+			expect(queue.length).toBe(1);
+			expect(elementOne.updates.length).toBe(2);
 
-			queue.add(elementTwo, function () {});
-			queue.add(elementTwo, function () {});
-			expect(queue.elements.length).toBe(2);
-			expect(queue.stacks.length).toBe(2);
-			expect(queue.stacks[1].length).toBe(2);
+			queue.add(elementTwo, "test1", function () {});
+			queue.add(elementTwo, "test2", function () {});
+			expect(queue.length).toBe(2);
+			expect(elementTwo.updates.length).toBe(2);
 		});
 
 		it("get from queue", function () {
@@ -178,39 +175,38 @@
 				elementTwo = dom.div(),
 				queue = new dom.render.Queue();
 
-			queue.add(elementOne, function () {});
-			queue.add(elementOne, function () {});
-			queue.add(elementTwo, function () {});
-			queue.add(elementTwo, function () {});
+			queue.add(elementOne, "test1", function () {});
+			queue.add(elementOne, "test2", function () {});
+			queue.add(elementTwo, "test3", function () {});
+			queue.add(elementTwo, "test4", function () {});
 
-			expect(queue.elements.length).toBe(2);
-			expect(queue.stacks.length).toBe(2);
-			expect(queue.stacks[0].length).toBe(2);
-			expect(queue.stacks[1].length).toBe(2);
-
-			queue.get();
-
-			expect(queue.elements.length).toBe(2);
-			expect(queue.stacks.length).toBe(2);
-			expect(queue.stacks[0].length).toBe(1);
-			expect(queue.stacks[1].length).toBe(2);
+			expect(queue.length).toBe(2);
+			expect(elementOne.updates.length).toBe(2);
+			expect(elementTwo.updates.length).toBe(2);
 
 			queue.get();
 
-			expect(queue.elements.length).toBe(1);
-			expect(queue.stacks.length).toBe(1);
-			expect(queue.stacks[0].length).toBe(2);
+			expect(queue.length).toBe(2);
+			expect(elementOne.updates.length).toBe(1);
+			expect(elementTwo.updates.length).toBe(2);
 
 			queue.get();
 
-			expect(queue.elements.length).toBe(1);
-			expect(queue.stacks.length).toBe(1);
-			expect(queue.stacks[0].length).toBe(1);
+			expect(queue.length).toBe(1);
+			expect(elementOne.updates.length).toBe(0);
+			expect(elementTwo.updates.length).toBe(2);
 
 			queue.get();
 
-			expect(queue.elements.length).toBe(0);
-			expect(queue.stacks.length).toBe(0);
+			expect(queue.length).toBe(1);
+			expect(elementOne.updates.length).toBe(0);
+			expect(elementTwo.updates.length).toBe(1);
+
+			queue.get();
+
+			expect(queue.length).toBe(0);
+			expect(elementOne.updates.length).toBe(0);
+			expect(elementTwo.updates.length).toBe(0);
 		});
 
 		it("getFor from queue", function () {
@@ -218,21 +214,26 @@
 				elementTwo = dom.div(),
 				queue = new dom.render.Queue();
 
-			queue.add(elementOne, function () {});
-			queue.add(elementOne, function () {});
-			queue.add(elementTwo, function () {});
-			queue.add(elementTwo, function () {});
+			queue.add(elementOne, "test1", function () {});
+			queue.add(elementOne, "test2", function () {});
+			queue.add(elementTwo, "test3", function () {});
+			queue.add(elementTwo, "test4", function () {});
 
-			expect(queue.elements.length).toBe(2);
-			expect(queue.stacks.length).toBe(2);
-			expect(queue.stacks[0].length).toBe(2);
-			expect(queue.stacks[1].length).toBe(2);
+			expect(queue.length).toBe(2);
+			expect(elementOne.updates.length).toBe(2);
+			expect(elementTwo.updates.length).toBe(2);
 
 			expect(queue.getFor(elementOne).length).toBe(2);
 
-			expect(queue.elements.length).toBe(1);
-			expect(queue.stacks.length).toBe(1);
-			expect(queue.stacks[0].length).toBe(2);
+			expect(queue.length).toBe(1);
+			expect(elementOne.updates.length).toBe(0);
+			expect(elementTwo.updates.length).toBe(2);
+
+			expect(queue.getFor(elementTwo).length).toBe(2);
+
+			expect(queue.length).toBe(0);
+			expect(elementOne.updates.length).toBe(0);
+			expect(elementTwo.updates.length).toBe(0);
 		});
 
 	});
