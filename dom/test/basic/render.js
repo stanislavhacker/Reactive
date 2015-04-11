@@ -328,6 +328,48 @@
 
 		});
 
+		describe("isPrioritized function", function () {
+
+			it("not rendered", function () {
+				var div = dom.div();
+				expect(div.isPrioritized()).toBe(false);
+			});
+
+			it("rendered", function () {
+				var div = dom.div();
+				dom.attach(document.body, div);
+				expect(div.isPrioritized()).toBe(true);
+				div.remove();
+			});
+
+			it("rendered display block", function () {
+				var display = dom.contract("block"),
+					div = dom.div(
+					dom.css(
+						dom.cssProperty("display", display)
+					)
+				);
+
+				dom.attach(document.body, div);
+				expect(div.isPrioritized()).toBe(true);
+				div.remove();
+			});
+
+			it("rendered display none", function () {
+				var display = dom.contract("none"),
+					div = dom.div(
+					dom.css(
+						dom.cssProperty("display", display)
+					)
+				);
+
+				dom.attach(document.body, div);
+				expect(div.isPrioritized()).toBe(false);
+				div.remove();
+			});
+
+		});
+
 	});
 
 }());

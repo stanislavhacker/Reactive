@@ -1964,7 +1964,16 @@ var dom = (function() {
 	 * @returns {boolean}
 	 */
 	dom.html.Element.prototype.isPrioritized = function () {
-		return this.rendered;
+		var display,
+			css = this.getCss(),
+			rendered = this.rendered;
+		//css exists
+		if (rendered && css) {
+			display = css.getCssProperty(CssPropertyType.DISPLAY);
+			//display is not set (null) or string
+			return display !== "none";
+		}
+		return rendered;
 	};
 
 	/**
@@ -2737,6 +2746,27 @@ var dom = (function() {
 	};
 
 	/**
+	 * Get css property
+	 * @param {string} name
+	 * @returns {string|null}
+	 */
+	dom.sheets.Css.prototype.getCssProperty = function (name) {
+		var i,
+			property,
+			css = this.css;
+
+		for (i = 0; i < css.length; i++) {
+			//property
+			property = css[i];
+			//get name
+			if (property instanceof dom.sheets.CssProperty && property.getName() === name) {
+				return property.getValue();
+			}
+		}
+		return null;
+	};
+
+	/**
 	 * @public
 	 * Get css
 	 * @returns {Array.<dom.sheets.CssProperty|dom.sheets.CssGroup>}
@@ -3140,6 +3170,14 @@ var sheets = (function (dom) {
 		return this.cssElement !== null;
 	};
 
+	/**
+	 * Check if rule is empty
+	 * @returns {boolean}
+	 */
+	dom.sheets.CssRule.prototype.isEmpty = function () {
+		return this.properties.length === 0;
+	};
+
 
 }(dom, document, window));
 ;/**
@@ -3498,8 +3536,8 @@ var sheets = (function (dom) {
 	 */
 	dom.builder.Css.prototype.appendRule = function (rule) {
 		var name = rule.getRuleName();
-		//is already in dom, do nothing
-		if (rule.isInDom()) {
+		//is already in dom or empty, do nothing
+		if (rule.isEmpty() || rule.isInDom()) {
 			return;
 		}
 		//check rule exists

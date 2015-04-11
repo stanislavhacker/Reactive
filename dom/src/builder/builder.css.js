@@ -112,8 +112,8 @@
 	 */
 	dom.builder.Css.prototype.appendRule = function (rule) {
 		var name = rule.getRuleName();
-		//is already in dom, do nothing
-		if (rule.isInDom()) {
+		//is already in dom or empty, do nothing
+		if (rule.isEmpty() || rule.isInDom()) {
 			return;
 		}
 		//check rule exists

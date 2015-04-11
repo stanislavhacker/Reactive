@@ -31,6 +31,27 @@
 	};
 
 	/**
+	 * Get css property
+	 * @param {string} name
+	 * @returns {string|null}
+	 */
+	dom.sheets.Css.prototype.getCssProperty = function (name) {
+		var i,
+			property,
+			css = this.css;
+
+		for (i = 0; i < css.length; i++) {
+			//property
+			property = css[i];
+			//get name
+			if (property instanceof dom.sheets.CssProperty && property.getName() === name) {
+				return property.getValue();
+			}
+		}
+		return null;
+	};
+
+	/**
 	 * @public
 	 * Get css
 	 * @returns {Array.<dom.sheets.CssProperty|dom.sheets.CssGroup>}

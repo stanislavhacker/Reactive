@@ -48,5 +48,13 @@
 		return this.cssElement !== null;
 	};
 
+	/**
+	 * Check if rule is empty
+	 * @returns {boolean}
+	 */
+	dom.sheets.CssRule.prototype.isEmpty = function () {
+		return this.properties.length === 0;
+	};
+
 
 }(dom, document, window));

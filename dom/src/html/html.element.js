@@ -146,7 +146,16 @@
 	 * @returns {boolean}
 	 */
 	dom.html.Element.prototype.isPrioritized = function () {
-		return this.rendered;
+		var display,
+			css = this.getCss(),
+			rendered = this.rendered;
+		//css exists
+		if (rendered && css) {
+			display = css.getCssProperty(CssPropertyType.DISPLAY);
+			//display is not set (null) or string
+			return display !== "none";
+		}
+		return rendered;
 	};
 
 	/**
