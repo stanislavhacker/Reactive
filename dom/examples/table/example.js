@@ -8,7 +8,7 @@
 		number = dom.contract(0);
 
 	//title
-	h1 = dom.h1(dom.text('Table example'));
+	h1 = dom.h1(dom.text('Table example - large table'));
 
 	//description
 	description = dom.p(dom.text('Basically is a non sence do table width 17 000 cells. But there is to see what the library ' +

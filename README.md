@@ -4,6 +4,7 @@ Shadow DOM library without jQuery, React and other stuff. Fully adaptable on bro
 ## Examples
  - [Simple example - run test](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/simple/index.html)
  - [Css example - generating css](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/css/index.html)
+ - [Table example - small table test](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/table2/index.html)
  - [Table example - long table test](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/table/index.html)
  
 # How to start developing for Reactive?
