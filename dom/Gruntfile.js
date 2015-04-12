@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 			'src/utils/utils.array.js',
 			//Events
 			'src/events/events.event.js',
+			'src/events/events.event.message.js',
 			//Data
 			'src/data/data.contract.js',
 			'src/data/data.contract.unbound.js',

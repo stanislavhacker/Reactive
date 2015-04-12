@@ -108,10 +108,20 @@
 			expect(givenEvent).toBe(null);
 
 			createdEvent = simulateMouse(active.element, "mousedown");
-			expect(givenEvent).toBe(createdEvent);
+			expect(givenEvent.getEvent()).toBe(createdEvent);
 
 			event.trigger(null);
 			expect(givenEvent).toBe(null);
+		});
+
+	});
+
+	describe("Dom event message", function () {
+
+		it("message", function () {
+			var message = new dom.events.EventMessage(EventType.MouseMove, null);
+			expect(message.getEvent()).toBe(null);
+			expect(message.getType()).toBe('mousemove');
 		});
 
 	});

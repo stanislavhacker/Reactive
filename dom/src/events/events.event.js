@@ -11,7 +11,6 @@
 	 * Event
 	 * @param {dom.events.EventType|EventType|string} type
 	 * @param {Function} handler
-	 * @extends {HTMLElement}
 	 * @constructor
 	 */
 	dom.events.Event = function (type, handler) {
@@ -48,10 +47,9 @@
 
 	/**
 	 * Trigger
-	 * @param {Event} event
+	 * @param {dom.events.EventMessage} event
 	 */
 	dom.events.Event.prototype.trigger = function (event) {
-		//TODO: Convert event?
 		this.handler(event);
 	};
 

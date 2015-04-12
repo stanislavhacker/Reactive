@@ -71,7 +71,7 @@
 				return;
 			}
 			//make routine
-			event.trigger(e);
+			event.trigger(new dom.events.EventMessage(event.getType(), e));
 		});
 	};
 
