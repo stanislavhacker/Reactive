@@ -1415,8 +1415,8 @@ var dom = (function() {
 	 * @returns {dom.render.Update}
 	 */
 	function insert(self, element) {
-		var where,
-			queue = self.queue,
+		var queueLow = self.queueLow,
+			queueHigh = self.queueHigh,
 			updatesMap = self.updatesMap,
 			updates = element.getUpdates(),
 			updateId = updates.getId(),
@@ -1427,10 +1427,11 @@ var dom = (function() {
 			updatesMap[updateId] = updates;
 			//prioritize
 			if (element.isPrioritized()) {
-				where = Math.floor(queue.length / 2) + 1;
-				queue.splice(where, 0, updateId);
+				//push to high
+				queueHigh.push(updateId);
 			} else {
-				queue.push(updateId);
+				//push to low
+				queueLow.push(updateId);
 			}
 			//set variable
 			update = updates;
@@ -1448,7 +1449,9 @@ var dom = (function() {
 	 */
 	function retrieve(self) {
 		var update,
-			queue = self.queue,
+			queueLow = self.queueLow,
+			queueHigh = self.queueHigh,
+			queue = queueHigh.length ? queueHigh : queueLow,
 			key = queue[0],
 			updateMap = self.updatesMap,
 			updates = updateMap[key];
@@ -1474,7 +1477,9 @@ var dom = (function() {
 		/** @type {Object.<string, dom.render.Update>}*/
 		this.updatesMap = {};
 		/** @type {Array.<string>}*/
-		this.queue = [];
+		this.queueHigh = [];
+		/** @type {Array.<string>}*/
+		this.queueLow = [];
 		/** @type {number}*/
 		this.length = 0;
 	};
@@ -1517,8 +1522,10 @@ var dom = (function() {
 	dom.render.Queue.prototype.getFor = function (element) {
 		var i,
 			all,
+			index,
 			array = [],
-			queue = this.queue,
+			queueLow = this.queueLow,
+			queueHigh = this.queueHigh,
 			updateMap = this.updatesMap,
 			updates = element.getUpdates(),
 			children = element.getChildren(),
@@ -1541,7 +1548,16 @@ var dom = (function() {
 		array = array.concat(all);
 		//remove
 		delete updateMap[key];
-		queue.splice(queue.indexOf(key), 1);
+		//remove from low queue
+		index = queueLow.indexOf(key);
+		if (index >= 0) {
+			queueLow.splice(index, 1);
+		}
+		//remove from high queue
+		index = queueHigh.indexOf(key);
+		if (index >= 0) {
+			queueHigh.splice(index, 1);
+		}
 		//length
 		this.length--;
 		//return functions
