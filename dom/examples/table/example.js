@@ -3,6 +3,7 @@
 	"use strict";
 
 	var h1,
+		table,
 		description,
 		number = dom.contract(0);
 
@@ -65,8 +66,9 @@
 	dom.attach(document.body, description);
 	//source
 	source('https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/table/example.js');
-	dom.attach(document.body, createTable());
-
+	//table
+	table = createTable();
+	dom.attach(document.body, table);
 	//call
 	var interval = setInterval(function () {
 		var v = number.getValue();
