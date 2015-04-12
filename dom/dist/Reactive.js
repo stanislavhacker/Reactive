@@ -969,9 +969,21 @@ var dom = (function() {
 		 */
 		contract: function (value) {
 			return new dom.data.Contract(value);
+		},
+
+		//EVENT functions
+
+		/**
+		 * @static
+		 * Event
+		 * @param {string} type
+		 * @param {Function} handler
+		 * @returns {dom.events.Event}
+		 */
+		event: function (type, handler) {
+			return new dom.events.Event(type, handler)
 		}
 
-		
 	};
 
 }());;/**
@@ -1148,6 +1160,29 @@ var dom = (function() {
 
 	/**
 	 * @protected
+	 * Process events
+	 * @param {Array.<dom.Element>} elements
+	 * @return {Array.<dom.events.Event>}
+	 */
+	dom.Element.prototype.processEvents = function (elements) {
+		var i,
+			element,
+			events = [];
+
+		for (i = 0; i < elements.length; i++) {
+			//load element
+			element = /** @type {dom.events.Event} */ elements[i];
+			//filter
+			if (element instanceof dom.events.Event) {
+				events.push(element);
+			}
+		}
+
+		return events;
+	};
+
+	/**
+	 * @protected
 	 * Bound with element
 	 * @param {dom.Element} element
 	 */
@@ -1166,8 +1201,41 @@ var dom = (function() {
 
 	dom.render = dom.render || {};
 
-	var spawnMin = 30,
-		spawnMax = 150;
+	var hidden,
+		spawnMin = 30,
+		spawnMax = 150,
+		spawnHidden = 1000;
+
+	/**
+	 * Check hidden
+	 * @returns {*}
+	 */
+	function isDocumentHidden() {
+		//check hidden
+		if (hidden === undefined) {
+			//noinspection JSUnresolvedVariable
+			if (document.hidden !== undefined) {
+				hidden = "hidden";
+			}
+			//noinspection JSUnresolvedVariable
+			if (document.mozHidden !== undefined) {
+				hidden = "mozHidden";
+			}
+			//noinspection JSUnresolvedVariable
+			if (document.msHidden !== undefined) {
+				hidden = "msHidden";
+			}
+			//noinspection JSUnresolvedVariable
+			if (document.webkitHidden !== undefined) {
+				hidden = "webkitHidden";
+			}
+			//not supported
+			if (hidden === undefined) {
+				hidden = null;
+			}
+		}
+		return hidden ? document[hidden] : false;
+	}
 
 	/**
 	 * Renderer
@@ -1240,7 +1308,13 @@ var dom = (function() {
 	 */
 	dom.render.Renderer.prototype.spawnTimer = function () {
 		var time,
-			self = this;
+			self = this,
+			spawnTime = this.TIMER_SPAWN;
+
+		//check is hidden
+		if (isDocumentHidden()) {
+			spawnTime = spawnHidden;
+		}
 
 		//create new timer
 		this.timer = setTimeout(function () {
@@ -1254,7 +1328,7 @@ var dom = (function() {
 			if (self.queue.count() !== 0) {
 				self.changed();
 			}
-		}, this.TIMER_SPAWN);
+		}, spawnTime);
 	};
 
 	/**
@@ -1692,6 +1766,205 @@ var dom = (function() {
 
 }(dom, document, window));
 ;/**
+ * Event in Reactive
+ * @author Stanislav Hacker
+ */
+(function (dom, document, window) {
+	"use strict";
+
+	dom.events = dom.events || {};
+
+	/**
+	 * Event
+	 * @param {dom.events.EventType|EventType|string} type
+	 * @param {Function} handler
+	 * @constructor
+	 */
+	dom.events.Event = function (type, handler) {
+		/** @type {string}*/
+		this.type = type;
+		/** @type {Function}*/
+		this.handler = handler;
+		/** @type {boolean}*/
+		this.detached = false;
+	};
+	dom.utils.inherit(dom.events.Event, dom.Element);
+
+	/**
+	 * Get type
+	 * @returns {dom.events.EventType|EventType|string}
+	 */
+	dom.events.Event.prototype.getType = function () {
+		return this.type;
+	};
+
+	/**
+	 * Enable
+	 */
+	dom.events.Event.prototype.enable = function () {
+		this.detached = false;
+	};
+
+	/**
+	 * Disable
+	 */
+	dom.events.Event.prototype.disable = function () {
+		this.detached = true;
+	};
+
+	/**
+	 * Trigger
+	 * @param {dom.events.EventMessage} event
+	 */
+	dom.events.Event.prototype.trigger = function (event) {
+		this.handler(event);
+	};
+
+	/**
+	 * Is detached
+	 * @returns {boolean}
+	 */
+	dom.events.Event.prototype.isActive = function () {
+		return !this.detached;
+	};
+
+
+	/**
+	 * Event type
+	 * @num {string}
+	 */
+	dom.events.EventType = {
+		//Mouse events
+		Click: "click",
+		DblClick: "dblclick",
+		Drag: "drag",
+		DragEnd: "dragend",
+		DragEnter: "dragenter",
+		DragLeave: "dragleave",
+		DragOver: "dragover",
+		DragStart: "dragstart",
+		Drop: "drop",
+		MouseDown: "mousedown",
+		MouseMove: "mousemove",
+		MouseOut: "mouseout",
+		MouseOver: "mouseover",
+		MouseUp: "mouseup",
+		MouseWheel: "mousewheel",
+		Scroll: "scroll",
+		Wheel: "wheel",
+
+		//Copy / paste
+		Copy: "copy",
+		Cut: "cut",
+		Paste: "paste",
+
+		//Media
+		Abort: "abort",
+		CanPlay: "canplay",
+		CanPlayThrough: "canplaythrough",
+		CueChange: "cuechange",
+		DurationChange: "durationchange",
+		Emptied: "emptied",
+		Ended: "ended",
+		LoadedData: "loadeddata",
+		LoadedMetadata: "loadedmetadata",
+		LoadStart: "loadstart",
+		Pause: "pause",
+		Play: "play",
+		Playing: "playing",
+		Progress: "progress",
+		RateChange: "ratechange",
+		Seeked: "seeked",
+		Seeking: "seeking",
+		Stalled: "stalled",
+		Suspend: "suspend",
+		TimeUpdate: "timeupdate",
+		VolumeChange: "volumechange",
+		Waiting: "waiting",
+
+		//Keyboard
+		KeyDown: "keydown",
+		KeyPress: "keypress",
+		KeyUp: "keyup",
+
+		//Forms
+		Blur: "blur",
+		Change: "change",
+		ContextMenu: "contextmenu",
+		Focus: "focus",
+		Input: "input",
+		Invalid: "invalid",
+		Reset: "reset",
+		Search: "search",
+		Select: "select",
+		Submit: "submit",
+
+		//Window
+		AfterPrint: "afterprint",
+		BeforePrint: "beforeprint",
+		BeforeUnload: "beforeunload",
+		HashChange: "hashchange",
+		Message: "message",
+		Offline: "offline",
+		Online: "online",
+		PageHide: "pagehide",
+		PageShow: "pageshow",
+		PopState: "popstate",
+		Resize: "resize",
+		Storage: "storage",
+		Unload: "unload",
+
+		//Universal
+		Load: "load",
+		Error: "error",
+		Show: "show",
+		Toggle: "toggle"
+	};
+
+	//export on window
+	window['EventType'] = dom.events.EventType;
+
+}(dom, document, window));
+;/**
+ * Event in Reactive
+ * @author Stanislav Hacker
+ */
+(function (dom, document, window) {
+	"use strict";
+
+	dom.events = dom.events || {};
+
+	/**
+	 * Event message
+	 * @param {dom.events.EventType|EventType|string} type
+	 * @param {Event} originalEvent
+	 * @constructor
+	 */
+	dom.events.EventMessage = function (type, originalEvent) {
+		/** @type {dom.events.EventType|EventType|string}*/
+		this.type = type;
+		/** @type {Event}*/
+		this.event = originalEvent;
+	};
+
+	/**
+	 * Get event
+	 * @returns {Event}
+	 */
+	dom.events.EventMessage.prototype.getEvent = function () {
+		return this.event;
+	};
+
+	/**
+	 * Get type
+	 * @returns {dom.events.EventType|EventType|string}
+	 */
+	dom.events.EventMessage.prototype.getType = function () {
+		return this.type;
+	};
+
+}(dom, document, window));
+;/**
  * Data contract in Reactive
  * @author Stanislav Hacker
  */
@@ -1850,10 +2123,15 @@ var dom = (function() {
 		this.attributes = [];
 		/** @type {Array.<dom.html.Classes>}*/
 		this.classNames = [];
+		/** @type {Array.<dom.events.Event>}*/
+		this.events = [];
 		/** @type {dom.sheets.Css}*/
 		this.css = null;
 		/** @type {dom.render.Update}*/
 		this.updates = new dom.render.Update();
+
+		/** @type {boolean}*/
+		this.rendered = false;
 
 		//init
 		this.init(elements);
@@ -1864,9 +2142,6 @@ var dom = (function() {
 		this.cssRules = null;
 		/** @type {dom.builder.Live}*/
 		this.reactor = null;
-
-		/** @type {boolean}*/
-		this.rendered = false;
 	};
 	dom.utils.inherit(dom.html.Element, dom.Element);
 
@@ -1879,6 +2154,7 @@ var dom = (function() {
 		this.attributes = this.processAttributes(elements);
 		this.classNames = this.processClasses(elements);
 		this.css = this.processCss(elements);
+		this.events = this.processEvents(elements);
 	};
 
 	/**
@@ -1948,6 +2224,15 @@ var dom = (function() {
 	 */
 	dom.html.Element.prototype.getCss = function () {
 		return this.css || null;
+	};
+
+	/**
+	 * @public
+	 * Get events
+	 * @returns {Array.<dom.events.Event>}
+	 */
+	dom.html.Element.prototype.getEvents = function () {
+		return this.events;
 	};
 
 	/**
@@ -3232,6 +3517,7 @@ var sheets = (function (dom) {
 		this.generateClasses();
 		this.generateCss();
 		this.generateChildren();
+		this.generateEvents();
 	};
 
 	/**
@@ -3361,6 +3647,8 @@ var sheets = (function (dom) {
 			for (i = 0; i < children.length; i++) {
 				//child
 				child = children[i];
+				//set parent render state
+				child.rendered = element.rendered;
 				//children element
 				childrenElement = child.getLive();
 				//dom element
@@ -3369,11 +3657,24 @@ var sheets = (function (dom) {
 				if (!domElement.contains(childrenElement)) {
 					//TODO: Async?
 					domElement.appendChild(childrenElement);
-					//set parent render state
-					child.rendered = element.rendered;
 				}
 			}
 		}
+	};
+
+	/**
+	 * @private
+	 * Generate events for element
+	 */
+	dom.builder.Live.prototype.generateEvents = function () {
+		var element = this.element,
+			events = element.getEvents();
+		//no events
+		if (events.length === 0) {
+			return;
+		}
+		//process all
+		new dom.builder.Event(element).bindEvents();
 	};
 
 }(dom, document, window));
@@ -3423,6 +3724,83 @@ var sheets = (function (dom) {
 
 }(dom, document, window));
 ;/**
+ * Builder for Reactive
+ * @author Stanislav Hacker
+ */
+(function (dom) {
+	"use strict";
+
+	dom.builder = dom.builder || {};
+
+	/**
+	 * Add event
+	 * @param {HTMLElement} el
+	 * @param {string} eventType
+	 * @param {function} handler
+	 */
+	function addEvent(el, eventType, handler) {
+		// DOM Level 2 browsers
+		if (el.addEventListener) {
+			el.addEventListener(eventType, handler, false);
+		// IE <= 8
+		} else if (el.attachEvent) {
+			el.attachEvent('on' + eventType, handler);
+		// ancient browsers
+		} else {
+			throw "Reactive events are not supported in this browser.";
+		}
+	}
+
+	/**
+	 * Event
+	 * @param {dom.html.Element} element
+	 * @constructor
+	 */
+	dom.builder.Event = function (element) {
+		/** @type {dom.html.Element}*/
+		this.element = element;
+	};
+
+	/**
+	 * @public
+	 * Bind events on element
+	 */
+	dom.builder.Event.prototype.bindEvents = function () {
+		var i,
+			event,
+			element = this.element,
+			events = element.getEvents();
+		//process all
+		for (i = 0; i < events.length; i++) {
+			//get event
+			event = events[i];
+			//attach
+			this.attachEvent(event);
+		}
+	};
+
+	/**
+	 * @private
+	 * Attach event
+	 * @param {dom.events.Event} event
+	 */
+	dom.builder.Event.prototype.attachEvent = function (event) {
+		var target,
+			element = this.element;
+		//attach
+		addEvent(document.body, event.getType(), function (e) {
+			//target
+			target = e.target || e.srcElement;
+			//do nothing if is not right element
+			if (element.element !== target || event.isActive() === false) {
+				return;
+			}
+			//make routine
+			event.trigger(new dom.events.EventMessage(event.getType(), e));
+		});
+	};
+
+}(dom, document, window));;/**
  * Builder for Reactive
  * @author Stanislav Hacker
  */
