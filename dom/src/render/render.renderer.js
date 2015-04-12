@@ -7,8 +7,41 @@
 
 	dom.render = dom.render || {};
 
-	var spawnMin = 30,
-		spawnMax = 150;
+	var hidden,
+		spawnMin = 30,
+		spawnMax = 150,
+		spawnHidden = 1000;
+
+	/**
+	 * Check hidden
+	 * @returns {*}
+	 */
+	function isDocumentHidden() {
+		//check hidden
+		if (hidden === undefined) {
+			//noinspection JSUnresolvedVariable
+			if (document.hidden !== undefined) {
+				hidden = "hidden";
+			}
+			//noinspection JSUnresolvedVariable
+			if (document.mozHidden !== undefined) {
+				hidden = "mozHidden";
+			}
+			//noinspection JSUnresolvedVariable
+			if (document.msHidden !== undefined) {
+				hidden = "msHidden";
+			}
+			//noinspection JSUnresolvedVariable
+			if (document.webkitHidden !== undefined) {
+				hidden = "webkitHidden";
+			}
+			//not supported
+			if (hidden === undefined) {
+				hidden = null;
+			}
+		}
+		return hidden ? document[hidden] : false;
+	}
 
 	/**
 	 * Renderer
@@ -81,7 +114,13 @@
 	 */
 	dom.render.Renderer.prototype.spawnTimer = function () {
 		var time,
-			self = this;
+			self = this,
+			spawnTime = this.TIMER_SPAWN;
+
+		//check is hidden
+		if (isDocumentHidden()) {
+			spawnTime = spawnHidden;
+		}
 
 		//create new timer
 		this.timer = setTimeout(function () {
@@ -95,7 +134,7 @@
 			if (self.queue.count() !== 0) {
 				self.changed();
 			}
-		}, this.TIMER_SPAWN);
+		}, spawnTime);
 	};
 
 	/**
