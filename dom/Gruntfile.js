@@ -16,6 +16,8 @@ module.exports = function(grunt) {
 			'src/utils/utils.inherit.js',
 			'src/utils/utils.logger.js',
 			'src/utils/utils.array.js',
+			//Events
+			'src/events/events.event.js',
 			//Data
 			'src/data/data.contract.js',
 			'src/data/data.contract.unbound.js',
@@ -36,6 +38,7 @@ module.exports = function(grunt) {
 			//Builders
 			'src/builder/builder.live.js',
 			'src/builder/builder.live.text.js',
+			'src/builder/builder.event.js',
 			'src/builder/builder.css.js'
 		],
 		specs = [

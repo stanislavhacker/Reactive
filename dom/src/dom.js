@@ -969,9 +969,21 @@ var dom = (function() {
 		 */
 		contract: function (value) {
 			return new dom.data.Contract(value);
+		},
+
+		//EVENT functions
+
+		/**
+		 * @static
+		 * Event
+		 * @param {string} type
+		 * @param {Function} handler
+		 * @returns {dom.events.Event}
+		 */
+		event: function (type, handler) {
+			return new dom.events.Event(type, handler)
 		}
 
-		
 	};
 
 }());

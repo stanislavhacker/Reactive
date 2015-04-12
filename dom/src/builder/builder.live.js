@@ -30,6 +30,7 @@
 		this.generateClasses();
 		this.generateCss();
 		this.generateChildren();
+		this.generateEvents();
 	};
 
 	/**
@@ -159,6 +160,8 @@
 			for (i = 0; i < children.length; i++) {
 				//child
 				child = children[i];
+				//set parent render state
+				child.rendered = element.rendered;
 				//children element
 				childrenElement = child.getLive();
 				//dom element
@@ -167,11 +170,24 @@
 				if (!domElement.contains(childrenElement)) {
 					//TODO: Async?
 					domElement.appendChild(childrenElement);
-					//set parent render state
-					child.rendered = element.rendered;
 				}
 			}
 		}
+	};
+
+	/**
+	 * @private
+	 * Generate events for element
+	 */
+	dom.builder.Live.prototype.generateEvents = function () {
+		var element = this.element,
+			events = element.getEvents();
+		//no events
+		if (events.length === 0) {
+			return;
+		}
+		//process all
+		new dom.builder.Event(element).bindEvents();
 	};
 
 }(dom, document, window));

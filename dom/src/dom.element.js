@@ -172,6 +172,29 @@
 
 	/**
 	 * @protected
+	 * Process events
+	 * @param {Array.<dom.Element>} elements
+	 * @return {Array.<dom.events.Event>}
+	 */
+	dom.Element.prototype.processEvents = function (elements) {
+		var i,
+			element,
+			events = [];
+
+		for (i = 0; i < elements.length; i++) {
+			//load element
+			element = /** @type {dom.events.Event} */ elements[i];
+			//filter
+			if (element instanceof dom.events.Event) {
+				events.push(element);
+			}
+		}
+
+		return events;
+	};
+
+	/**
+	 * @protected
 	 * Bound with element
 	 * @param {dom.Element} element
 	 */

@@ -95,6 +95,9 @@
 				)
 			);
 
+			expect(div.getCss().getCssProperty("display")).toBe('block');
+			expect(div.getCss().getCssProperty("test")).toBe(null);
+
 			el = document.createElement('div');
 			document.body.appendChild(el);
 

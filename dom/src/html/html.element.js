@@ -32,10 +32,15 @@
 		this.attributes = [];
 		/** @type {Array.<dom.html.Classes>}*/
 		this.classNames = [];
+		/** @type {Array.<dom.events.Event>}*/
+		this.events = [];
 		/** @type {dom.sheets.Css}*/
 		this.css = null;
 		/** @type {dom.render.Update}*/
 		this.updates = new dom.render.Update();
+
+		/** @type {boolean}*/
+		this.rendered = false;
 
 		//init
 		this.init(elements);
@@ -46,9 +51,6 @@
 		this.cssRules = null;
 		/** @type {dom.builder.Live}*/
 		this.reactor = null;
-
-		/** @type {boolean}*/
-		this.rendered = false;
 	};
 	dom.utils.inherit(dom.html.Element, dom.Element);
 
@@ -61,6 +63,7 @@
 		this.attributes = this.processAttributes(elements);
 		this.classNames = this.processClasses(elements);
 		this.css = this.processCss(elements);
+		this.events = this.processEvents(elements);
 	};
 
 	/**
@@ -130,6 +133,15 @@
 	 */
 	dom.html.Element.prototype.getCss = function () {
 		return this.css || null;
+	};
+
+	/**
+	 * @public
+	 * Get events
+	 * @returns {Array.<dom.events.Event>}
+	 */
+	dom.html.Element.prototype.getEvents = function () {
+		return this.events;
 	};
 
 	/**
