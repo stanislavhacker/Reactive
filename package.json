@@ -1,0 +1,15 @@
+{
+  "name": "Reactive-Bundle",
+  "version": "0.0.1",
+  "description": "Shadow DOM library without jQuery, React and other stuff. Fully adaptable on browser performance and current load.",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-compress": "^0.13.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-uglify": "^0.8.0"
+  },
+  "author": "Stanislav Hacker",
+  "license": "ISC"
+}

@@ -3,8 +3,7 @@ module.exports = function(grunt) {
 	// Project configuration.
 
 	//files spec
-	var sandbox = "../sandbox/lib/",
-		files = [
+	var files = [
 			//Base object
 			'src/dom.js',
 			'src/dom.element.js',
@@ -51,10 +50,6 @@ module.exports = function(grunt) {
 		],
 		gruntFile = [
 			'Gruntfile.js'
-		],
-		bundle = [
-			'dist/Reactive.js',
-			'../css/dist/Reactive.css.js'
 		];
 
 
@@ -122,12 +117,6 @@ module.exports = function(grunt) {
 				src: files,
 				// the location of the resulting JS file
 				dest: 'dist/<%= pkg.name %>.js'
-			},
-			bundle: {
-				// the files to concatenate
-				src: bundle,
-				// the location of the resulting JS file
-				dest: sandbox + '<%= pkg.name %>.min.js'
 			}
 		},
 
@@ -140,10 +129,6 @@ module.exports = function(grunt) {
 			build: {
 				src: 'dist/<%= pkg.name %>.js',
 				dest: 'dist/<%= pkg.name %>.min.js'
-			},
-			bundle: {
-				src: sandbox + '<%= pkg.name %>.min.js',
-				dest: sandbox + '<%= pkg.name %>.min.js'
 			}
 		},
 
@@ -173,22 +158,6 @@ module.exports = function(grunt) {
 				path: 'http://localhost:8888/_SpecRunner.html',
 				delay: 1000
 			}
-		},
-
-		//Compress task
-
-		compress: {
-			main: {
-				options: {
-					archive: '../Reactive-sandbox.zip'
-				},
-				files: [
-					{expand: true, cwd: '../sandbox/', src: ['*.*']},
-					{expand: true, cwd: '../sandbox/', src: ['lib/**/*']},
-					{expand: true, cwd: '../sandbox/', src: ['src/**/*']},
-					{expand: true, cwd: '../sandbox/', src: ['test/**/*']}
-				]
-			}
 		}
 
 	});
@@ -204,8 +173,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-open');
 
 	// Default task(s).
-	grunt.registerTask('default', ['clean', 'jasmine', 'concat:dist', 'uglify:build']);
-	grunt.registerTask('bundle', ['concat:bundle', 'uglify:bundle', 'compress']);
+	grunt.registerTask('default', ['clean', 'jasmine', 'concat', 'uglify']);
 	grunt.registerTask('test debug', ['jasmine:pivotal', 'open:test', 'connect']);
 
 };
