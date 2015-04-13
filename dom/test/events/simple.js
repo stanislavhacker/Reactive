@@ -28,7 +28,7 @@
 			null
 		);
 		element.dispatchEvent(evt);
-		return evt
+		return evt;
 	}
 
 	describe("Dom event simple function", function () {
@@ -92,7 +92,7 @@
 			expect(clicked).toBe(2);
 		});
 
-		it("trigger", function () {
+		it("trigger mousedown", function () {
 			var div,
 				createdEvent,
 				givenEvent = null,
@@ -109,9 +109,33 @@
 
 			createdEvent = simulateMouse(active.element, "mousedown");
 			expect(givenEvent.getEvent()).toBe(createdEvent);
+			expect(givenEvent instanceof dom.events.EventMessage).toBe(true);
 
 			event.trigger(null);
 			expect(givenEvent).toBe(null);
+		});
+
+		it("trigger change", function () {
+			var div,
+				builder,
+				createdEvent,
+				givenEvent = null,
+				event = dom.event(EventType.Change, function (evnt) {
+					givenEvent = evnt;
+				}),
+				active = dom.input(event, dom.attr('type', 'checkbox'));
+			//append to body
+			div = dom.div(active);
+			dom.attach(document.body, div);
+
+			builder = new dom.builder.Event(active);
+			//noinspection JSAccessibilityCheck
+			createdEvent = builder.createEvent(event, active.element, null);
+			expect(createdEvent.getEvent()).toBe(null);
+			expect(createdEvent instanceof dom.events.ChangeEventMessage).toBe(true);
+			expect(createdEvent.newValue).toBe("");
+			expect(createdEvent.checked).toBe(false);
+
 		});
 
 	});

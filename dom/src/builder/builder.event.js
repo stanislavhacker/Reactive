@@ -55,24 +55,69 @@
 	};
 
 	/**
+	 * Bubble
+	 * @param {HTMLElement} where
+	 * @param {HTMLElement} target
+	 * @returns {boolean}
+	 */
+	function bubble(where, target) {
+		var parent = target;
+		//iterate all to body
+		while(parent) {
+			//check
+			if (parent === where) {
+				return true;
+			}
+			parent = parent.parentNode;
+		}
+		return false;
+	}
+
+	/**
 	 * @private
 	 * Attach event
 	 * @param {dom.events.Event} event
 	 */
 	dom.builder.Event.prototype.attachEvent = function (event) {
 		var target,
+			self = this,
 			element = this.element;
 		//attach
 		addEvent(document.body, event.getType(), function (e) {
+			//not active
+			if (event.isActive() === false) {
+				return;
+			}
 			//target
 			target = e.target || e.srcElement;
 			//do nothing if is not right element
-			if (element.element !== target || event.isActive() === false) {
-				return;
+			if (bubble(element.element, target)) {
+				//make routine
+				event.trigger(self.createEvent(event, target, e));
 			}
-			//make routine
-			event.trigger(new dom.events.EventMessage(event.getType(), e));
 		});
+	};
+
+	/**
+	 * @private
+	 * Create event
+	 * @param {dom.events.Event} event
+	 * @param {*} domElement
+	 * @param {Event} originalEvent
+	 */
+	dom.builder.Event.prototype.createEvent = function (event, domElement, originalEvent) {
+		var type = event.getType(),
+			base;
+
+		switch (type) {
+			case EventType.Change:
+				base = new dom.events.ChangeEventMessage(type, originalEvent);
+				base.checked = Boolean(domElement.checked);
+				base.newValue = domElement.value;
+				return base;
+			default:
+				return new dom.events.EventMessage(type, originalEvent);
+		}
 	};
 
 }(dom, document, window));
