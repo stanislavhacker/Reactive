@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 				// the files to concatenate
 				src: bundle,
 				// the location of the resulting JS file
-				dest: sandbox + '<%= pkg.name %>.min.js'
+				dest: sandbox + 'Reactive.min.js'
 			}
 		},
 
@@ -29,11 +29,11 @@ module.exports = function(grunt) {
 
 		uglify: {
 			options: {
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+				banner: '/*! Reactive <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
 			build: {
-				src: sandbox + '<%= pkg.name %>.min.js',
-				dest: sandbox + '<%= pkg.name %>.min.js'
+				src: sandbox + 'Reactive.min.js',
+				dest: sandbox + 'Reactive.min.js'
 			}
 		},
 
