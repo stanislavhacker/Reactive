@@ -10,9 +10,6 @@ function source(link) {
 	var a = dom.div(
 		dom.classes("source-code"),
 		dom.css(
-			dom.cssGroup("a",
-				dom.cssProperty(CssPropertyType.COLOR, "black")
-			),
 			dom.cssProperty(CssPropertyType.DISPLAY, "block"),
 			dom.cssProperty(CssPropertyType.WIDTH, "100%"),
 			dom.cssProperty(CssPropertyType.TEXT_ALIGN, "center"),
@@ -20,6 +17,9 @@ function source(link) {
 			dom.cssProperty(CssPropertyType.FONT_STYLE, "italic")
 		),
 		dom.a(
+			dom.css(
+				dom.cssProperty(CssPropertyType.COLOR, "black")
+			),
 			dom.attr('href', link),
 			dom.attr('target', '_blank'),
 			dom.text('view source code')
