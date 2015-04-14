@@ -27,32 +27,23 @@
 	}
 
 	/**
-	 * Event
-	 * @param {dom.html.Element} element
-	 * @constructor
+	 * Remove handler
+	 * @param {HTMLElement} el
+	 * @param {string} eventType
+	 * @param {function} handler
 	 */
-	dom.builder.Event = function (element) {
-		/** @type {dom.html.Element}*/
-		this.element = element;
-	};
-
-	/**
-	 * @public
-	 * Bind events on element
-	 */
-	dom.builder.Event.prototype.bindEvents = function () {
-		var i,
-			event,
-			element = this.element,
-			events = element.getEvents();
-		//process all
-		for (i = 0; i < events.length; i++) {
-			//get event
-			event = events[i];
-			//attach
-			this.attachEvent(event);
+	function removeEvent(el, eventType, handler) {
+		// For all major browsers, except IE 8 and earlier
+		if (el.removeEventListener) {
+			el.removeEventListener(eventType, handler);
+		// For IE 8 and earlier versions
+		} else if (el.detachEvent) {
+			el.detachEvent('on' + eventType, handler);
+		// ancient browsers
+		} else {
+			throw "Reactive events are not supported in this browser.";
 		}
-	};
+	}
 
 	/**
 	 * Bubble
@@ -74,16 +65,48 @@
 	}
 
 	/**
+	 * Event
+	 * @param {dom.html.Element} element
+	 * @constructor
+	 */
+	dom.builder.Event = function (element) {
+		/** @type {dom.html.Element}*/
+		this.element = element;
+		/** @type {Array.<{event: dom.events.Event, handler: function}>}*/
+		this.handlers = [];
+	};
+
+	/**
+	 * @public
+	 * Bind events on element
+	 */
+	dom.builder.Event.prototype.bindEvents = function () {
+		var i,
+			event,
+			element = this.element,
+			events = element.getEvents();
+		//process all
+		for (i = 0; i < events.length; i++) {
+			//get event
+			event = events[i];
+			//attach
+			this.attachEvent(event);
+		}
+	};
+
+	/**
 	 * @private
 	 * Attach event
 	 * @param {dom.events.Event} event
 	 */
 	dom.builder.Event.prototype.attachEvent = function (event) {
-		var target,
+		var handler,
+			target,
 			self = this,
+			handlers = this.handlers,
 			element = this.element;
-		//attach
-		addEvent(document.body, event.getType(), function (e) {
+		//create handler
+		handler = function (e) {
 			//not active
 			if (event.isActive() === false) {
 				return;
@@ -95,7 +118,14 @@
 				//make routine
 				event.trigger(self.createEvent(event, target, e));
 			}
+		};
+		//push handler
+		handlers.push({
+			event: event,
+			handler: handler
 		});
+		//attach
+		addEvent(document.body, event.getType(), handler);
 	};
 
 	/**
@@ -117,6 +147,23 @@
 				return base;
 			default:
 				return new dom.events.EventMessage(type, originalEvent);
+		}
+	};
+
+	/**
+	 * @public
+	 * Remove
+	 */
+	dom.builder.Event.prototype.remove = function () {
+		var i,
+			handler,
+			handlers = this.handlers;
+
+		for (i = 0; i < handlers.length; i++) {
+			//handler
+			handler = handlers[i];
+			//remove
+			removeEvent(document.body, handler.event.getType(), handler.handler);
 		}
 	};
 

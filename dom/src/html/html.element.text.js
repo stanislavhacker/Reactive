@@ -111,17 +111,10 @@
 	 * Remove
 	 */
 	dom.html.TextElement.prototype.remove = function () {
-		var parent = this.parent,
-			element = this.element;
-
-		//parent
-		if (parent) {
-			//remove from dom
-			if (parent.element && element) {
-				parent.element.removeChild(element);
-			}
-			//remove from children
-			this.setParent(null);
+		var reactor = this.reactor;
+		//remove from dom
+		if (reactor) {
+			reactor.remove();
 		}
 		//un-register change
 		this.text.removeChangeEvent(this);

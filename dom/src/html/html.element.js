@@ -244,8 +244,7 @@
 		var i,
 			name,
 			css = this.css,
-			parent = this.parent,
-			element = this.element,
+			reactor = this.reactor,
 			children = this.children,
 			classNames = this.classNames,
 			attributes = this.attributes;
@@ -268,14 +267,9 @@
 			css.elements.removeElement(this);
 			removeElementFromCss(this, css.getCss());
 		}
-		//parent
-		if (parent) {
-			//remove from dom
-			if (parent.element && element) {
-				parent.element.removeChild(element);
-			}
-			//remove from children
-			this.setParent(null);
+		//remove from dom
+		if (reactor) {
+			reactor.remove();
 		}
 		//no rendered
 		this.rendered = false;

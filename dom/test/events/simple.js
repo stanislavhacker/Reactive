@@ -57,6 +57,7 @@
 			simulateMouse(div.element, "mousedown");
 			expect(clicked).toBe(1);
 
+			div.remove();
 		});
 
 		it("enable / disable", function () {
@@ -90,6 +91,8 @@
 
 			simulateMouse(active.element, "mousedown");
 			expect(clicked).toBe(2);
+
+			div.remove();
 		});
 
 		it("trigger mousedown", function () {
@@ -113,6 +116,8 @@
 
 			event.trigger(null);
 			expect(givenEvent).toBe(null);
+
+			div.remove();
 		});
 
 		it("trigger change", function () {
@@ -136,6 +141,33 @@
 			expect(createdEvent.newValue).toBe("");
 			expect(createdEvent.checked).toBe(false);
 
+			div.remove();
+		});
+
+		it("unbind click event", function () {
+			var div,
+				clicked = 0,
+				active = dom.div(
+					dom.event(EventType.MouseDown, function () {
+						clicked++;
+					})
+				);
+
+			expect(clicked).toBe(0);
+
+			//append to body
+			div = dom.div(active);
+			dom.attach(document.body, div);
+
+			simulateMouse(active.element, "mousedown");
+			expect(clicked).toBe(1);
+			simulateMouse(active.element, "mousedown");
+			expect(clicked).toBe(2);
+
+			div.remove();
+
+			simulateMouse(active.element, "mousedown");
+			expect(clicked).toBe(2);
 		});
 
 	});

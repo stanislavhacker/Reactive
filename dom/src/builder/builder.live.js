@@ -18,6 +18,8 @@
 		this.element = element;
 		/** @type {HTMLElement}*/
 		this.parent = parent;
+		/** @type {dom.builder.Event}*/
+		this.events = null;
 	};
 
 	/**
@@ -187,7 +189,30 @@
 			return;
 		}
 		//process all
-		new dom.builder.Event(element).bindEvents();
+		this.events = new dom.builder.Event(element);
+		this.events.bindEvents();
+	};
+
+	/**
+	 * @public
+	 * Remove
+	 */
+	dom.builder.Live.prototype.remove = function () {
+		var events = this.events,
+			element = this.element,
+			parent = element.parent;
+
+		//remove all events
+		if (events) {
+			events.remove();
+		}
+		//parent element exists
+		if (parent && parent.element) {
+			//remove from dom
+			parent.element.removeChild(element.element);
+			//remove from children
+			element.setParent(null);
+		}
 	};
 
 }(dom, document, window));
