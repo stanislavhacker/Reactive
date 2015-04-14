@@ -1981,6 +1981,35 @@ var dom = (function() {
 
 }(dom, document, window));
 ;/**
+ * Event in Reactive
+ * @author Stanislav Hacker
+ */
+(function (dom) {
+	"use strict";
+
+	dom.events = dom.events || {};
+
+	/**
+	 * Event message
+	 * @param {dom.events.EventType|EventType|string} type
+	 * @param {Event} originalEvent
+	 * @extends {dom.events.EventMessage}
+	 * @constructor
+	 */
+	dom.events.ChangeEventMessage = function (type, originalEvent) {
+		/** @type {dom.events.EventType|EventType|string}*/
+		this.type = type;
+		/** @type {Event}*/
+		this.event = originalEvent;
+		/** @type {boolean|undefined}*/
+		this.newValue = undefined;
+		/** @type {boolean|undefined}*/
+		this.checked = undefined;
+	};
+	dom.utils.inherit(dom.events.ChangeEventMessage, dom.events.EventMessage);
+
+}(dom, document, window));
+;/**
  * Data contract in Reactive
  * @author Stanislav Hacker
  */
@@ -2351,8 +2380,7 @@ var dom = (function() {
 		var i,
 			name,
 			css = this.css,
-			parent = this.parent,
-			element = this.element,
+			reactor = this.reactor,
 			children = this.children,
 			classNames = this.classNames,
 			attributes = this.attributes;
@@ -2375,14 +2403,9 @@ var dom = (function() {
 			css.elements.removeElement(this);
 			removeElementFromCss(this, css.getCss());
 		}
-		//parent
-		if (parent) {
-			//remove from dom
-			if (parent.element && element) {
-				parent.element.removeChild(element);
-			}
-			//remove from children
-			this.setParent(null);
+		//remove from dom
+		if (reactor) {
+			reactor.remove();
 		}
 		//no rendered
 		this.rendered = false;
@@ -2651,17 +2674,10 @@ var dom = (function() {
 	 * Remove
 	 */
 	dom.html.TextElement.prototype.remove = function () {
-		var parent = this.parent,
-			element = this.element;
-
-		//parent
-		if (parent) {
-			//remove from dom
-			if (parent.element && element) {
-				parent.element.removeChild(element);
-			}
-			//remove from children
-			this.setParent(null);
+		var reactor = this.reactor;
+		//remove from dom
+		if (reactor) {
+			reactor.remove();
 		}
 		//un-register change
 		this.text.removeChangeEvent(this);
@@ -3405,10 +3421,7 @@ var sheets = (function (dom) {
 	 * @returns {string}
 	 */
 	dom.sheets.CssGroup.prototype.getName = function () {
-		var name = this.name,
-			start = name[0];
-		//return name with space or not
-		return start === ":" ? name : " " + name;
+		return this.name;
 	};
 
 	/**
@@ -3521,6 +3534,8 @@ var sheets = (function (dom) {
 		this.element = element;
 		/** @type {HTMLElement}*/
 		this.parent = parent;
+		/** @type {dom.builder.Event}*/
+		this.events = null;
 	};
 
 	/**
@@ -3690,7 +3705,30 @@ var sheets = (function (dom) {
 			return;
 		}
 		//process all
-		new dom.builder.Event(element).bindEvents();
+		this.events = new dom.builder.Event(element);
+		this.events.bindEvents();
+	};
+
+	/**
+	 * @public
+	 * Remove
+	 */
+	dom.builder.Live.prototype.remove = function () {
+		var events = this.events,
+			element = this.element,
+			parent = element.parent;
+
+		//remove all events
+		if (events) {
+			events.remove();
+		}
+		//parent element exists
+		if (parent && parent.element) {
+			//remove from dom
+			parent.element.removeChild(element.element);
+			//remove from children
+			element.setParent(null);
+		}
 	};
 
 }(dom, document, window));
@@ -3768,6 +3806,44 @@ var sheets = (function (dom) {
 	}
 
 	/**
+	 * Remove handler
+	 * @param {HTMLElement} el
+	 * @param {string} eventType
+	 * @param {function} handler
+	 */
+	function removeEvent(el, eventType, handler) {
+		// For all major browsers, except IE 8 and earlier
+		if (el.removeEventListener) {
+			el.removeEventListener(eventType, handler);
+		// For IE 8 and earlier versions
+		} else if (el.detachEvent) {
+			el.detachEvent('on' + eventType, handler);
+		// ancient browsers
+		} else {
+			throw "Reactive events are not supported in this browser.";
+		}
+	}
+
+	/**
+	 * Bubble
+	 * @param {HTMLElement} where
+	 * @param {HTMLElement} target
+	 * @returns {boolean}
+	 */
+	function bubble(where, target) {
+		var parent = target;
+		//iterate all to body
+		while(parent) {
+			//check
+			if (parent === where) {
+				return true;
+			}
+			parent = parent.parentNode;
+		}
+		return false;
+	}
+
+	/**
 	 * Event
 	 * @param {dom.html.Element} element
 	 * @constructor
@@ -3775,6 +3851,8 @@ var sheets = (function (dom) {
 	dom.builder.Event = function (element) {
 		/** @type {dom.html.Element}*/
 		this.element = element;
+		/** @type {Array.<{event: dom.events.Event, handler: function}>}*/
+		this.handlers = [];
 	};
 
 	/**
@@ -3801,19 +3879,71 @@ var sheets = (function (dom) {
 	 * @param {dom.events.Event} event
 	 */
 	dom.builder.Event.prototype.attachEvent = function (event) {
-		var target,
+		var handler,
+			target,
+			self = this,
+			handlers = this.handlers,
 			element = this.element;
-		//attach
-		addEvent(document.body, event.getType(), function (e) {
+		//create handler
+		handler = function (e) {
+			//not active
+			if (event.isActive() === false) {
+				return;
+			}
 			//target
 			target = e.target || e.srcElement;
 			//do nothing if is not right element
-			if (element.element !== target || event.isActive() === false) {
-				return;
+			if (bubble(element.element, target)) {
+				//make routine
+				event.trigger(self.createEvent(event, target, e));
 			}
-			//make routine
-			event.trigger(new dom.events.EventMessage(event.getType(), e));
+		};
+		//push handler
+		handlers.push({
+			event: event,
+			handler: handler
 		});
+		//attach
+		addEvent(document.body, event.getType(), handler);
+	};
+
+	/**
+	 * @private
+	 * Create event
+	 * @param {dom.events.Event} event
+	 * @param {*} domElement
+	 * @param {Event} originalEvent
+	 */
+	dom.builder.Event.prototype.createEvent = function (event, domElement, originalEvent) {
+		var type = event.getType(),
+			base;
+
+		switch (type) {
+			case EventType.Change:
+				base = new dom.events.ChangeEventMessage(type, originalEvent);
+				base.checked = Boolean(domElement.checked);
+				base.newValue = domElement.value;
+				return base;
+			default:
+				return new dom.events.EventMessage(type, originalEvent);
+		}
+	};
+
+	/**
+	 * @public
+	 * Remove
+	 */
+	dom.builder.Event.prototype.remove = function () {
+		var i,
+			handler,
+			handlers = this.handlers;
+
+		for (i = 0; i < handlers.length; i++) {
+			//handler
+			handler = handlers[i];
+			//remove
+			removeEvent(document.body, handler.event.getType(), handler.handler);
+		}
 	};
 
 }(dom, document, window));;/**
