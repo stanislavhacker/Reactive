@@ -4,9 +4,11 @@
 
 	var h1,
 		item,
-		clickEvent,
 		changeEvent,
-		clicked = dom.contract(0),
+		clickEventInner,
+		clickEventOuter,
+		clickedInner = dom.contract(0),
+		clickedOuter = dom.contract(0),
 		state = dom.contract("inactive");
 
 	//title
@@ -16,58 +18,79 @@
 	changeEvent = dom.event(EventType.Change, function (e) {
 		state.setValue(e.checked ? "active" : "inactive");
 	});
-	clickEvent = dom.event(EventType.Click, function (e) {
-		clicked.setValue(clicked.getValue() + 1);
+	clickEventInner = dom.event(EventType.Click, function (e) {
+		clickedInner.setValue(clickedInner.getValue() + 1);
+	});
+	clickEventOuter = dom.event(EventType.Click, function (e) {
+		clickedOuter.setValue(clickedOuter.getValue() + 1);
 	});
 
 	//item
 	item = dom.div(
+		//attr
+		dom.attr(AttributeType.ID, "container"),
 		//css
 		dom.css(
 			dom.cssGroup(":hover",
-				dom.cssProperty(CssPropertyType.BACKGROUND, "red")
+				dom.cssProperty(CssPropertyType.BACKGROUND, "#C4C4C4")
 			),
-			dom.cssGroup(".active",
-				dom.cssProperty(CssPropertyType.BACKGROUND, "yellow"),
-				dom.cssGroup(" .clicked",
-					dom.cssProperty(CssPropertyType.COLOR, "black")
-				)
-			),
-			dom.cssProperty(CssPropertyType.MARGIN, "0px auto"),
-			dom.cssProperty(CssPropertyType.WIDTH, "200px"),
-			dom.cssProperty(CssPropertyType.HEIGHT, "50px"),
-			dom.cssProperty(CssPropertyType.BACKGROUND, "gray")
+			dom.cssProperty(CssPropertyType.PADDING, "10px"),
+			dom.cssProperty(CssPropertyType.BACKGROUND, "#D6D6D6")
 		),
-		//classes
-		dom.classes(state),
-		//attr
-		dom.attr(AttributeType.ID, "item"),
 		//children
-		dom.input(
-			//css
-			dom.css(
-				dom.cssProperty(CssPropertyType.MARGIN, "5px")
-			),
-			//attr
-			dom.attr('type', 'checkbox'),
-			//events
-			changeEvent
-		),
 		dom.div(
-			//classes
-			dom.classes("clicked"),
 			//css
 			dom.css(
-				dom.cssProperty(CssPropertyType.COLOR, "white"),
-				dom.cssProperty(CssPropertyType.TEXT_ALIGN, "center")
+				dom.cssGroup(":hover",
+					dom.cssProperty(CssPropertyType.BACKGROUND, "red")
+				),
+				dom.cssGroup(".active",
+					dom.cssProperty(CssPropertyType.BACKGROUND, "yellow"),
+					dom.cssGroup(" .clicked",
+						dom.cssProperty(CssPropertyType.COLOR, "black")
+					)
+				),
+				dom.cssProperty(CssPropertyType.MARGIN, "0px auto"),
+				dom.cssProperty(CssPropertyType.WIDTH, "200px"),
+				dom.cssProperty(CssPropertyType.HEIGHT, "50px"),
+				dom.cssProperty(CssPropertyType.BACKGROUND, "gray")
 			),
+			//classes
+			dom.classes(state),
+			//attr
+			dom.attr(AttributeType.ID, "item"),
 			//children
-			dom.text("Clicked: "),
-			dom.text(clicked),
-			dom.text(" times")
+			dom.input(
+				//css
+				dom.css(
+					dom.cssProperty(CssPropertyType.MARGIN, "5px")
+				),
+				//attr
+				dom.attr('type', 'checkbox'),
+				//events
+				changeEvent
+			),
+			dom.div(
+				//classes
+				dom.classes("clicked"),
+				//css
+				dom.css(
+					dom.cssProperty(CssPropertyType.COLOR, "white"),
+					dom.cssProperty(CssPropertyType.TEXT_ALIGN, "center")
+				),
+				//children
+				dom.text("Clicked: "),
+				dom.text(clickedInner),
+				dom.text(" times")
+			),
+			//events
+			clickEventInner
 		),
+		dom.text("Clicked: "),
+		dom.text(clickedOuter),
+		dom.text(" times"),
 		//events
-		clickEvent
+		clickEventOuter
 	);
 
 	//attach
