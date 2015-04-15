@@ -17,12 +17,15 @@
 	//events
 	changeEvent = dom.event(EventType.Change, function (e) {
 		state.setValue(e.checked ? "active" : "inactive");
+		return true; //event is handled and stop propagation
 	});
 	clickEventInner = dom.event(EventType.Click, function (e) {
 		clickedInner.setValue(clickedInner.getValue() + 1);
+		return true;
 	});
 	clickEventOuter = dom.event(EventType.Click, function (e) {
 		clickedOuter.setValue(clickedOuter.getValue() + 1);
+		return true;
 	});
 
 	//item
