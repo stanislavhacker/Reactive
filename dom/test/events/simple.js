@@ -120,6 +120,61 @@
 			div.remove();
 		});
 
+		it("trigger mousedown - propagation", function () {
+			var div,
+				called = 0,
+				eventOne = dom.event(EventType.MouseDown, function () {
+					called += 1;
+				}),
+				eventTwo = dom.event(EventType.MouseDown, function () {
+					called += 10;
+				}),
+				active = dom.div(eventOne);
+
+			//append to body
+			div = dom.div(active, eventTwo);
+			dom.attach(document.body, div);
+
+			simulateMouse(active.element, "mousedown");
+			expect(called).toBe(11);
+
+			simulateMouse(active.element, "mousedown");
+			expect(called).toBe(22);
+
+			simulateMouse(div.element, "mousedown");
+			expect(called).toBe(32);
+
+			div.remove();
+		});
+
+		it("trigger mousedown - stop propagation", function () {
+			var div,
+				called = 0,
+				eventOne = dom.event(EventType.MouseDown, function () {
+					called += 1;
+					return true;
+				}),
+				eventTwo = dom.event(EventType.MouseDown, function () {
+					called += 10;
+				}),
+				active = dom.div(eventOne);
+
+			//append to body
+			div = dom.div(active, eventTwo);
+			dom.attach(document.body, div);
+
+			simulateMouse(active.element, "mousedown");
+			expect(called).toBe(1);
+
+			simulateMouse(active.element, "mousedown");
+			expect(called).toBe(2);
+
+			simulateMouse(div.element, "mousedown");
+			expect(called).toBe(12);
+
+			div.remove();
+		});
+
 		it("trigger change", function () {
 			var div,
 				builder,

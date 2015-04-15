@@ -18,6 +18,8 @@
 		this.type = type;
 		/** @type {Event}*/
 		this.event = originalEvent;
+		/** @type {dom.html.Element}*/
+		this.handledBy = null;
 	};
 
 	/**
@@ -34,6 +36,14 @@
 	 */
 	dom.events.EventMessage.prototype.getType = function () {
 		return this.type;
+	};
+
+	/**
+	 * Get handled by
+	 * @returns {dom.html.Element}
+	 */
+	dom.events.EventMessage.prototype.getHandledBy = function () {
+		return this.handledBy;
 	};
 
 }(dom, document, window));

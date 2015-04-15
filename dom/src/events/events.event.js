@@ -48,9 +48,10 @@
 	/**
 	 * Trigger
 	 * @param {dom.events.EventMessage} event
+	 * @return {boolean} handled
 	 */
 	dom.events.Event.prototype.trigger = function (event) {
-		this.handler(event);
+		return Boolean(this.handler(event));
 	};
 
 	/**

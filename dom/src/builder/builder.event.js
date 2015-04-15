@@ -101,7 +101,9 @@
 	 */
 	dom.builder.Event.prototype.attachEvent = function (event) {
 		var handler,
+			handled,
 			target,
+			message,
 			self = this,
 			handlers = this.handlers,
 			element = this.element;
@@ -111,12 +113,25 @@
 			if (event.isActive() === false) {
 				return;
 			}
+			//get even from window
+			e = e || window.event;
 			//target
 			target = e.target || e.srcElement;
 			//do nothing if is not right element
 			if (bubble(element.element, target)) {
-				//make routine
-				event.trigger(self.createEvent(event, target, e));
+				//create message
+				message = e.message || self.createEvent(event, target, e);
+				//update message
+				e.message = message;
+				//if not handled
+				if (message.getHandledBy() === null) {
+					//make routine
+					handled = event.trigger(message);
+					//handled by element
+					if (handled) {
+						message.handledBy = element;
+					}
+				}
 			}
 		};
 		//push handler

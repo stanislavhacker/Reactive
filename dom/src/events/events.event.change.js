@@ -19,6 +19,10 @@
 		this.type = type;
 		/** @type {Event}*/
 		this.event = originalEvent;
+		/** @type {dom.html.Element}*/
+		this.handledBy = null;
+
+
 		/** @type {boolean|undefined}*/
 		this.newValue = undefined;
 		/** @type {boolean|undefined}*/
