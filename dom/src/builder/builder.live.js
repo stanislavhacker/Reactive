@@ -193,6 +193,122 @@
 		this.events.bindEvents();
 	};
 
+
+
+
+	/**
+	 * @public
+	 * Set attribute
+	 * @param {AttributeType|string} name
+	 * @param {string} value
+	 */
+	dom.builder.Live.prototype.setAttribute = function (name, value) {
+		var element = this.element.element;
+
+		//abstract attribute
+		switch(name) {
+			case AttributeType.VALUE:
+				element.value = value;
+				break;
+			case AttributeType.ID:
+				element.id = value;
+				break;
+			case AttributeType.ACCESSKEY:
+				element.accessKey = value;
+				break;
+			case AttributeType.ACTION:
+				element.action = value;
+				break;
+			case AttributeType.ALINK:
+				element.alink = value;
+				break;
+			case AttributeType.ALT:
+				element.alt = value;
+				break;
+			case AttributeType.CHECKED:
+				element.checked = !!value;
+				break;
+			case AttributeType.CITE:
+				element.cite = value;
+				break;
+			case AttributeType.COLS:
+				element.cols = value;
+				break;
+			case AttributeType.COLSPAN:
+				element.colSpan = value;
+				break;
+			case AttributeType.DISABLED:
+				element.disabled = !!value;
+				break;
+			case AttributeType.HREF:
+				element.href = value;
+				break;
+			case AttributeType.FOR:
+				element.htmlFor = value;
+				break;
+			case AttributeType.LANG:
+				element.lang = value;
+				break;
+			case AttributeType.MEDIA:
+				element.media = value;
+				break;
+			case AttributeType.METHOD:
+				element.method = value;
+				break;
+			case AttributeType.NAME:
+				element.name = value;
+				break;
+			case AttributeType.READONLY:
+				element.readOnly = !!value;
+				break;
+			case AttributeType.REL:
+				element.rel = value;
+				break;
+			case AttributeType.ROWS:
+				element.rows = value;
+				break;
+			case AttributeType.ROWSPAN:
+				element.rowSpan = value;
+				break;
+			case AttributeType.SRC:
+				element.src = value;
+				break;
+			case AttributeType.TABINDEX:
+				element.tabIndex = value;
+				break;
+			case AttributeType.TARGET:
+				element.target = value;
+				break;
+			case AttributeType.TITLE:
+				element.title = value;
+				break;
+			default:
+				element.setAttribute(name, value);
+				break;
+		}
+	};
+
+	/**
+	 * @public
+	 * Set css property
+	 * @type {string} name
+	 * @type {string} value
+	 */
+	dom.builder.Live.prototype.setCssProperty = function (name, value) {
+		var element = this.element.element;
+		element.style[name] = value;
+	};
+
+	/**
+	 * @public
+	 * Set class name
+	 * @type {Array.<string>} value
+	 */
+	dom.builder.Live.prototype.setClassName = function (value) {
+		var element = this.element.element;
+		element.className = value.join(" ");
+	};
+
 	/**
 	 * @public
 	 * Remove

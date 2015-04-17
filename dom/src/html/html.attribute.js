@@ -16,7 +16,7 @@
 	 */
 	dom.html.Attribute = function (name, value) {
 		/** @type {ElementType|string}*/
-		this.name = name;
+		this.name = name.toLowerCase();
 		/** @type {dom.data.Contract}*/
 		this.value = value instanceof dom.data.Contract ? value : new dom.data.UnboundContract(value);
 		/** @type {dom.html.Elements}*/
@@ -82,9 +82,8 @@
 		COLSPAN: "colspan",
 		DISABLED: "disabled",
 		HREF: "href",
-		LABEL: "label",
+		FOR: "for",
 		LANG: "lang",
-		LINK: "link",
 		MEDIA: "media",
 		METHOD: "method",
 		NAME: "name",

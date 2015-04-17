@@ -42,4 +42,31 @@
 		}
 	};
 
+	/**
+	 * @public
+	 * Set attribute
+	 * @param {AttributeType|string} name
+	 * @param {string} value
+	 */
+	dom.builder.LiveText.prototype.setAttribute = function (name, value) {
+	};
+
+
+	/**
+	 * @public
+	 * Set css property
+	 * @type {string} name
+	 * @type {string} value
+	 */
+	dom.builder.LiveText.prototype.setCssProperty = function (name, value) {
+	};
+
+	/**
+	 * @public
+	 * Set class name
+	 * @type {Array.<string>} value
+	 */
+	dom.builder.LiveText.prototype.setClassName = function (value) {
+	};
+
 }(dom, document, window));

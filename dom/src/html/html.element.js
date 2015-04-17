@@ -282,11 +282,12 @@
 	 * @type {string} value
 	 */
 	dom.html.Element.prototype.setAttribute = function (name, value) {
-		var element = this.element;
+		var element = this.element,
+			self = this;
 		//set attribute on dom element
 		if (element) {
 			dom.html.RENDERER.render(this, name, function () {
-				element.setAttribute(name, value);
+				self.reactor.setAttribute(name, value);
 			});
 		}
 	};
@@ -298,11 +299,12 @@
 	 * @type {string} value
 	 */
 	dom.html.Element.prototype.setCssProperty = function (name, value) {
-		var element = this.element;
+		var element = this.element,
+			self = this;
 		//set attribute on dom element
 		if (element) {
 			dom.html.RENDERER.render(this, name, function () {
-				element.style[name] = value;
+				self.reactor.setCssProperty(name, value);
 			});
 		}
 	};
@@ -313,11 +315,12 @@
 	 * @type {Array.<string>} value
 	 */
 	dom.html.Element.prototype.setClassName = function (value) {
-		var element = this.element;
+		var element = this.element,
+			self = this;
 		//set attribute on dom element
 		if (element) {
 			dom.html.RENDERER.render(this, "className", function () {
-				element.className = value.join(" ");
+				self.reactor.setClassName(value);
 			});
 		}
 	};
