@@ -136,4 +136,4 @@ document.body.appendChild(text.getLive());
 
 After render, here will be checkbox and text 'true'. After you check checkbox, text change on 'false'. Reactive known that you have attached contract on checked attribute and also known that you wan to react on change event (because you attach `dom.event(EventType.Change)` without callback). After click on checkbox, Reactive automatically call `setValue` method on contract that is bound on checked attribute and that cause change in text node element created by `dom.text(checked)` call.
 
-[More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---working-with-events) or [Example](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/all/index.html)
+[More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---working-with-events) or [Example](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/events/index.html) or [Full Events example](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/all/index.html)
