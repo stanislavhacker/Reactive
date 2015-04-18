@@ -85,7 +85,6 @@
 		MouseUp: "mouseup",
 		MouseWheel: "mousewheel",
 		Scroll: "scroll",
-		Wheel: "wheel",
 
 		//Copy / paste
 		Copy: "copy",

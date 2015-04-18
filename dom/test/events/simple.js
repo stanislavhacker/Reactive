@@ -172,6 +172,8 @@
 			simulateMouse(div.element, "mousedown");
 			expect(called).toBe(12);
 
+			simulateMouse(active.element, "mouseup");
+
 			div.remove();
 		});
 
@@ -197,6 +199,196 @@
 			expect(createdEvent.checked.getValue()).toBe(false);
 
 			div.remove();
+		});
+
+		describe("trigger mouse events", function () {
+
+			it("trigger mouse basic", function () {
+				var div,
+					builder,
+					createdEvent,
+					givenEvent = null,
+					event = dom.event(EventType.Click, function (evnt) {
+						givenEvent = evnt;
+					}),
+					active = dom.div(event);
+				//append to body
+				div = dom.div(active);
+				dom.attach(document.body, div);
+
+				builder = new dom.builder.Event(active);
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {});
+				expect(createdEvent.getEvent()).not.toBe(null);
+				expect(createdEvent instanceof dom.events.MouseEventMessage).toBe(true);
+				expect(createdEvent.buttons instanceof dom.events.mouse.Buttons);
+				expect(createdEvent.positions instanceof dom.events.mouse.Position);
+				expect(createdEvent.modifiers instanceof dom.events.key.Modifiers);
+				expect(createdEvent.wheel).toBe(0);
+
+				div.remove();
+			});
+
+			it("trigger mouse basic - otjer event", function () {
+				var div,
+					builder,
+					createdEvent,
+					givenEvent = null,
+					event = dom.event(EventType.MouseMove, function (evnt) {
+						givenEvent = evnt;
+					}),
+					active = dom.div(event);
+				//append to body
+				div = dom.div(active);
+				dom.attach(document.body, div);
+
+				builder = new dom.builder.Event(active);
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {});
+				expect(createdEvent.getEvent()).not.toBe(null);
+				expect(createdEvent instanceof dom.events.MouseEventMessage).toBe(true);
+				expect(createdEvent.buttons instanceof dom.events.mouse.Buttons);
+				expect(createdEvent.positions instanceof dom.events.mouse.Position);
+				expect(createdEvent.modifiers instanceof dom.events.key.Modifiers);
+				expect(createdEvent.wheel).toBe(0);
+
+				div.remove();
+			});
+
+			it("buttons fill test - which", function () {
+				var createdEvent,
+					event = dom.event(EventType.Click, function (evnt) {}),
+					active = dom.div(event),
+					builder = new dom.builder.Event(active);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					which: 1
+				});
+				expect(createdEvent.buttons.left).toBe(true);
+				expect(createdEvent.buttons.right).toBe(false);
+				expect(createdEvent.buttons.middle).toBe(false);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					which: 2
+				});
+				expect(createdEvent.buttons.left).toBe(false);
+				expect(createdEvent.buttons.right).toBe(false);
+				expect(createdEvent.buttons.middle).toBe(true);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					which: 3
+				});
+				expect(createdEvent.buttons.left).toBe(false);
+				expect(createdEvent.buttons.right).toBe(true);
+				expect(createdEvent.buttons.middle).toBe(false);
+
+			});
+
+			it("buttons fill test - button", function () {
+				var createdEvent,
+					event = dom.event(EventType.Click, function (evnt) {}),
+					active = dom.div(event),
+					builder = new dom.builder.Event(active);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					button: 0
+				});
+				expect(createdEvent.buttons.left).toBe(false);
+				expect(createdEvent.buttons.right).toBe(false);
+				expect(createdEvent.buttons.middle).toBe(false);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					button: 1
+				});
+				expect(createdEvent.buttons.left).toBe(true);
+				expect(createdEvent.buttons.right).toBe(false);
+				expect(createdEvent.buttons.middle).toBe(false);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					button: 2
+				});
+				expect(createdEvent.buttons.left).toBe(false);
+				expect(createdEvent.buttons.right).toBe(true);
+				expect(createdEvent.buttons.middle).toBe(false);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					button: 3
+				});
+				expect(createdEvent.buttons.left).toBe(true);
+				expect(createdEvent.buttons.right).toBe(true);
+				expect(createdEvent.buttons.middle).toBe(false);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					button: 4
+				});
+				expect(createdEvent.buttons.left).toBe(false);
+				expect(createdEvent.buttons.right).toBe(false);
+				expect(createdEvent.buttons.middle).toBe(true);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					button: 5
+				});
+				expect(createdEvent.buttons.left).toBe(true);
+				expect(createdEvent.buttons.right).toBe(false);
+				expect(createdEvent.buttons.middle).toBe(true);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					button: 6
+				});
+				expect(createdEvent.buttons.left).toBe(false);
+				expect(createdEvent.buttons.right).toBe(true);
+				expect(createdEvent.buttons.middle).toBe(true);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					button: 7
+				});
+				expect(createdEvent.buttons.left).toBe(true);
+				expect(createdEvent.buttons.right).toBe(true);
+				expect(createdEvent.buttons.middle).toBe(true);
+
+
+			});
+
+			it("wheel fill test", function () {
+				var createdEvent,
+					event = dom.event(EventType.Click, function (evnt) {}),
+					active = dom.div(event),
+					builder = new dom.builder.Event(active);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					wheelDelta: 120
+				});
+				expect(createdEvent.wheel).toBe(120);
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					wheelDelta: 240
+				});
+				expect(createdEvent.wheel).toBe(240);
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					detail: -3
+				});
+				expect(createdEvent.wheel).toBe(120);
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					detail: -6
+				});
+				expect(createdEvent.wheel).toBe(240);
+
+			});
+
 		});
 
 		it("unbind click event", function () {
@@ -233,6 +425,24 @@
 			var message = new dom.events.EventMessage(EventType.MouseMove, null);
 			expect(message.getEvent()).toBe(null);
 			expect(message.getType()).toBe('mousemove');
+		});
+
+		it("message change", function () {
+			var message = new dom.events.ChangeEventMessage(EventType.Change, null);
+			expect(message.getEvent()).toBe(null);
+			expect(message.getType()).toBe('change');
+			expect(message.newValue instanceof dom.data.Contract);
+			expect(message.checked instanceof dom.data.Contract);
+		});
+
+		it("message mouse", function () {
+			var message = new dom.events.MouseEventMessage(EventType.MouseMove, null);
+			expect(message.getEvent()).toBe(null);
+			expect(message.getType()).toBe('mousemove');
+			expect(message.buttons instanceof dom.events.mouse.Buttons);
+			expect(message.positions instanceof dom.events.mouse.Position);
+			expect(message.modifiers instanceof dom.events.key.Modifiers);
+			expect(message.wheel).toBe(0);
 		});
 
 	});

@@ -19,6 +19,7 @@ module.exports = function(grunt) {
 			'src/events/events.event.js',
 			'src/events/events.event.message.js',
 			'src/events/events.event.change.js',
+			'src/events/events.event.mouse.js',
 			//Data
 			'src/data/data.contract.js',
 			'src/data/data.contract.unbound.js',

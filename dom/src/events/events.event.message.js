@@ -6,6 +6,9 @@
 	"use strict";
 
 	dom.events = dom.events || {};
+	dom.events.mouse = dom.events.mouse || {};
+	dom.events.key = dom.events.key || {};
+
 
 	/**
 	 * Event message
@@ -44,6 +47,64 @@
 	 */
 	dom.events.EventMessage.prototype.getHandledBy = function () {
 		return this.handledBy;
+	};
+
+
+
+
+
+
+
+	/**
+	 * Buttons
+	 * @constructor
+	 */
+	dom.events.mouse.Buttons = function () {
+		/** @type {boolean}*/
+		this.left = false;
+		/** @type {boolean}*/
+		this.middle = false;
+		/** @type {boolean}*/
+		this.right = false;
+	};
+
+	/**
+	 * Position
+	 * @constructor
+	 */
+	dom.events.mouse.Position = function () {
+		/** @type {dom.events.mouse.Coordination}*/
+		this.viewport = new dom.events.mouse.Coordination();
+		/** @type {dom.events.mouse.Coordination}*/
+		this.document = new dom.events.mouse.Coordination();
+		/** @type {dom.events.mouse.Coordination}*/
+		this.screen = new dom.events.mouse.Coordination();
+	};
+
+	/**
+	 * Coordination
+	 * @constructor
+	 */
+	dom.events.mouse.Coordination = function () {
+		/** @type {number}*/
+		this.top = 0;
+		/** @type {number}*/
+		this.left = 0;
+	};
+
+	/**
+	 * Modifiers
+	 * @constructor
+	 */
+	dom.events.key.Modifiers = function () {
+		/** @type {boolean}*/
+		this.altKey = false;
+		/** @type {boolean}*/
+		this.ctrlKey = false;
+		/** @type {boolean}*/
+		this.metaKey = false;
+		/** @type {boolean}*/
+		this.shiftKey = false;
 	};
 
 }(dom, document, window));

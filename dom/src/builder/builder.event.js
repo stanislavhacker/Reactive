@@ -2,15 +2,17 @@
  * Builder for Reactive
  * @author Stanislav Hacker
  */
-(function (dom) {
+(function (dom, document, window) {
 	"use strict";
 
 	dom.builder = dom.builder || {};
 
+	var buttons = dom.events.mouse.Buttons();
+
 	/**
 	 * Add event
-	 * @param {HTMLElement} el
-	 * @param {string} eventType
+	 * @param {HTMLElement|Window} el
+	 * @param {dom.events.EventType|EventType|string} eventType
 	 * @param {function} handler
 	 */
 	function addEvent(el, eventType, handler) {
@@ -24,12 +26,21 @@
 		} else {
 			throw "Reactive events are not supported in this browser.";
 		}
+
+		//firefox scroll
+		switch(eventType) {
+			case EventType.MouseWheel:
+				addEvent(el, "DOMMouseScroll", handler);
+				break;
+			default:
+				break;
+		}
 	}
 
 	/**
 	 * Remove handler
 	 * @param {HTMLElement} el
-	 * @param {string} eventType
+	 * @param {dom.events.EventType|EventType|string} eventType
 	 * @param {function} handler
 	 */
 	function removeEvent(el, eventType, handler) {
@@ -42,6 +53,15 @@
 		// ancient browsers
 		} else {
 			throw "Reactive events are not supported in this browser.";
+		}
+
+		//firefox scroll
+		switch(eventType) {
+			case EventType.MouseWheel:
+				removeEvent(el, "DOMMouseScroll", handler);
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -165,10 +185,10 @@
 			case EventType.MouseOut:
 			case EventType.MouseOver:
 			case EventType.MouseUp:
-			//Scroll events
 			case EventType.MouseWheel:
+				return dom.builder.Event.createMouseEventMessage(event, element, originalEvent);
+			//Scroll events
 			case EventType.Scroll:
-			case EventType.Wheel:
 			//Drag events
 			case EventType.Drag:
 			case EventType.DragEnd:
@@ -265,6 +285,102 @@
 	//CREATORS
 
 	/**
+	 * Determine button
+	 * @param {*} event
+	 * @param {dom.events.mouse.Buttons} buttons
+	 */
+	function determineButton (event, buttons) {
+		// all browsers except IE before version 9
+		if ('which' in event) {
+			switch (event.which) {
+				case 1:
+					buttons.left = true;
+					break;
+				case 2:
+					buttons.middle = true;
+					break;
+				case 3:
+					buttons.right = true;
+					break;
+			}
+		//old browsers IE8 <
+		} else {
+			//case
+			switch (event.button) {
+				case 1:
+					buttons.left = true;
+					break;
+				case 2:
+					buttons.right = true;
+					break;
+				case 3:
+					buttons.left = true;
+					buttons.right = true;
+					break;
+				case 4:
+					buttons.middle = true;
+					break;
+				case 5:
+					buttons.left = true;
+					buttons.middle = true;
+					break;
+				case 6:
+					buttons.right = true;
+					buttons.middle = true;
+					break;
+				case 7:
+					buttons.left = true;
+					buttons.middle = true;
+					buttons.right = true;
+					break;
+			}
+		}
+	}
+
+	/**
+	 * Determine modifiers
+	 * @param {MouseEvent} event
+	 * @param {dom.events.key.Modifiers} modifiers
+	 */
+	function determineModifiers (event, modifiers) {
+		modifiers.altKey = event.altKey;
+		modifiers.ctrlKey = event.ctrlKey;
+		modifiers.metaKey = event.metaKey;
+		modifiers.shiftKey = event.shiftKey;
+	}
+
+	/**
+	 * Determine positions
+	 * @param {MouseEvent} event
+	 * @param {dom.events.mouse.Position} positions
+	 */
+	function determinePositions (event, positions) {
+		//noinspection JSValidateTypes
+		var pageSupport = event.pageX !== undefined;
+		//viewport fill
+		positions.viewport.left = event.clientX;
+		positions.viewport.top = event.clientY;
+		//document fill
+		positions.document.left = pageSupport ? event.pageX : event.clientX + document.documentElement.scrollLeft;
+		positions.document.top = pageSupport ? event.pageY : event.clientY + document.documentElement.scrollTop;
+		//screen fill
+		positions.screen.left = event.screenX;
+		positions.screen.top = event.screenY;
+	}
+
+	/**
+	 * Determine wheel
+	 * @param {MouseEvent} event
+	 * @returns {number}
+	 */
+	function determineWheel (event) {
+		return event.detail ? event.detail * (-40) : event.wheelDelta;
+	}
+
+
+
+
+	/**
 	 * @static
 	 * Create change event message
 	 * @param {dom.events.Event} event
@@ -299,10 +415,50 @@
 		return base;
 	};
 
+	/**
+	 * @static
+	 * Create mouse event message
+	 * @param {dom.events.Event} event
+	 * @param {dom.html.Element} element
+	 * @param {Event} originalEvent
+	 * @return {dom.events.ChangeEventMessage}
+	 */
+	dom.builder.Event.createMouseEventMessage = function (event, element, originalEvent) {
+		var type = event.getType(),
+			base;
+
+		base = new dom.events.MouseEventMessage(type, originalEvent);
+		//determine buttons on mouse down
+		switch(type) {
+			case EventType.Click:
+				determineButton(originalEvent, base.buttons);
+				break;
+			case EventType.MouseDown:
+				buttons = new dom.events.mouse.Buttons();
+				determineButton(originalEvent, buttons);
+				base.buttons = buttons;
+				break;
+			default:
+				base.buttons = buttons;
+				break;
+		}
+		//determine rest
+		determinePositions(originalEvent, base.positions);
+		determineModifiers(originalEvent, base.modifiers);
+		base.wheel = determineWheel(originalEvent) || 0;
+
+		return base;
+	};
 
 
 
-
-
+	//bind helper events
+	addEvent(window, EventType.MouseDown, function (e) {
+		buttons = new dom.events.mouse.Buttons();
+		determineButton(e, buttons);
+	});
+	addEvent(window, EventType.MouseUp, function () {
+		buttons = new dom.events.mouse.Buttons();
+	});
 
 }(dom, document, window));
