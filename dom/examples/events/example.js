@@ -3,16 +3,15 @@
 	"use strict";
 
 	var h1,
+		h2,
 		item,
 		changeEvent,
 		clickEventInner,
 		clickEventOuter,
+		checked = dom.contract(true),
 		clickedInner = dom.contract(0),
 		clickedOuter = dom.contract(0),
 		state = dom.contract("inactive");
-
-	//title
-	h1 = dom.h1(dom.text('Events example'));
 
 	//events
 	changeEvent = dom.event(EventType.Change, function (e) {
@@ -28,6 +27,17 @@
 		return true;
 	});
 
+
+	//title
+	h1 = dom.h1(dom.text('Events example'));
+	dom.attach(document.body, h1);
+
+	//source
+	source('https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/events/example.js');
+
+	//title
+	h2 = dom.h2(dom.text('External handled change'));
+	dom.attach(document.body, h2);
 	//item
 	item = dom.div(
 		//attr
@@ -95,11 +105,33 @@
 		//events
 		clickEventOuter
 	);
+	dom.attach(document.body, item);
 
-	//attach
-	dom.attach(document.body, h1);
-	//source
-	source('https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/events/example.js');
+	//title
+	h2 = dom.h2(dom.text('Self handled change'));
+	dom.attach(document.body, h2);
+
 	//item
+	item = dom.div(
+		//attr
+		dom.attr(AttributeType.ID, "container2"),
+		//css
+		dom.css(
+			dom.cssGroup(":hover",
+				dom.cssProperty(CssPropertyType.BACKGROUND, "#C4C4C4")
+			),
+			dom.cssProperty(CssPropertyType.PADDING, "10px"),
+			dom.cssProperty(CssPropertyType.BACKGROUND, "#D6D6D6")
+		),
+		//children
+		dom.input(
+			//attr
+			dom.attr('type', 'checkbox'),
+			dom.attr('checked', checked),
+			//events
+			dom.event(EventType.Change)
+		),
+		dom.text(checked)
+	);
 	dom.attach(document.body, item);
 }());

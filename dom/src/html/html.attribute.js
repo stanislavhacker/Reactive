@@ -48,6 +48,15 @@
 
 	/**
 	 * @public
+	 * Get data contract
+	 * @returns {dom.data.Contract}
+	 */
+	dom.html.Attribute.prototype.getDataContract = function () {
+		return this.value;
+	};
+
+	/**
+	 * @public
 	 * Is changeable
 	 * @returns {boolean}
 	 */

@@ -2767,6 +2767,15 @@ var dom = (function() {
 
 	/**
 	 * @public
+	 * Get data contract
+	 * @returns {dom.data.Contract}
+	 */
+	dom.html.Attribute.prototype.getDataContract = function () {
+		return this.value;
+	};
+
+	/**
+	 * @public
 	 * Is changeable
 	 * @returns {boolean}
 	 */
@@ -4215,21 +4224,25 @@ var sheets = (function (dom) {
 		var domElement = element.getLive(),
 			attributes = element.getAttributes(),
 			type = event.getType(),
+			checkedContract,
+			valueContract,
 			checkedAttr,
 			valueAttr,
 			base;
 
 		//checked attr
-		checkedAttr = attributes[AttributeType.CHECKED] || new dom.data.UnboundContract(null);
-		checkedAttr.setValue(Boolean(domElement.checked));
+		checkedAttr = attributes[AttributeType.CHECKED];
+		checkedContract = checkedAttr ? checkedAttr.getDataContract() : new dom.data.UnboundContract(null);
+		checkedContract.setValue(Boolean(domElement.checked));
 
 		//value attr
-		valueAttr = attributes[AttributeType.VALUE] || new dom.data.UnboundContract(null);
-		valueAttr.setValue(domElement.value);
+		valueAttr = attributes[AttributeType.VALUE];
+		valueContract = valueAttr ? valueAttr.getDataContract() : new dom.data.UnboundContract(null);
+		valueContract.setValue(domElement.value);
 
 		base = new dom.events.ChangeEventMessage(type, originalEvent);
-		base.checked = checkedAttr;
-		base.newValue = valueAttr;
+		base.checked = checkedContract;
+		base.newValue = valueContract;
 
 		return base;
 	};

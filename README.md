@@ -76,7 +76,7 @@ document.body.appendChild(div.getLive());
 [More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---basic-dom-element-usage)
 
 ## Create styles in element
-Creating styles operates on a similar principle. Just call `dom.css()` and then use the parameters`dom.cssProperty()`. But if you look at the HTML, you will find that there are no css! How then used? It's very simple. Static css are very slow on the elements. Therefore, there are a generated CSS styles that can be connected as a statics css file on page!
+Creating styles operates on a similar principle. Just call `dom.css()` and then use the parameters `dom.cssProperty()`. But if you look at the HTML, you will find that there are no css! How then used? It's very simple. Static css are very slow on the elements. Therefore, there are a generated CSS styles that can be connected as a statics css file on page!
 
 ##### JS code
 
@@ -104,3 +104,35 @@ document.body.appendChild(div.getLive());
 ```
 
 [More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---basic-dom-element-usage)
+
+## Events
+It's really easy to working with dom events. You can you shorthand `dom.event()` that is use for binding event on element. This method has 2 parameters. One is type of event `EventType` enum or string. Second parameter is handler. If handler is called, ther is passed `dom.events.EventMessage` as a parameter. This message contains typ, original event and data bsed on current event type. There is example bellow::
+
+##### JS code
+
+```javascript
+var div = dom.input(
+	dom.event(EventType.Change, function (eventMessage) {
+		//event handler here
+	})
+);
+document.body.appendChild(div.getLive());
+```
+
+But here is a another options. Because Reactive use `dom.contract` as base communication object. You can attach this contract on value or checked or another attribute and tell element to change this contract. You can more understand by example.
+
+```javascript
+var checked = dom.contact(true),
+	div = dom.input(
+		dom.attr(AttributeType.TYPE, 'checkbox'),
+		dom.attr(AttributeType.CHECKED, checked),
+		dom.event(EventType.Change)
+	),
+	text = dom.text(checked);
+document.body.appendChild(div.getLive());
+document.body.appendChild(text.getLive());
+```
+
+After render, here will be checkbox and text 'true'. After you check checkbox, text change on 'false'. Reactive known that you have attached contract on checked attribute and also known that you wan to react on change event (because you attach `dom.event(EventType.Change)` without callback). After click on checkbox, Reactive automatically call `setValue` method on contract that is bound on checked attribute and that cause change in text node element created by `dom.text(checked)` call.
+
+[More here](https://github.com/stanislavhacker/Reactive/wiki/module:-DOM---working-with-events) or [Example](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/events/index.html)
