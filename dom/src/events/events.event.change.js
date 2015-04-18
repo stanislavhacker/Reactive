@@ -23,9 +23,9 @@
 		this.handledBy = null;
 
 
-		/** @type {boolean|undefined}*/
+		/** @type {dom.data.Contract}*/
 		this.newValue = undefined;
-		/** @type {boolean|undefined}*/
+		/** @type {dom.data.Contract}*/
 		this.checked = undefined;
 	};
 	dom.utils.inherit(dom.events.ChangeEventMessage, dom.events.EventMessage);

@@ -16,7 +16,7 @@
 
 	//events
 	changeEvent = dom.event(EventType.Change, function (e) {
-		state.setValue(e.checked ? "active" : "inactive");
+		state.setValue(e.checked.getValue() ? "active" : "inactive");
 		return true; //event is handled and stop propagation
 	});
 	clickEventInner = dom.event(EventType.Click, function (e) {

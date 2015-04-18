@@ -190,11 +190,11 @@
 
 			builder = new dom.builder.Event(active);
 			//noinspection JSAccessibilityCheck
-			createdEvent = builder.createEvent(event, active.element, null);
+			createdEvent = builder.createEvent(event, active, null);
 			expect(createdEvent.getEvent()).toBe(null);
 			expect(createdEvent instanceof dom.events.ChangeEventMessage).toBe(true);
-			expect(createdEvent.newValue).toBe("");
-			expect(createdEvent.checked).toBe(false);
+			expect(createdEvent.newValue.getValue()).toBe("");
+			expect(createdEvent.checked.getValue()).toBe(false);
 
 			div.remove();
 		});

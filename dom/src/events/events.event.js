@@ -10,14 +10,14 @@
 	/**
 	 * Event
 	 * @param {dom.events.EventType|EventType|string} type
-	 * @param {Function} handler
+	 * @param {Function=} handler
 	 * @constructor
 	 */
 	dom.events.Event = function (type, handler) {
 		/** @type {string}*/
 		this.type = type;
 		/** @type {Function}*/
-		this.handler = handler;
+		this.handler = handler || function () { return true; };
 		/** @type {boolean}*/
 		this.detached = false;
 	};
