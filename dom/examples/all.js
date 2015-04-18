@@ -27,3 +27,21 @@ function source(link) {
 	);
 	dom.attach(document.body, a);
 }
+
+
+/**
+ * Event visualizer
+ * @param {*} event
+ * @return {string}
+ */
+function eventVisualiser(event) {
+	//noinspection JSValidateTypes
+	event.event = event.event.toString();
+	if (event.newValue) {
+		event.newValue = "[object dom.data.Contract] (value: " + event.newValue.getValue() + ")";
+	}
+	if (event.checked) {
+		event.checked = "[object dom.data.Contract] (value: " + event.checked.getValue() + ")";
+	}
+	return JSON.stringify(event, null, "  ");
+}
