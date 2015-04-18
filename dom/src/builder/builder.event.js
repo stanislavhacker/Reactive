@@ -370,10 +370,14 @@
 
 	/**
 	 * Determine wheel
+	 * @param {dom.events.EventType|EventType|string} type
 	 * @param {MouseEvent} event
 	 * @returns {number}
 	 */
-	function determineWheel (event) {
+	function determineWheel (type, event) {
+		if (type !== EventType.MouseWheel) {
+			return 0;
+		}
 		return event.detail ? event.detail * (-40) : event.wheelDelta;
 	}
 
@@ -445,7 +449,7 @@
 		//determine rest
 		determinePositions(originalEvent, base.positions);
 		determineModifiers(originalEvent, base.modifiers);
-		base.wheel = determineWheel(originalEvent) || 0;
+		base.wheel = determineWheel(type, originalEvent);
 
 		return base;
 	};

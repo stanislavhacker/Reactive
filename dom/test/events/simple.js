@@ -362,7 +362,7 @@
 
 			it("wheel fill test", function () {
 				var createdEvent,
-					event = dom.event(EventType.Click, function (evnt) {}),
+					event = dom.event(EventType.MouseWheel, function (evnt) {}),
 					active = dom.div(event),
 					builder = new dom.builder.Event(active);
 
