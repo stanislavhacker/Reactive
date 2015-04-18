@@ -8,10 +8,10 @@ Shadow DOM library without jQuery, React and other stuff. Fully adaptable on bro
  - [Table example - long table test](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/table/index.html)
  - [Events example - basics](http://htmlpreview.github.io/?https://github.com/stanislavhacker/Reactive/blob/master/dom/examples/events/index.html)
  
-# How to start developing for Reactive?
+##  How to start developing for Reactive?
 Go to this [link](https://github.com/stanislavhacker/Reactive/wiki/How-to-start-developing%3F) in wiki.
 
-# How to start developing in Reactive sandbox?
+##  How to start developing in Reactive sandbox?
 Go to this [link](https://github.com/stanislavhacker/Reactive/wiki/How-to-develop-with-Reactive) in wiki.
 
 
