@@ -1868,7 +1868,6 @@ var dom = (function() {
 		MouseUp: "mouseup",
 		MouseWheel: "mousewheel",
 		Scroll: "scroll",
-		Wheel: "wheel",
 
 		//Copy / paste
 		Copy: "copy",
@@ -1950,6 +1949,9 @@ var dom = (function() {
 	"use strict";
 
 	dom.events = dom.events || {};
+	dom.events.mouse = dom.events.mouse || {};
+	dom.events.key = dom.events.key || {};
+
 
 	/**
 	 * Event message
@@ -1990,6 +1992,64 @@ var dom = (function() {
 		return this.handledBy;
 	};
 
+
+
+
+
+
+
+	/**
+	 * Buttons
+	 * @constructor
+	 */
+	dom.events.mouse.Buttons = function () {
+		/** @type {boolean}*/
+		this.left = false;
+		/** @type {boolean}*/
+		this.middle = false;
+		/** @type {boolean}*/
+		this.right = false;
+	};
+
+	/**
+	 * Position
+	 * @constructor
+	 */
+	dom.events.mouse.Position = function () {
+		/** @type {dom.events.mouse.Coordination}*/
+		this.viewport = new dom.events.mouse.Coordination();
+		/** @type {dom.events.mouse.Coordination}*/
+		this.document = new dom.events.mouse.Coordination();
+		/** @type {dom.events.mouse.Coordination}*/
+		this.screen = new dom.events.mouse.Coordination();
+	};
+
+	/**
+	 * Coordination
+	 * @constructor
+	 */
+	dom.events.mouse.Coordination = function () {
+		/** @type {number}*/
+		this.top = 0;
+		/** @type {number}*/
+		this.left = 0;
+	};
+
+	/**
+	 * Modifiers
+	 * @constructor
+	 */
+	dom.events.key.Modifiers = function () {
+		/** @type {boolean}*/
+		this.altKey = false;
+		/** @type {boolean}*/
+		this.ctrlKey = false;
+		/** @type {boolean}*/
+		this.metaKey = false;
+		/** @type {boolean}*/
+		this.shiftKey = false;
+	};
+
 }(dom, document, window));
 ;/**
  * Event in Reactive
@@ -2022,6 +2082,41 @@ var dom = (function() {
 		this.checked = undefined;
 	};
 	dom.utils.inherit(dom.events.ChangeEventMessage, dom.events.EventMessage);
+
+}(dom, document, window));
+;/**
+ * Event in Reactive
+ * @author Stanislav Hacker
+ */
+(function (dom) {
+	"use strict";
+
+	dom.events = dom.events || {};
+
+	/**
+	 * Event message
+	 * @param {dom.events.EventType|EventType|string} type
+	 * @param {Event} originalEvent
+	 * @extends {dom.events.EventMessage}
+	 * @constructor
+	 */
+	dom.events.MouseEventMessage = function (type, originalEvent) {
+		/** @type {dom.events.EventType|EventType|string}*/
+		this.type = type;
+		/** @type {Event}*/
+		this.event = originalEvent;
+		/** @type {dom.html.Element}*/
+		this.handledBy = null;
+		/** @type {dom.events.mouse.Buttons}*/
+		this.buttons = new dom.events.mouse.Buttons();
+		/** @type {dom.events.mouse.Position}*/
+		this.positions = new dom.events.mouse.Position();
+		/** @type {dom.events.key.Modifiers}*/
+		this.modifiers = new dom.events.key.Modifiers();
+		/** @type {number}*/
+		this.wheel = 0;
+	};
+	dom.utils.inherit(dom.events.MouseEventMessage, dom.events.EventMessage);
 
 }(dom, document, window));
 ;/**
@@ -3950,15 +4045,17 @@ var sheets = (function (dom) {
  * Builder for Reactive
  * @author Stanislav Hacker
  */
-(function (dom) {
+(function (dom, document, window) {
 	"use strict";
 
 	dom.builder = dom.builder || {};
 
+	var buttons = dom.events.mouse.Buttons();
+
 	/**
 	 * Add event
-	 * @param {HTMLElement} el
-	 * @param {string} eventType
+	 * @param {HTMLElement|Window} el
+	 * @param {dom.events.EventType|EventType|string} eventType
 	 * @param {function} handler
 	 */
 	function addEvent(el, eventType, handler) {
@@ -3972,12 +4069,21 @@ var sheets = (function (dom) {
 		} else {
 			throw "Reactive events are not supported in this browser.";
 		}
+
+		//firefox scroll
+		switch(eventType) {
+			case EventType.MouseWheel:
+				addEvent(el, "DOMMouseScroll", handler);
+				break;
+			default:
+				break;
+		}
 	}
 
 	/**
 	 * Remove handler
 	 * @param {HTMLElement} el
-	 * @param {string} eventType
+	 * @param {dom.events.EventType|EventType|string} eventType
 	 * @param {function} handler
 	 */
 	function removeEvent(el, eventType, handler) {
@@ -3990,6 +4096,15 @@ var sheets = (function (dom) {
 		// ancient browsers
 		} else {
 			throw "Reactive events are not supported in this browser.";
+		}
+
+		//firefox scroll
+		switch(eventType) {
+			case EventType.MouseWheel:
+				removeEvent(el, "DOMMouseScroll", handler);
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -4113,10 +4228,10 @@ var sheets = (function (dom) {
 			case EventType.MouseOut:
 			case EventType.MouseOver:
 			case EventType.MouseUp:
-			//Scroll events
 			case EventType.MouseWheel:
+				return dom.builder.Event.createMouseEventMessage(event, element, originalEvent);
+			//Scroll events
 			case EventType.Scroll:
-			case EventType.Wheel:
 			//Drag events
 			case EventType.Drag:
 			case EventType.DragEnd:
@@ -4213,6 +4328,102 @@ var sheets = (function (dom) {
 	//CREATORS
 
 	/**
+	 * Determine button
+	 * @param {*} event
+	 * @param {dom.events.mouse.Buttons} buttons
+	 */
+	function determineButton (event, buttons) {
+		// all browsers except IE before version 9
+		if ('which' in event) {
+			switch (event.which) {
+				case 1:
+					buttons.left = true;
+					break;
+				case 2:
+					buttons.middle = true;
+					break;
+				case 3:
+					buttons.right = true;
+					break;
+			}
+		//old browsers IE8 <
+		} else {
+			//case
+			switch (event.button) {
+				case 1:
+					buttons.left = true;
+					break;
+				case 2:
+					buttons.right = true;
+					break;
+				case 3:
+					buttons.left = true;
+					buttons.right = true;
+					break;
+				case 4:
+					buttons.middle = true;
+					break;
+				case 5:
+					buttons.left = true;
+					buttons.middle = true;
+					break;
+				case 6:
+					buttons.right = true;
+					buttons.middle = true;
+					break;
+				case 7:
+					buttons.left = true;
+					buttons.middle = true;
+					buttons.right = true;
+					break;
+			}
+		}
+	}
+
+	/**
+	 * Determine modifiers
+	 * @param {MouseEvent} event
+	 * @param {dom.events.key.Modifiers} modifiers
+	 */
+	function determineModifiers (event, modifiers) {
+		modifiers.altKey = event.altKey;
+		modifiers.ctrlKey = event.ctrlKey;
+		modifiers.metaKey = event.metaKey;
+		modifiers.shiftKey = event.shiftKey;
+	}
+
+	/**
+	 * Determine positions
+	 * @param {MouseEvent} event
+	 * @param {dom.events.mouse.Position} positions
+	 */
+	function determinePositions (event, positions) {
+		//noinspection JSValidateTypes
+		var pageSupport = event.pageX !== undefined;
+		//viewport fill
+		positions.viewport.left = event.clientX;
+		positions.viewport.top = event.clientY;
+		//document fill
+		positions.document.left = pageSupport ? event.pageX : event.clientX + document.documentElement.scrollLeft;
+		positions.document.top = pageSupport ? event.pageY : event.clientY + document.documentElement.scrollTop;
+		//screen fill
+		positions.screen.left = event.screenX;
+		positions.screen.top = event.screenY;
+	}
+
+	/**
+	 * Determine wheel
+	 * @param {MouseEvent} event
+	 * @returns {number}
+	 */
+	function determineWheel (event) {
+		return event.detail ? event.detail * (-40) : event.wheelDelta;
+	}
+
+
+
+
+	/**
 	 * @static
 	 * Create change event message
 	 * @param {dom.events.Event} event
@@ -4247,11 +4458,51 @@ var sheets = (function (dom) {
 		return base;
 	};
 
+	/**
+	 * @static
+	 * Create mouse event message
+	 * @param {dom.events.Event} event
+	 * @param {dom.html.Element} element
+	 * @param {Event} originalEvent
+	 * @return {dom.events.ChangeEventMessage}
+	 */
+	dom.builder.Event.createMouseEventMessage = function (event, element, originalEvent) {
+		var type = event.getType(),
+			base;
+
+		base = new dom.events.MouseEventMessage(type, originalEvent);
+		//determine buttons on mouse down
+		switch(type) {
+			case EventType.Click:
+				determineButton(originalEvent, base.buttons);
+				break;
+			case EventType.MouseDown:
+				buttons = new dom.events.mouse.Buttons();
+				determineButton(originalEvent, buttons);
+				base.buttons = buttons;
+				break;
+			default:
+				base.buttons = buttons;
+				break;
+		}
+		//determine rest
+		determinePositions(originalEvent, base.positions);
+		determineModifiers(originalEvent, base.modifiers);
+		base.wheel = determineWheel(originalEvent) || 0;
+
+		return base;
+	};
 
 
 
-
-
+	//bind helper events
+	addEvent(window, EventType.MouseDown, function (e) {
+		buttons = new dom.events.mouse.Buttons();
+		determineButton(e, buttons);
+	});
+	addEvent(window, EventType.MouseUp, function () {
+		buttons = new dom.events.mouse.Buttons();
+	});
 
 }(dom, document, window));;/**
  * Builder for Reactive
