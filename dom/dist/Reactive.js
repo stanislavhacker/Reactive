@@ -1793,14 +1793,14 @@ var dom = (function() {
 	/**
 	 * Event
 	 * @param {dom.events.EventType|EventType|string} type
-	 * @param {Function} handler
+	 * @param {Function=} handler
 	 * @constructor
 	 */
 	dom.events.Event = function (type, handler) {
 		/** @type {string}*/
 		this.type = type;
 		/** @type {Function}*/
-		this.handler = handler;
+		this.handler = handler || function () { return true; };
 		/** @type {boolean}*/
 		this.detached = false;
 	};
@@ -1831,9 +1831,10 @@ var dom = (function() {
 	/**
 	 * Trigger
 	 * @param {dom.events.EventMessage} event
+	 * @return {boolean} handled
 	 */
 	dom.events.Event.prototype.trigger = function (event) {
-		this.handler(event);
+		return Boolean(this.handler(event));
 	};
 
 	/**
@@ -1961,6 +1962,8 @@ var dom = (function() {
 		this.type = type;
 		/** @type {Event}*/
 		this.event = originalEvent;
+		/** @type {dom.html.Element}*/
+		this.handledBy = null;
 	};
 
 	/**
@@ -1977,6 +1980,14 @@ var dom = (function() {
 	 */
 	dom.events.EventMessage.prototype.getType = function () {
 		return this.type;
+	};
+
+	/**
+	 * Get handled by
+	 * @returns {dom.html.Element}
+	 */
+	dom.events.EventMessage.prototype.getHandledBy = function () {
+		return this.handledBy;
 	};
 
 }(dom, document, window));
@@ -2001,9 +2012,13 @@ var dom = (function() {
 		this.type = type;
 		/** @type {Event}*/
 		this.event = originalEvent;
-		/** @type {boolean|undefined}*/
+		/** @type {dom.html.Element}*/
+		this.handledBy = null;
+
+
+		/** @type {dom.data.Contract}*/
 		this.newValue = undefined;
-		/** @type {boolean|undefined}*/
+		/** @type {dom.data.Contract}*/
 		this.checked = undefined;
 	};
 	dom.utils.inherit(dom.events.ChangeEventMessage, dom.events.EventMessage);
@@ -2418,11 +2433,12 @@ var dom = (function() {
 	 * @type {string} value
 	 */
 	dom.html.Element.prototype.setAttribute = function (name, value) {
-		var element = this.element;
+		var element = this.element,
+			self = this;
 		//set attribute on dom element
 		if (element) {
 			dom.html.RENDERER.render(this, name, function () {
-				element.setAttribute(name, value);
+				self.reactor.setAttribute(name, value);
 			});
 		}
 	};
@@ -2434,11 +2450,12 @@ var dom = (function() {
 	 * @type {string} value
 	 */
 	dom.html.Element.prototype.setCssProperty = function (name, value) {
-		var element = this.element;
+		var element = this.element,
+			self = this;
 		//set attribute on dom element
 		if (element) {
 			dom.html.RENDERER.render(this, name, function () {
-				element.style[name] = value;
+				self.reactor.setCssProperty(name, value);
 			});
 		}
 	};
@@ -2449,11 +2466,12 @@ var dom = (function() {
 	 * @type {Array.<string>} value
 	 */
 	dom.html.Element.prototype.setClassName = function (value) {
-		var element = this.element;
+		var element = this.element,
+			self = this;
 		//set attribute on dom element
 		if (element) {
 			dom.html.RENDERER.render(this, "className", function () {
-				element.className = value.join(" ");
+				self.reactor.setClassName(value);
 			});
 		}
 	};
@@ -2717,7 +2735,7 @@ var dom = (function() {
 	 */
 	dom.html.Attribute = function (name, value) {
 		/** @type {ElementType|string}*/
-		this.name = name;
+		this.name = name.toLowerCase();
 		/** @type {dom.data.Contract}*/
 		this.value = value instanceof dom.data.Contract ? value : new dom.data.UnboundContract(value);
 		/** @type {dom.html.Elements}*/
@@ -2783,9 +2801,8 @@ var dom = (function() {
 		COLSPAN: "colspan",
 		DISABLED: "disabled",
 		HREF: "href",
-		LABEL: "label",
+		FOR: "for",
 		LANG: "lang",
-		LINK: "link",
 		MEDIA: "media",
 		METHOD: "method",
 		NAME: "name",
@@ -3709,6 +3726,122 @@ var sheets = (function (dom) {
 		this.events.bindEvents();
 	};
 
+
+
+
+	/**
+	 * @public
+	 * Set attribute
+	 * @param {AttributeType|string} name
+	 * @param {string} value
+	 */
+	dom.builder.Live.prototype.setAttribute = function (name, value) {
+		var element = this.element.element;
+
+		//abstract attribute
+		switch(name) {
+			case AttributeType.VALUE:
+				element.value = value;
+				break;
+			case AttributeType.ID:
+				element.id = value;
+				break;
+			case AttributeType.ACCESSKEY:
+				element.accessKey = value;
+				break;
+			case AttributeType.ACTION:
+				element.action = value;
+				break;
+			case AttributeType.ALINK:
+				element.alink = value;
+				break;
+			case AttributeType.ALT:
+				element.alt = value;
+				break;
+			case AttributeType.CHECKED:
+				element.checked = !!value;
+				break;
+			case AttributeType.CITE:
+				element.cite = value;
+				break;
+			case AttributeType.COLS:
+				element.cols = value;
+				break;
+			case AttributeType.COLSPAN:
+				element.colSpan = value;
+				break;
+			case AttributeType.DISABLED:
+				element.disabled = !!value;
+				break;
+			case AttributeType.HREF:
+				element.href = value;
+				break;
+			case AttributeType.FOR:
+				element.htmlFor = value;
+				break;
+			case AttributeType.LANG:
+				element.lang = value;
+				break;
+			case AttributeType.MEDIA:
+				element.media = value;
+				break;
+			case AttributeType.METHOD:
+				element.method = value;
+				break;
+			case AttributeType.NAME:
+				element.name = value;
+				break;
+			case AttributeType.READONLY:
+				element.readOnly = !!value;
+				break;
+			case AttributeType.REL:
+				element.rel = value;
+				break;
+			case AttributeType.ROWS:
+				element.rows = value;
+				break;
+			case AttributeType.ROWSPAN:
+				element.rowSpan = value;
+				break;
+			case AttributeType.SRC:
+				element.src = value;
+				break;
+			case AttributeType.TABINDEX:
+				element.tabIndex = value;
+				break;
+			case AttributeType.TARGET:
+				element.target = value;
+				break;
+			case AttributeType.TITLE:
+				element.title = value;
+				break;
+			default:
+				element.setAttribute(name, value);
+				break;
+		}
+	};
+
+	/**
+	 * @public
+	 * Set css property
+	 * @type {string} name
+	 * @type {string} value
+	 */
+	dom.builder.Live.prototype.setCssProperty = function (name, value) {
+		var element = this.element.element;
+		element.style[name] = value;
+	};
+
+	/**
+	 * @public
+	 * Set class name
+	 * @type {Array.<string>} value
+	 */
+	dom.builder.Live.prototype.setClassName = function (value) {
+		var element = this.element.element;
+		element.className = value.join(" ");
+	};
+
 	/**
 	 * @public
 	 * Remove
@@ -3776,6 +3909,33 @@ var sheets = (function (dom) {
 		}
 	};
 
+	/**
+	 * @public
+	 * Set attribute
+	 * @param {AttributeType|string} name
+	 * @param {string} value
+	 */
+	dom.builder.LiveText.prototype.setAttribute = function (name, value) {
+	};
+
+
+	/**
+	 * @public
+	 * Set css property
+	 * @type {string} name
+	 * @type {string} value
+	 */
+	dom.builder.LiveText.prototype.setCssProperty = function (name, value) {
+	};
+
+	/**
+	 * @public
+	 * Set class name
+	 * @type {Array.<string>} value
+	 */
+	dom.builder.LiveText.prototype.setClassName = function (value) {
+	};
+
 }(dom, document, window));
 ;/**
  * Builder for Reactive
@@ -3826,7 +3986,7 @@ var sheets = (function (dom) {
 
 	/**
 	 * Bubble
-	 * @param {HTMLElement} where
+	 * @param {dom.html.Element} where
 	 * @param {HTMLElement} target
 	 * @returns {boolean}
 	 */
@@ -3835,7 +3995,7 @@ var sheets = (function (dom) {
 		//iterate all to body
 		while(parent) {
 			//check
-			if (parent === where) {
+			if (parent === where.element) {
 				return true;
 			}
 			parent = parent.parentNode;
@@ -3880,7 +4040,9 @@ var sheets = (function (dom) {
 	 */
 	dom.builder.Event.prototype.attachEvent = function (event) {
 		var handler,
+			handled,
 			target,
+			message,
 			self = this,
 			handlers = this.handlers,
 			element = this.element;
@@ -3890,12 +4052,25 @@ var sheets = (function (dom) {
 			if (event.isActive() === false) {
 				return;
 			}
+			//get even from window
+			e = e || window.event;
 			//target
 			target = e.target || e.srcElement;
 			//do nothing if is not right element
-			if (bubble(element.element, target)) {
-				//make routine
-				event.trigger(self.createEvent(event, target, e));
+			if (bubble(element, target)) {
+				//create message
+				message = e.message || self.createEvent(event, element, e);
+				//update message
+				e.message = message;
+				//if not handled
+				if (message.getHandledBy() === null) {
+					//make routine
+					handled = event.trigger(message);
+					//handled by element
+					if (handled) {
+						message.handledBy = element;
+					}
+				}
 			}
 		};
 		//push handler
@@ -3911,19 +4086,96 @@ var sheets = (function (dom) {
 	 * @private
 	 * Create event
 	 * @param {dom.events.Event} event
-	 * @param {*} domElement
+	 * @param {dom.html.Element} element
 	 * @param {Event} originalEvent
 	 */
-	dom.builder.Event.prototype.createEvent = function (event, domElement, originalEvent) {
-		var type = event.getType(),
-			base;
-
+	dom.builder.Event.prototype.createEvent = function (event, element, originalEvent) {
+		var type = event.getType();
+		//switch by type
 		switch (type) {
+			//Change events
 			case EventType.Change:
-				base = new dom.events.ChangeEventMessage(type, originalEvent);
-				base.checked = Boolean(domElement.checked);
-				base.newValue = domElement.value;
-				return base;
+				return dom.builder.Event.createChangeEventMessage(event, element, originalEvent);
+			//Mouse events
+			case EventType.Click:
+			case EventType.DblClick:
+			case EventType.MouseDown:
+			case EventType.MouseMove:
+			case EventType.MouseOut:
+			case EventType.MouseOver:
+			case EventType.MouseUp:
+			//Scroll events
+			case EventType.MouseWheel:
+			case EventType.Scroll:
+			case EventType.Wheel:
+			//Drag events
+			case EventType.Drag:
+			case EventType.DragEnd:
+			case EventType.DragEnter:
+			case EventType.DragLeave:
+			case EventType.DragOver:
+			case EventType.DragStart:
+			case EventType.Drop:
+			//Copy / pastes
+			case EventType.Copy:
+			case EventType.Cut:
+			case EventType.Paste:
+			//Media events
+			case EventType.Abort:
+			case EventType.CanPlay:
+			case EventType.CanPlayThrough:
+			case EventType.CueChange:
+			case EventType.DurationChange:
+			case EventType.Emptied:
+			case EventType.Ended:
+			case EventType.LoadedData:
+			case EventType.LoadedMetadata:
+			case EventType.LoadStart:
+			case EventType.Pause:
+			case EventType.Play:
+			case EventType.Playing:
+			case EventType.Progress:
+			case EventType.RateChange:
+			case EventType.Seeked:
+			case EventType.Seeking:
+			case EventType.Stalled:
+			case EventType.Suspend:
+			case EventType.TimeUpdate:
+			case EventType.VolumeChange:
+			case EventType.Waiting:
+			//Keyboard events
+			case EventType.KeyDown:
+			case EventType.KeyPress:
+			case EventType.KeyUp:
+			//Forms events
+			case EventType.Blur:
+			case EventType.ContextMenu:
+			case EventType.Focus:
+			case EventType.Input:
+			case EventType.Invalid:
+			case EventType.Reset:
+			case EventType.Search:
+			case EventType.Select:
+			case EventType.Submit:
+			//Window events
+			case EventType.AfterPrint:
+			case EventType.BeforePrint:
+			case EventType.BeforeUnload:
+			case EventType.HashChange:
+			case EventType.Message:
+			case EventType.Offline:
+			case EventType.Online:
+			case EventType.PageHide:
+			case EventType.PageShow:
+			case EventType.PopState:
+			case EventType.Resize:
+			case EventType.Storage:
+			case EventType.Unload:
+			//Universal events
+			case EventType.Load:
+			case EventType.Error:
+			case EventType.Show:
+			case EventType.Toggle:
 			default:
 				return new dom.events.EventMessage(type, originalEvent);
 		}
@@ -3945,6 +4197,48 @@ var sheets = (function (dom) {
 			removeEvent(document.body, handler.event.getType(), handler.handler);
 		}
 	};
+
+
+
+
+	//CREATORS
+
+	/**
+	 * @static
+	 * Create change event message
+	 * @param {dom.events.Event} event
+	 * @param {dom.html.Element} element
+	 * @param {Event} originalEvent
+	 * @return {dom.events.ChangeEventMessage}
+	 */
+	dom.builder.Event.createChangeEventMessage = function (event, element, originalEvent) {
+		var domElement = element.getLive(),
+			attributes = element.getAttributes(),
+			type = event.getType(),
+			checkedAttr,
+			valueAttr,
+			base;
+
+		//checked attr
+		checkedAttr = attributes[AttributeType.CHECKED] || new dom.data.UnboundContract(null);
+		checkedAttr.setValue(Boolean(domElement.checked));
+
+		//value attr
+		valueAttr = attributes[AttributeType.VALUE] || new dom.data.UnboundContract(null);
+		valueAttr.setValue(domElement.value);
+
+		base = new dom.events.ChangeEventMessage(type, originalEvent);
+		base.checked = checkedAttr;
+		base.newValue = valueAttr;
+
+		return base;
+	};
+
+
+
+
+
+
 
 }(dom, document, window));;/**
  * Builder for Reactive
