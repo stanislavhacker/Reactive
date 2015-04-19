@@ -2,6 +2,30 @@
 (function () {
 	"use strict";
 
+	/**
+	 * Create item
+	 * @param {string} text
+	 * @param {dom.events.Event} event1
+	 * @param {dom.events.Event=} event2
+	 * @returns {dom.html.Element}
+	 */
+	function createItem(text, event1, event2) {
+		return dom.div(
+			dom.classes("tester"),
+			dom.css(
+				dom.cssProperty("width", "250px"),
+				dom.cssProperty("background", "red"),
+				dom.cssProperty("color", "white"),
+				dom.cssProperty("text-align", "center"),
+				dom.cssProperty("padding", "10px"),
+				dom.cssProperty("margin", "3px")
+			),
+			dom.text(text),
+			event1,
+			event2
+		);
+	}
+
 	var h1,
 		h3,
 		item,
@@ -55,82 +79,70 @@
 		dom.attach(document.body, h3);
 
 		//click
-		item = dom.div(
-			dom.classes("tester"),
-			dom.css(
-				dom.cssProperty("width", "250px"),
-				dom.cssProperty("background", "red"),
-				dom.cssProperty("color", "white"),
-				dom.cssProperty("text-align", "center"),
-				dom.cssProperty("padding", "10px"),
-				dom.cssProperty("margin", "3px")
-			),
-			dom.text("Click event"),
+		dom.attach(document.body, createItem(
+			"Click event",
 			dom.event(EventType.Click, function (e) {
 				value.setValue(eventVisualiser(e));
 			})
-		);
-		dom.attach(document.body, item);
+		));
 
 		//mouseup, down
-		item = dom.div(
-			dom.classes("tester"),
-			dom.text("Mousedown, mouseup event"),
+		dom.attach(document.body, createItem(
+			"Mousedown, mouseup event",
 			dom.event(EventType.MouseDown, function (e) {
 				value.setValue(eventVisualiser(e));
 			}),
 			dom.event(EventType.MouseUp, function (e) {
 				value.setValue(eventVisualiser(e));
 			})
-		);
-		dom.attach(document.body, item);
+		));
 
 		//double click
-		item = dom.div(
-			dom.classes("tester"),
-			dom.text("Double click event"),
+		dom.attach(document.body, createItem(
+			"Double click event",
 			dom.event(EventType.DblClick, function (e) {
 				value.setValue(eventVisualiser(e));
 			})
-		);
-		dom.attach(document.body, item);
+		));
 
 		//mouse move
-		item = dom.div(
-			dom.classes("tester"),
-			dom.text("Move event"),
+		dom.attach(document.body, createItem(
+			"Move event",
 			dom.event(EventType.MouseMove, function (e) {
 				value.setValue(eventVisualiser(e));
 			})
-		);
-		dom.attach(document.body, item);
+		));
 
 		//mouse over, out
-		item = dom.div(
-			dom.classes("tester"),
-			dom.text("Move over, out"),
+		dom.attach(document.body, createItem(
+			"Move over out",
 			dom.event(EventType.MouseOver, function (e) {
 				value.setValue(eventVisualiser(e));
 			}),
 			dom.event(EventType.MouseOut, function (e) {
 				value.setValue(eventVisualiser(e));
 			})
-		);
-		dom.attach(document.body, item);
+		));
 
 		//mouse wheel
-		item = dom.div(
-			dom.classes("tester"),
-			dom.text("Move wheel"),
+		dom.attach(document.body, createItem(
+			"Move wheel",
 			dom.event(EventType.MouseWheel, function (e) {
 				value.setValue(eventVisualiser(e));
 			})
-		);
-		dom.attach(document.body, item);
+		));
+
+		//contextmenu
+		dom.attach(document.body, createItem(
+			"ContextMenu",
+			dom.event(EventType.ContextMenu, function (e) {
+				value.setValue(eventVisualiser(e));
+			})
+		));
 
 	}());
 
-	//CHANG EVENTS
+	//CHANGE EVENTS
 	(function () {
 
 		h3 = dom.h3(dom.text('Change events'));
@@ -163,5 +175,83 @@
 		dom.attach(document.body, item);
 
 	}());
+
+	//SCROLL EVENTS
+	(function () {
+
+		h3 = dom.h3(dom.text('Scroll events'));
+		dom.attach(document.body, h3);
+
+		//scroll
+		item = dom.div(
+			dom.classes("tester", "overflow"),
+			dom.css(
+				dom.cssGroup(".overflow",
+					dom.cssProperty("overflow", "scroll"),
+					dom.cssProperty("height", "200px")
+				)
+			),
+			dom.text("Scroll event"),
+			dom.div(
+				dom.css(
+					dom.cssProperty("width", "1000px"),
+					dom.cssProperty("height", "2000px")
+				)
+			),
+			dom.event(EventType.Scroll, function (e) {
+				value.setValue(eventVisualiser(e));
+			})
+		);
+		dom.attach(document.body, item);
+
+	}());
+
+	//KEY EVENTS
+	(function () {
+
+		h3 = dom.h3(dom.text('Key events'));
+		dom.attach(document.body, h3);
+
+		//keydown
+		item = dom.div(
+			dom.classes("tester"),
+			dom.text("Keydown event"),
+			dom.br(),
+			dom.input(
+				dom.event(EventType.KeyDown, function (e) {
+					value.setValue(eventVisualiser(e));
+				})
+			)
+		);
+		dom.attach(document.body, item);
+
+		//keypress
+		item = dom.div(
+			dom.classes("tester"),
+			dom.text("Keypress event"),
+			dom.br(),
+			dom.input(
+				dom.event(EventType.KeyPress, function (e) {
+					value.setValue(eventVisualiser(e));
+				})
+			)
+		);
+		dom.attach(document.body, item);
+
+		//keypress
+		item = dom.div(
+			dom.classes("tester"),
+			dom.text("Keyup event"),
+			dom.br(),
+			dom.input(
+				dom.event(EventType.KeyUp, function (e) {
+					value.setValue(eventVisualiser(e));
+				})
+			)
+		);
+		dom.attach(document.body, item);
+
+	}());
+
 
 }());
