@@ -16,9 +16,10 @@
 	 * @param {function} handler
 	 */
 	function addEvent(el, eventType, handler) {
+		var phase = EventType.Scroll === eventType;
 		// DOM Level 2 browsers
 		if (el.addEventListener) {
-			el.addEventListener(eventType, handler, false);
+			el.addEventListener(eventType, handler, phase);
 		// IE <= 8
 		} else if (el.attachEvent) {
 			el.attachEvent('on' + eventType, handler);
@@ -186,9 +187,22 @@
 			case EventType.MouseOver:
 			case EventType.MouseUp:
 			case EventType.MouseWheel:
+			case EventType.ContextMenu:
 				return dom.builder.Event.createMouseEventMessage(event, element, originalEvent);
 			//Scroll events
 			case EventType.Scroll:
+				return dom.builder.Event.createScrollEventMessage(event, element, originalEvent);
+			//Keyboard events
+			case EventType.KeyDown:
+			case EventType.KeyPress:
+			case EventType.KeyUp:
+				return dom.builder.Event.createKeyEventMessage(event, element, originalEvent);
+			//Forms events
+			case EventType.Blur:
+			case EventType.Focus:
+			case EventType.Reset:
+			case EventType.Select:
+			case EventType.Submit:
 			//Drag events
 			case EventType.Drag:
 			case EventType.DragEnd:
@@ -224,20 +238,6 @@
 			case EventType.TimeUpdate:
 			case EventType.VolumeChange:
 			case EventType.Waiting:
-			//Keyboard events
-			case EventType.KeyDown:
-			case EventType.KeyPress:
-			case EventType.KeyUp:
-			//Forms events
-			case EventType.Blur:
-			case EventType.ContextMenu:
-			case EventType.Focus:
-			case EventType.Input:
-			case EventType.Invalid:
-			case EventType.Reset:
-			case EventType.Search:
-			case EventType.Select:
-			case EventType.Submit:
 			//Window events
 			case EventType.AfterPrint:
 			case EventType.BeforePrint:
@@ -381,6 +381,15 @@
 		return event.detail ? event.detail * (-40) : event.wheelDelta;
 	}
 
+	/**
+	 * Determine key type
+	 * @param {number} keyCode
+	 * @return {KeyType|string}
+	 */
+	function determineKey (keyCode) {
+		return dom.events.KeyType[keyCode];
+	}
+
 
 
 
@@ -450,6 +459,54 @@
 		determinePositions(originalEvent, base.positions);
 		determineModifiers(originalEvent, base.modifiers);
 		base.wheel = determineWheel(type, originalEvent);
+
+		return base;
+	};
+
+	/**
+	 * @static
+	 * Create scroll event message
+	 * @param {dom.events.Event} event
+	 * @param {dom.html.Element} element
+	 * @param {Event} originalEvent
+	 * @return {dom.events.ScrollEventMessage}
+	 */
+	dom.builder.Event.createScrollEventMessage = function (event, element, originalEvent) {
+		var domElement = element.element,
+			type = event.getType(),
+			base;
+
+		base = new dom.events.ScrollEventMessage(type, originalEvent);
+		base.scrollTop = domElement.scrollTop;
+		base.scrollLeft = domElement.scrollLeft;
+
+		return base;
+	};
+
+	/**
+	 * @static
+	 * Create scroll event message
+	 * @param {dom.events.Event} event
+	 * @param {dom.html.Element} element
+	 * @param {Event} originalEvent
+	 * @return {dom.events.ScrollEventMessage}
+	 */
+	dom.builder.Event.createKeyEventMessage = function (event, element, originalEvent) {
+		var type = event.getType(),
+			base;
+
+		base = new dom.events.KeyEventMessage(type, originalEvent);
+
+		determineModifiers(originalEvent, base.modifiers);
+		//char
+		base.charCode = originalEvent.charCode;
+		base.character = base.charCode ? String.fromCharCode(base.charCode) : null;
+		//key
+		base.keyCode = originalEvent.keyCode;
+		//do not determine for keypress
+		if (type !== EventType.KeyPress) {
+			base.key = determineKey(base.keyCode) || String.fromCharCode(base.keyCode).toLowerCase();
+		}
 
 		return base;
 	};

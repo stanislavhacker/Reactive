@@ -229,7 +229,7 @@
 				div.remove();
 			});
 
-			it("trigger mouse basic - otjer event", function () {
+			it("trigger mouse basic - other event", function () {
 				var div,
 					builder,
 					createdEvent,
@@ -386,6 +386,113 @@
 					detail: -6
 				});
 				expect(createdEvent.wheel).toBe(240);
+
+			});
+
+		});
+
+		describe("trigger scroll events", function () {
+
+			it("trigger scroll basic", function () {
+				var div,
+					builder,
+					createdEvent,
+					givenEvent = null,
+					event = dom.event(EventType.Scroll, function (evnt) {
+						givenEvent = evnt;
+					}),
+					active = dom.div(event);
+				//append to body
+				div = dom.div(active);
+				dom.attach(document.body, div);
+
+				builder = new dom.builder.Event(active);
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {});
+				expect(createdEvent.getEvent()).not.toBe(null);
+				expect(createdEvent instanceof dom.events.ScrollEventMessage).toBe(true);
+				expect(createdEvent.scrollTop).toBe(0);
+				expect(createdEvent.scrollLeft).toBe(0);
+
+				div.remove();
+			});
+
+		});
+
+		describe("trigger key events", function () {
+
+			it("trigger key basic", function () {
+				var div,
+					builder,
+					createdEvent,
+					givenEvent = null,
+					event = dom.event(EventType.KeyDown, function (evnt) {
+						givenEvent = evnt;
+					}),
+					active = dom.div(event);
+				//append to body
+				div = dom.div(active);
+				dom.attach(document.body, div);
+
+				builder = new dom.builder.Event(active);
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {});
+				expect(createdEvent.getEvent()).not.toBe(null);
+				expect(createdEvent instanceof dom.events.KeyEventMessage).toBe(true);
+				expect(createdEvent.modifiers instanceof dom.events.key.Modifiers).toBe(true);
+				expect(createdEvent.keyCode).toBe(undefined);
+				expect(createdEvent.charCode).toBe(undefined);
+				expect(createdEvent.character).toBe(null);
+				expect(createdEvent.key).toBeDefined();
+
+				div.remove();
+			});
+
+			it("key and character fill test - keydown", function () {
+				var createdEvent,
+					event = dom.event(EventType.KeyDown, function (evnt) {}),
+					active = dom.div(event),
+					builder = new dom.builder.Event(active);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					keyCode: 8,
+					charCode: 0
+				});
+				expect(createdEvent.key).toBe('backspace');
+				expect(createdEvent.character).toBe(null);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					keyCode: 96,
+					charCode: 0
+				});
+				expect(createdEvent.key).toBe('num0');
+				expect(createdEvent.character).toBe(null);
+
+			});
+
+			it("key and character fill test - keypress", function () {
+				var createdEvent,
+					event = dom.event(EventType.KeyPress, function (evnt) {}),
+					active = dom.div(event),
+					builder = new dom.builder.Event(active);
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					keyCode: 104,
+					charCode: 104
+				});
+				expect(createdEvent.key).toBe(null);
+				expect(createdEvent.character).toBe('h');
+
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {
+					keyCode: 56,
+					charCode: 56
+				});
+				expect(createdEvent.key).toBe(null);
+				expect(createdEvent.character).toBe('8');
 
 			});
 

@@ -125,10 +125,7 @@
 		Change: "change",
 		ContextMenu: "contextmenu",
 		Focus: "focus",
-		Input: "input",
-		Invalid: "invalid",
 		Reset: "reset",
-		Search: "search",
 		Select: "select",
 		Submit: "submit",
 
