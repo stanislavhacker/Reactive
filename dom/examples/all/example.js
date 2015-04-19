@@ -253,5 +253,73 @@
 
 	}());
 
+	//FORM EVENTS
+	(function () {
+
+		h3 = dom.h3(dom.text('Form events'));
+		dom.attach(document.body, h3);
+
+		//focus, blur
+		item = dom.div(
+			dom.classes("tester"),
+			dom.text("Focus, blur event"),
+			dom.br(),
+			dom.input(
+				dom.event(EventType.Focus, function (e) {
+					value.setValue(eventVisualiser(e));
+				}),
+				dom.event(EventType.Blur, function (e) {
+					value.setValue(eventVisualiser(e));
+				})
+			),
+			dom.select(
+				dom.option(dom.text("Value1")),
+				dom.option(dom.text("Value2")),
+				dom.event(EventType.Focus, function (e) {
+					value.setValue(eventVisualiser(e));
+				}),
+				dom.event(EventType.Blur, function (e) {
+					value.setValue(eventVisualiser(e));
+				})
+			)
+		);
+		dom.attach(document.body, item);
+
+		//submit, reset
+		item = dom.div(
+			dom.classes("tester"),
+			dom.text("Reset, submit event"),
+			dom.br(),
+			dom.a(dom.attr('name', 'form')),
+			dom.form(
+				dom.attr('action', '#form'),
+				dom.input(dom.attr('type', 'submit')),
+				dom.input(dom.attr('type', 'reset')),
+				dom.event(EventType.Submit, function (e) {
+					value.setValue(eventVisualiser(e));
+				}),
+				dom.event(EventType.Reset, function (e) {
+					value.setValue(eventVisualiser(e));
+				})
+			)
+		);
+		dom.attach(document.body, item);
+
+		//focus, blur
+		item = dom.div(
+			dom.classes("tester"),
+			dom.text("Select event"),
+			dom.br(),
+			dom.input(
+				dom.attr('value', 'Select text here ...'),
+				dom.event(EventType.Select, function (e) {
+					value.setValue(eventVisualiser(e));
+				})
+			)
+		);
+		dom.attach(document.body, item);
+
+	}());
+
 
 }());

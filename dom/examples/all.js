@@ -35,13 +35,18 @@ function source(link) {
  * @return {string}
  */
 function eventVisualiser(event) {
+	var key;
+
 	//noinspection JSValidateTypes
 	event.event = event.event.toString();
-	if (event.newValue) {
-		event.newValue = "[object dom.data.Contract] (value: " + event.newValue.getValue() + ")";
-	}
-	if (event.checked) {
-		event.checked = "[object dom.data.Contract] (value: " + event.checked.getValue() + ")";
+	delete event.handledBy;
+	//contract change
+	for (key in event) {
+		if (event.hasOwnProperty(key)) {
+			if (event[key] instanceof dom.data.Contract) {
+				event[key] = "[object dom.data.Contract] (value: " + event[key].getValue() + ")";
+			}
+		}
 	}
 	return JSON.stringify(event, null, "  ");
 }
