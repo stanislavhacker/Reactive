@@ -16,7 +16,12 @@
 	 * @param {function} handler
 	 */
 	function addEvent(el, eventType, handler) {
-		var phase = EventType.Scroll === eventType;
+		var phase = false;
+		//determine phase
+		phase = phase || EventType.Scroll === eventType;
+		phase = phase || EventType.Focus === eventType;
+		phase = phase || EventType.Blur === eventType;
+
 		// DOM Level 2 browsers
 		if (el.addEventListener) {
 			el.addEventListener(eventType, handler, phase);
@@ -203,6 +208,7 @@
 			case EventType.Reset:
 			case EventType.Select:
 			case EventType.Submit:
+				return dom.builder.Event.createFormEventMessage(event, element, originalEvent);
 			//Drag events
 			case EventType.Drag:
 			case EventType.DragEnd:
@@ -507,6 +513,41 @@
 		if (type !== EventType.KeyPress) {
 			base.key = determineKey(base.keyCode) || String.fromCharCode(base.keyCode).toLowerCase();
 		}
+
+		return base;
+	};
+
+	/**
+	 * @static
+	 * Create form event message
+	 * @param {dom.events.Event} event
+	 * @param {dom.html.Element} element
+	 * @param {Event} originalEvent
+	 * @return {dom.events.FormEventMessage}
+	 */
+	dom.builder.Event.createFormEventMessage = function (event, element, originalEvent) {
+		var domElement = element.getLive(),
+			attributes = element.getAttributes(),
+			type = event.getType(),
+			checkedContract,
+			valueContract,
+			checkedAttr,
+			valueAttr,
+			base;
+
+		//checked attr
+		checkedAttr = attributes[AttributeType.CHECKED];
+		checkedContract = checkedAttr ? checkedAttr.getDataContract() : new dom.data.UnboundContract(null);
+		checkedContract.setValue(Boolean(domElement.checked));
+
+		//value attr
+		valueAttr = attributes[AttributeType.VALUE];
+		valueContract = valueAttr ? valueAttr.getDataContract() : new dom.data.UnboundContract(null);
+		valueContract.setValue(domElement.value);
+
+		base = new dom.events.FormEventMessage(type, originalEvent);
+		base.checked = checkedContract;
+		base.currentValue = valueContract;
 
 		return base;
 	};

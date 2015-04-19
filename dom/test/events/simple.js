@@ -498,6 +498,34 @@
 
 		});
 
+		describe("trigger form events", function () {
+
+			it("trigger form basic", function () {
+				var div,
+					builder,
+					createdEvent,
+					givenEvent = null,
+					event = dom.event(EventType.Blur, function (evnt) {
+						givenEvent = evnt;
+					}),
+					active = dom.div(event);
+				//append to body
+				div = dom.div(active);
+				dom.attach(document.body, div);
+
+				builder = new dom.builder.Event(active);
+				//noinspection JSAccessibilityCheck
+				createdEvent = builder.createEvent(event, active, {});
+				expect(createdEvent.getEvent()).not.toBe(null);
+				expect(createdEvent instanceof dom.events.FormEventMessage).toBe(true);
+				expect(createdEvent.currentValue instanceof dom.data.Contract).toBe(true);
+				expect(createdEvent.checked instanceof dom.data.Contract).toBe(true);
+
+				div.remove();
+			});
+
+		});
+
 		it("unbind click event", function () {
 			var div,
 				clicked = 0,
